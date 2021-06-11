@@ -59,7 +59,8 @@
     "vue-router": "^3.3.4",
     "vuetify": "^2.2.22",
     "vuetify-confirm": "^2.0.5",
-    "vuex": "^3.2.0"
+    "vuex": "^3.2.0",
+    "ddd-viewer": "../ddd-viewer/"
   },
   "devDependencies": {
     "@babylonjs/core": "^4.2.0",
@@ -82,7 +83,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "faker": "^4.1.0",
     "fibers": "^5.0.0",
-    "husky": "^4.2.5",
     "istanbul-lib-coverage": "^3.0.0",
     "lint-staged": "^10.2.11",
     "nyc": "^15.1.0",

@@ -48,7 +48,7 @@ import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
-import ViewerState from '@/dddviewer/ViewerState.js';
+import { ViewerState } from 'ddd-viewer';
 
 export default {
   name: 'App',

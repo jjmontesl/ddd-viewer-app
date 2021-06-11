@@ -24,8 +24,7 @@ import * as extent from 'ol/extent';
 import 'babylonjs-loaders';
 //import waterMaterial from '@/plugins/js/waterMaterial.js';
 
-import SceneViewer from '@/dddviewer/SceneViewer.js';
-import ModelGeoTileLayer3D from '@/dddviewer/layers/ModelGeoTileLayer3D.js';
+import {ModelGeoTileLayer3D, SceneViewer} from 'ddd-viewer';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
 export default {
