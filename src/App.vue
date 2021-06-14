@@ -145,7 +145,7 @@ export default {
   methods: {
 
       dddViewerMode(mode) {
-        //console.debug("Received Viewer Mode change event to: " + mode);
+        console.debug("Received Viewer Mode change event to: " + mode);
         if (mode !== null) {
             this.viewerState.mapVisible = mode === 'map';
             this.viewerState.sceneVisible = mode === 'scene';

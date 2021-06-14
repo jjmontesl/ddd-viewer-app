@@ -74,12 +74,13 @@ export default {
 
           const posString = this.positionString();
 
-          //this.$router.replace('/maps/' + posString);
+          /*
           if (this.$route.name === 'mapMain') {
               this.$router.replace('/maps/' + posString).catch(()=>{});
           } else if (this.$route.name === 'mapPlace')  {
               this.$router.replace('/maps/place/' + this.$route.params.name + '/' + posString).catch(()=>{});
           }
+          */
 
           const that = this;
           //that.$emit('dddPosition', that.positionWGS84(), this.map.getView().getZoom());
@@ -152,7 +153,8 @@ export default {
 
 
   mounted() {
-    //console.debug('Creating DDD map.');
+    
+    console.debug('Creating DDD map (tileUrlBase=' + this.getViewerState().dddConfig.tileUrlBase + ', position=' + this.getViewerState().positionWGS84 + ')');
 
     const that = this;
     this.getViewerState().dddMap = this;
@@ -193,12 +195,14 @@ export default {
 
       target: 'ddd-map',
       view: new View({
-        center: olProj.transform(that.getViewerState().positionWGS84, 'EPSG:4326', 'EPSG:3857'),
-        zoom: that.getViewerState().positionTileZoomLevel,
+        center: olProj.transform( [-8.726, 42.233] /*that.getViewerState().positionWGS84*/, 'EPSG:4326', 'EPSG:3857'),
+        zoom: 10, //that.getViewerState().positionTileZoomLevel,
         maxZoom: 18,
-        rotation: -that.getViewerState().positionHeading * Math.PI / 180.0,
+        rotation: 0, // -that.getViewerState().positionHeading * Math.PI / 180.0,
       }),
     });
+
+
 
     const map = that.map;
 

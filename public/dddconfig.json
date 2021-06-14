@@ -2,7 +2,8 @@
 
     "productionTip": false,
 
-    "tileUrlBase": "https://{{hostname}}:8000/cache/ddd_http/",
+    "_tileUrlBase": "https://{{hostname}}:8000/cache/ddd_http/",
+    "tileUrlBase": "http://{{hostname}}:8000/cache/ddd_http/",
 
     "showDevelLinks": true,
 

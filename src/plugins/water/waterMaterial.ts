@@ -1,3 +1,4 @@
+/*
 import { Nullable } from "babylonjs/types";
 import { serializeAsVector2, serializeAsTexture, serialize, expandToProperty, serializeAsColor3, SerializationHelper } from "babylonjs/Misc/decorators";
 import { Matrix, Vector2, Vector3 } from "babylonjs/Maths/math.vector";
@@ -22,10 +23,11 @@ import { Mesh } from "babylonjs/Meshes/mesh";
 import { Camera } from "babylonjs/Cameras/camera";
 import { Scene } from "babylonjs/scene";
 import { _TypeStore } from 'babylonjs/Misc/typeStore';
+import { EffectFallbacks } from 'babylonjs/Materials/effectFallbacks';
+*/
 
 import "./water.fragment";
 import "./water.vertex";
-import { EffectFallbacks } from 'babylonjs/Materials/effectFallbacks';
 
 class WaterMaterialDefines extends MaterialDefines implements IImageProcessingConfigurationDefines {
     public BUMP = false;

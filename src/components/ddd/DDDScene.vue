@@ -19,12 +19,12 @@
 
 <script>
 
-import * as olProj from 'ol/proj';
 import * as extent from 'ol/extent';
 import 'babylonjs-loaders';
 //import waterMaterial from '@/plugins/js/waterMaterial.js';
+import "@babylonjs/loaders/glTF";
 
-import {ModelGeoTileLayer3D, SceneViewer} from 'ddd-viewer';
+import {ModelGeoTileLayer3D, SceneViewer, ViewerState} from 'ddd-viewer';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
 export default {
@@ -74,7 +74,11 @@ export default {
 
     const canvas = document.getElementById('ddd-scene');
 
-    this.sceneViewer = new SceneViewer(this.getViewerState(), this);
+    const viewerState = new ViewerState(); // this.getViewerState();
+    viewerState.positionWGS84 = [-8.723, 42.238, 0];
+    viewerState.dddConfig = this.dddConfig;
+
+    this.sceneViewer = new SceneViewer(canvas, viewerState);
     this.setSceneViewer(this.sceneViewer);  // Set the reference to App so it can be accessed by other components
     this.sceneViewer.initialize(canvas);
     //this.getViewerState().sceneViewer = this.sceneViewer;  // Suspicious: setting sceneViewer as part of a Vue component?
@@ -158,7 +162,8 @@ export default {
         //let panel = this.$refs.dddViewPanel;
 
         // Do not resize (overlay):
-        let overlay = (this.sceneViewer.sequencer.playing);
+        // TODO: Restore (removed during migration to TS)
+        let overlay = false; // (this.sceneViewer.sequencer.playing);
         //if (overlay) { return; }
 
 
