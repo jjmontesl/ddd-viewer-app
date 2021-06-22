@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  "ignorePatterns": ["../ddd-viewer/**/*.js", "../ddd-viewer/**/*.ts"],
+  "ignorePatterns": ["**/ddd-viewer/**/*.js", "**/ddd-viewer/**/*.ts"],
   extends: [
     //'formidable/rules/eslint/best-practices/on',
     'formidable/rules/eslint/best-practices/off',

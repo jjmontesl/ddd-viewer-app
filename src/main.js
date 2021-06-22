@@ -1,3 +1,9 @@
+/*
+* DDDViewer App - DDD(3Ds) web viewer app for DDD-generated OSM and GIS environments
+* Copyright 2021 Jose Juan Montes and contributors
+* MIT License (see LICENSE file)
+*/
+
 import Vue from 'vue'
 import '@/plugins/axios'
 import vuetify from '@/plugins/vuetify'

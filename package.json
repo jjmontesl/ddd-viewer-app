@@ -1,8 +1,9 @@
 {
-  "name": "ddd-viewer",
+  "name": "ddd-viewer-app",
   "version": "0.5.0",
-  "description": "DDD(123) Viewer with OSM data support",
-  "license": "AGPL",
+  "license": "MIT",
+  "description": "DDD(3Ds) web viewer app for DDD-generated OSM and GIS environments",
+  "author": "Jose Juan Montes",
   "repository": {
     "type": "git",
     "url": "https://github.com/jjmontesl/ddd-viewer.git"
@@ -17,13 +18,7 @@
     "test:e2e": "vue-cli-service test:e2e --mode e2e",
     "test:unit": "vue-cli-service test:unit",
     "remark": "remark . -o",
-    "ci": "vue-cli-service test:e2e --env API_URL=https://api-demo.daniel-avellaneda.com,ENV=ci --headless --config video=false",
     "coverage": "nyc report --reporter=text-summary"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run remark"
-    }
   },
   "lint-staged": {
     "*.{js,vue}": [
@@ -32,19 +27,15 @@
     ]
   },
   "dependencies": {
-    "@babylonjs/loaders": "^4.2.0",
     "@mdi/font": "^5.1.45",
     "@types/suncalc": "^1.8.0",
     "axios": "^0.19.2",
-    "babylonjs": "^5.0.0-alpha.17",
-    "babylonjs-gltf2interface": "^5.0.0-alpha.17",
-    "babylonjs-loaders": "^5.0.0-alpha.25",
-    "babylonjs-materials": "^5.0.0-alpha.17",
     "core-js": "^3.6.5",
     "date-fns": "^2.12.0",
+    "ddd-viewer": "file:../ddd-viewer",
     "earcut": "^2.2.2",
     "ol": "^6.4.2",
-    "proj4": "^2.7.0",
+    "proj4": "^2.7.4",
     "remark-cli": "^8.0.0",
     "suncalc": "^1.8.0",
     "vee-validate": "^3.3.0",
@@ -62,7 +53,6 @@
     "vuex": "^3.2.0"
   },
   "devDependencies": {
-    "@babylonjs/core": "^4.2.0",
     "@cypress/code-coverage": "^3.8.1",
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "@vue/babel-preset-app": "^4.4.4",

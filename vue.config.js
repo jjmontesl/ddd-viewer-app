@@ -6,9 +6,10 @@ module.exports = {
     }
   },
   configureWebpack: {
+    resolve: { symlinks: false },
     devServer: {
       compress: true,
-      disableHostCheck: true,   
+      disableHostCheck: true,
     }
   }
 }

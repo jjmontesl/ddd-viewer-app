@@ -1,5 +1,8 @@
-
-
+/*
+* DDDViewer App - DDD(3Ds) web viewer app for DDD-generated OSM and GIS environments
+* Copyright 2021 Jose Juan Montes and contributors
+* MIT License (see LICENSE file)
+*/
 
 class ViewerState {
 
@@ -43,9 +46,11 @@ class ViewerState {
     // sceneSelectedMeshId = null;
 
 
+    /*
     sceneFPS = 0;
     sceneDrawCalls = null;
     sceneTriangles = null;
+    */
 
     sceneShadowsEnabled = false;
 

@@ -19,13 +19,14 @@
 
 <script>
 
-import * as extent from 'ol/extent';
-import 'babylonjs-loaders';
+//import * as extent from 'ol/extent';
 //import waterMaterial from '@/plugins/js/waterMaterial.js';
-import "@babylonjs/loaders/glTF";
 
-import {ModelGeoTileLayer3D, SceneViewer, ViewerState} from 'ddd-viewer';
+import { SceneViewer, ViewerState} from 'ddd-viewer';
+import { GeoTile3DLayer } from 'ddd-viewer';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
+
+import { GLTF, GLTF2 } from "@babylonjs/loaders/glTF";
 
 export default {
   metaInfo() {
@@ -80,10 +81,9 @@ export default {
 
     this.sceneViewer = new SceneViewer(canvas, viewerState);
     this.setSceneViewer(this.sceneViewer);  // Set the reference to App so it can be accessed by other components
-    this.sceneViewer.initialize(canvas);
     //this.getViewerState().sceneViewer = this.sceneViewer;  // Suspicious: setting sceneViewer as part of a Vue component?
 
-    const layerDddOsm3d = new ModelGeoTileLayer3D();
+    const layerDddOsm3d = new GeoTile3DLayer();
     this.sceneViewer.layerManager.addLayer("ddd-osm-3d", layerDddOsm3d);
 
     // Events
