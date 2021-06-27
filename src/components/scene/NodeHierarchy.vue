@@ -6,7 +6,7 @@
             <span v-show="nodeSelRel === 0" style="font-weight: bold;">{{ nodeLabel }}</span>
         </a> <small>({{ nodeChildrenCount }})</small></div>
         <div style="margin-left: 15px;">
-            <NodeHierarchy v-if="childPathGetter() !== null" :nodeGetter="nodeGetter" :pathGetter="childPathGetter" :depth="depth - 1"></NodeHierarchy>
+            <NodeHierarchy v-if="childPathGetter() !== null" :viewerState="viewerState" :nodeGetter="nodeGetter" :pathGetter="childPathGetter" :depth="depth - 1"></NodeHierarchy>
             <div>
                 <div v-for="child in nodeChildren" :key="child.id"><a @click="selectChild(child)">{{ child.label }}</a></div>
             </div>
@@ -37,7 +37,6 @@ const NodeHierarchy = {
     }
   },
   inject: [
-      'getViewerState',
       'getSceneViewer'
   ],
   data() {
@@ -66,6 +65,7 @@ const NodeHierarchy = {
     }
   },
   props: [
+      'viewerState',
       'nodeGetter',
       'pathGetter',
       'depth',

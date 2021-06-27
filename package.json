@@ -11,10 +11,11 @@
   "scripts": {
     "generate-build-version": "node generate-build-version",
     "serve": "vue-cli-service serve",
-    "serve-pub-https": "vue-cli-service serve --public 192.168.0.14:8080 --https",
+    "serve-pub-https": "vue-cli-service serve --public 127.0.0.1:8080 --https",
     "build": "npm run generate-build-version && vue-cli-service build",
     "format": "prettier --write --config .prettierrc \"**/*.js\"",
     "lint": "vue-cli-service lint --fix",
+    "inspect": "vue-cli-service inspect",
     "test:e2e": "vue-cli-service test:e2e --mode e2e",
     "test:unit": "vue-cli-service test:unit",
     "remark": "remark . -o",
@@ -28,7 +29,6 @@
   },
   "dependencies": {
     "@mdi/font": "^5.1.45",
-    "@types/suncalc": "^1.8.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "date-fns": "^2.12.0",
@@ -37,7 +37,6 @@
     "ol": "^6.4.2",
     "proj4": "^2.7.4",
     "remark-cli": "^8.0.0",
-    "suncalc": "^1.8.0",
     "vee-validate": "^3.3.0",
     "vue": "^2.6.11",
     "vue-analytics": "^5.22.1",

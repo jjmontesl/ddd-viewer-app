@@ -25,9 +25,13 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+.project
+.settings/
 
 .history/
 
-/upload.sh
-
+# DDD Viewer App data
 /public/assets
+
+# Maintenance files
+/upload.sh

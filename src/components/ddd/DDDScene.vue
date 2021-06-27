@@ -7,9 +7,9 @@
 
         <div class="ddd-scene-overlay" id="ddd-scene-overlay" style="width: 100%; height: 100%; position: absolute; z-index: 2; top: 0px; pointer-events: none;">
 
-            <div v-if="myViewerState.sceneTitleText" id="ddd-scene-overlay-text-title" style="white-space: pre-line; line-height: 130%; text-align: center; font-size: 150%; color: white; z-index: 10; bottom: 20%; width: 100%; font-outline: 1px black; position: absolute; text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;"><h2>{{myViewerState.sceneTitleText}}</h2></div>
+            <div v-if="viewerState.sceneTitleText" id="ddd-scene-overlay-text-title" style="white-space: pre-line; line-height: 130%; text-align: center; font-size: 150%; color: white; z-index: 10; bottom: 20%; width: 100%; font-outline: 1px black; position: absolute; text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;"><h2>{{viewerState.sceneTitleText}}</h2></div>
 
-            <SceneViewMode v-if="myViewerState.sceneVisible && myViewerState.sceneViewModeShow" :viewerState="myViewerState" />
+            <SceneViewMode v-if="viewerState.sceneVisible && viewerState.sceneViewModeShow" :viewerState="viewerState" />
 
         </div>
 
@@ -19,14 +19,11 @@
 
 <script>
 
-//import * as extent from 'ol/extent';
-//import waterMaterial from '@/plugins/js/waterMaterial.js';
-
-import { SceneViewer, ViewerState} from 'ddd-viewer';
+import { SceneViewer } from 'ddd-viewer';
 import { GeoTile3DLayer } from 'ddd-viewer';
-import SceneViewMode from '@/components/scene/SceneViewMode.vue';
+import { ViewerProcess } from 'ddd-viewer';
 
-import { GLTF, GLTF2 } from "@babylonjs/loaders/glTF";
+import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
 export default {
   metaInfo() {
@@ -43,23 +40,21 @@ export default {
     }
   },
   props: [
-      //'viewerState',
+      'viewerState',
   ],
   inject: [
-      'getViewerState',
       'setSceneViewer',
   ],
-  computed: {
-      'myViewerState': function() {return this.getViewerState();}
-  },
+
   beforeDestroy() {
       //console.debug("Disposing BabylonJS scene.");
       window.removeEventListener('resize', this.resize);
       clearTimeout(this._timeout);
       this.sceneViewer.dispose();
-      this.getViewerState().sceneViewer = null;
+      this.viewerState.sceneViewer = null;
       this.sceneViewer = null;
   },
+
   mounted() {
     //console.debug('Creating 3D scene.');
 
@@ -73,25 +68,62 @@ export default {
         //this.map.updateSize();
     }
 
+
+    let textures = null;
+    let splatmap = null;
+    const materialsConfigDef = this.viewerState.dddConfig.sceneMaterials.find((o) => { return o.value === this.viewerState.sceneTextureSet; });
+    if (materialsConfigDef) {
+        textures = materialsConfigDef.textures;
+        splatmap = materialsConfigDef.splatmap;
+    }
+
+    const dddConfig = {
+        "defaultCoords": [-8.723, 42.238],
+        "tileUrlBase": "http://localhost:8000/cache/ddd_http/",
+        "assetsUrlbase": "/assets/",
+
+        "materialsTextureSet": textures,
+        "materialsSplatmap": splatmap,
+
+        "geolocation": false
+        // TODO: move to viewer-app?
+        //"dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
+    }
+
+    // Initialize DDDViewer
     const canvas = document.getElementById('ddd-scene');
-
-    const viewerState = new ViewerState(); // this.getViewerState();
-    viewerState.positionWGS84 = [-8.723, 42.238, 0];
-    viewerState.dddConfig = this.dddConfig;
-
-    this.sceneViewer = new SceneViewer(canvas, viewerState);
+    this.sceneViewer = new SceneViewer(canvas, dddConfig);
     this.setSceneViewer(this.sceneViewer);  // Set the reference to App so it can be accessed by other components
-    //this.getViewerState().sceneViewer = this.sceneViewer;  // Suspicious: setting sceneViewer as part of a Vue component?
 
     const layerDddOsm3d = new GeoTile3DLayer();
     this.sceneViewer.layerManager.addLayer("ddd-osm-3d", layerDddOsm3d);
+
+    // Hook a callback to DDDViewer to update state.
+    const that = this;
+    class DDDSceneProcess extends ViewerProcess {
+        update(deltaTime) {
+            super.update(deltaTime);
+            that.viewerState.positionWGS84 = that.sceneViewer.viewerState.positionWGS84;
+            that.viewerState.positionScene = that.sceneViewer.viewerState.positionScene;
+            that.viewerState.positionGroundHeight = that.sceneViewer.viewerState.positionGroundHeight;
+            that.viewerState.positionHeading = that.sceneViewer.viewerState.positionHeading;
+
+            that.viewerState.sceneFPS = that.sceneViewer.viewerState.sceneFPS;
+            that.viewerState.sceneDrawCalls = that.sceneViewer.viewerState.sceneDrawCalls;
+            that.viewerState.sceneTriangles = that.sceneViewer.viewerState.sceneTriangles;
+
+            that.viewerState.positionDate = that.sceneViewer.viewerState.positionDate;
+            that.viewerState.positionDateSeconds = that.sceneViewer.viewerState.positionDateSeconds;
+
+        }
+    }
+    this.sceneViewer.processes.add(new DDDSceneProcess(this.sceneViewer));
 
     // Events
     window.addEventListener('resize', this.resize);
 
     // Filter drag event for clicks
     let drag = false;
-    let that = this;
     canvas.addEventListener('pointerdown', () => {drag = false;});
     canvas.addEventListener('pointermove', () => {drag = true;});
     canvas.addEventListener('pointerup', () => {if (!drag) { that.click(); } } );
@@ -180,17 +212,17 @@ export default {
         let el = this.sceneParent.querySelector('.ddd-scene');
         if (el) {
             //console.debug("Resizing scene: " + width + " " + height);
-            //el.style.height = parseInt(height / this.myViewerState.sceneViewportRescale) + "px";
-            //el.style.width = parseInt(width / this.myViewerState.sceneViewportRescale) + "px";
-            //el.width = parseInt(width / this.myViewerState.sceneViewportRescale);
-            //el.height = parseInt(height / this.myViewerState.sceneViewportRescale);
+            //el.style.height = parseInt(height / this.viewerState.sceneViewportRescale) + "px";
+            //el.style.width = parseInt(width / this.viewerState.sceneViewportRescale) + "px";
+            //el.width = parseInt(width / this.viewerState.sceneViewportRescale);
+            //el.height = parseInt(height / this.viewerState.sceneViewportRescale);
             //this.sceneViewer.engine.resize(true);
             el.style.height = (height) + "px";
             el.style.width = (width) + "px";
 
             el.width = width;
             el.height = height;
-            this.sceneViewer.engine.setHardwareScalingLevel(this.myViewerState.sceneViewportRescale);
+            this.sceneViewer.engine.setHardwareScalingLevel(this.viewerState.sceneViewportRescale);
             this.sceneViewer.engine.resize();
         }
 
@@ -205,10 +237,6 @@ export default {
         //this.sceneViewer.engine.resize(true);
       },
 
-      addLayer: function(layer) {
-          //console.debug("Adding layer: " + layer);
-      },
-
       cycleTime: function(seconds) {
             this.sceneViewer.viewerState.positionDate.setSeconds(this.sceneViewer.viewerState.positionDate.getSeconds() + seconds);
             this.sceneViewer.viewerState.positionDateSeconds = this.sceneViewer.viewerState.positionDate / 1000;
@@ -217,7 +245,7 @@ export default {
 
       click: function() {
 
-        if (! this.getViewerState().scenePickingEnabled) { return; }
+        if (! this.viewerState.scenePickingEnabled) { return; }
 
         // Easy way of computing dragging (still clicks if mouse is stopped before button release
         if (this.sceneViewer.camera.inertialAlphaOffset || this.sceneViewer.camera.inertialBetaOffset) {

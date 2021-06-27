@@ -37,7 +37,7 @@
           </v-container>
       -->
 
-      <DDDScene />
+      <DDDScene :viewerState="viewerState" />
 
 </template>
 

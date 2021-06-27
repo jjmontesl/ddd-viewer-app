@@ -34,13 +34,13 @@ export default {
   },
 
   props: [
-      //'viewerState',
+      'viewerState',
   ],
   computed: {
-      //'viewerState': function() {return this.getViewerState();}
+      //'viewerState': function() {return this.viewerState;}
   },
   inject: [
-      'getViewerState'
+      //'getViewerState'
   ],
 
   methods: {
@@ -82,17 +82,20 @@ export default {
           }
           */
 
-          const that = this;
-          //that.$emit('dddPosition', that.positionWGS84(), this.map.getView().getZoom());
-          this.getViewerState().positionWGS84 = that.positionWGS84();
-          this.getViewerState().positionTileZoomLevel = this.map.getView().getZoom();
-          this.getViewerState().positionHeading = - this.map.getView().getRotation() * 180.0 / Math.PI;
-          this.getViewerState().positionTilt = 0.01;
-          this.getViewerState().positionGroundHeight = 150.0;
+          //that.$emit('dddPosition', 4.positionWGS84(), this.map.getView().getZoom());
 
-          this.map.once('rendercomplete', function () {
+          console.debug("TODO: DDDMap move event viewerState updates skipped.");
+          /*
+          this.viewerState.positionWGS84 = that.positionWGS84();
+          this.viewerState.positionTileZoomLevel = this.map.getView().getZoom();
+          this.viewerState.positionHeading = - this.map.getView().getRotation() * 180.0 / Math.PI;
+          this.viewerState.positionTilt = 0.01;
+          this.viewerState.positionGroundHeight = 150.0;
+          */
 
-              const image = that.exportImage();
+          this.map.once('rendercomplete', () => {
+
+              const image = this.exportImage();
               const switchEl = document.getElementById('ddd-map-3d-switch');
               if (switchEl) {
                   switchEl.style.backgroundColor = '#ffffff';
@@ -154,10 +157,9 @@ export default {
 
   mounted() {
     
-    console.debug('Creating DDD map (tileUrlBase=' + this.getViewerState().dddConfig.tileUrlBase + ', position=' + this.getViewerState().positionWGS84 + ')');
+    console.debug('Creating DDD map (tileUrlBase=' + this.viewerState.dddConfig.tileUrlBase + ', position=' + this.viewerState.positionWGS84 + ')');
 
-    const that = this;
-    this.getViewerState().dddMap = this;
+    this.viewerState.dddMap = this;
 
     //const el = that.$el.querySelector('.ddd-map');
     //el.style.height = "calc(100%)";
@@ -166,7 +168,7 @@ export default {
           units: 'metric',
     });
 
-    that.map = new Map({
+    this.map = new Map({
       controls: defaultControls().extend([scaleLine]),
       layers: [
 
@@ -178,7 +180,7 @@ export default {
 
         new TileLayer({
              source: new XYZ({
-                 url: this.getViewerState().dddConfig.tileUrlBase + '{z}/{x}/{y}.png',
+                 url: this.viewerState.dddConfig.tileUrlBase + '{z}/{x}/{y}.png',
              }),
             minZoom: 16.6,
             maxZoom: 17.4,
@@ -195,20 +197,20 @@ export default {
 
       target: 'ddd-map',
       view: new View({
-        center: olProj.transform( [-8.726, 42.233] /*that.getViewerState().positionWGS84*/, 'EPSG:4326', 'EPSG:3857'),
-        zoom: 10, //that.getViewerState().positionTileZoomLevel,
+        center: olProj.transform( [-8.726, 42.233] /*that.viewerState.positionWGS84*/, 'EPSG:4326', 'EPSG:3857'),
+        zoom: 10, //that.viewerState.positionTileZoomLevel,
         maxZoom: 18,
-        rotation: 0, // -that.getViewerState().positionHeading * Math.PI / 180.0,
+        rotation: 0, // -that.viewerState.positionHeading * Math.PI / 180.0,
       }),
     });
 
 
 
-    const map = that.map;
+    const map = this.map;
 
     // Events
-    map.on('singleclick', that.click);
-    map.on("moveend", that.move);
+    map.on('singleclick', this.click);
+    map.on("moveend", this.move);
     window.addEventListener('resize', this.resize);
 
     // Resize initially

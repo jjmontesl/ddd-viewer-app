@@ -43,8 +43,7 @@
                         </p>
                         <p>
                             <b>NOTE this software is in development stage.</b> Loading and generation times vary
-                            depending on server load. <b>Performance degrades after loading a few tiles</b>
-                            (try reloading or switching to 2D and back to 3D to restore performance). <b>Camera
+                            depending on server load. <b>Camera
                             may appear far above surface</b> at times during loading. If this happens,
                             try switching to <i>walk</i> mode as it will set the camera above the ground.
                             Orthophotos layers may not be available.

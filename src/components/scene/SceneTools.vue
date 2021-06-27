@@ -32,11 +32,11 @@
 
                     <v-card-text class="text-left">
 
-                        <v-slider v-model="viewerState.sceneTileDrawDistance" step="1" min="0" max="4" thumb-label ticks label="Draw Distance"></v-slider>
+                        <v-slider v-model="viewerState.sceneTileDrawDistance" @change="sceneTileDrawDistanceChange" step="1" min="0" max="4" thumb-label ticks label="Draw Distance"></v-slider>
 
                         <v-select v-model="viewerState.sceneTextureSet" @change="sceneTextureSetChange" :items="textureModeItems" label="Textures" ></v-select>
 
-                        <v-select v-model="viewerState.sceneGroundTextureOverride" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
+                        <v-select v-model="viewerState.sceneGroundTextureOverrideKey" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
 
                         <v-select v-model="viewerState.sceneSkybox" @change="skyboxChange" :items="skyBoxItems" label="Environment" ></v-select>
 
@@ -288,9 +288,20 @@ export default {
          mesh.dispose();
       },
 
-      groundTextureLayerChange(value) {
-          //console.debug("Changing ground texture: ", value);
-          this.getSceneViewer().groundTextureLayerSetKey(value);
+      groundTextureLayerChange(key) {
+        console.debug("Setting ground texture: ", key);
+
+        let url = null;
+        const layers = this.viewerState.dddConfig.sceneGroundLayers;
+        if ( key && layers[key]) {
+            url = layers[key].url;
+            this.$root.viewerAppState.sceneGroundTextureOverrideKey = key;
+            this.getSceneViewer().groundTextureLayerSetUrl(url);
+        } else {
+            this.$root.viewerAppState.sceneGroundTextureOverrideKey = key;
+            this.getSceneViewer().groundTextureLayerSetUrl(null);
+        }
+
       },
 
       skyboxChange(value) {
@@ -308,8 +319,23 @@ export default {
           this.getSceneViewer().scenePostprocessingSetEnabled(value);
       },
 
-      sceneTextureSetChange(value) {
-          this.getSceneViewer().sceneTextureSet(value);
+      sceneTextureSetChange(textureSetKey) {
+
+        let textures = null;
+        let splatmap = null;
+
+        console.debug("Setting viewer app texture set to: " + textureSetKey);
+
+        const materialsConfigDef = this.viewerState.dddConfig.sceneMaterials.find((o) => { return o.value === textureSetKey; });
+        if (materialsConfigDef) {
+            textures = materialsConfigDef.textures;
+            splatmap = materialsConfigDef.splatmap;
+            localStorage.setItem( "dddSceneTextureSet", JSON.stringify(textureSetKey));
+            this.$root.viewerAppState.sceneTextureSet = textureSetKey;
+        }
+
+        // TODO: This is currently not working without a restart (these settings are actually applied during DDDViewer creation)
+        this.getSceneViewer().sceneTextureSet(textures, splatmap);
       },
 
       sceneTimeChange(value) {
@@ -318,6 +344,10 @@ export default {
             currentDate.setMinutes(parseInt((value - parseInt(value)) * 60));
             this.viewerState.positionDate = currentDate;
             this.viewerState.positionDateSeconds = this.viewerState.positionDate / 1000;
+      },
+
+      sceneTileDrawDistanceChange(value) {
+          this.getSceneViewer().viewerState.sceneTileDrawDistance = value;
       }
 
   },

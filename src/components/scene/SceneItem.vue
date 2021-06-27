@@ -84,7 +84,7 @@
                     <v-card-text v-if="!loading" class="text-left">
                         <div>
                             <h3>Node Tree</h3>
-                            <NodeHierarchy :nodeGetter="nodeGetter" depth="1"></NodeHierarchy>
+                            <NodeHierarchy :nodeGetter="nodeGetter" :viewerState="viewerState" depth="1"></NodeHierarchy>
                         </div>
                     </v-card-text>
 
@@ -155,6 +155,9 @@ export default {
       //titleTemplate: `${this.$t('home.TITLE')} - %s`
     }
   },
+  properties: [
+      'viewerState',
+  ],
   inject: [
     'getSceneViewer',
   ],

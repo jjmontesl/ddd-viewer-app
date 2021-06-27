@@ -17,8 +17,9 @@ import { store } from '@/store'
 import VuetifyConfirm from 'vuetify-confirm'
 import VueGtag from "vue-gtag";
 import VueGeolocation from 'vue-browser-geolocation';
+import DDDViewerAppState from './DDDViewerAppState'
 
-fetch("/dddconfig.json")  // process.env.BASE_URL +
+fetch("/ddd-viewer-app.config.json")  // process.env.BASE_URL +
   .then((response) => {
 
       response.json().then((config) => {
@@ -29,7 +30,7 @@ fetch("/dddconfig.json")  // process.env.BASE_URL +
         config.dddHttpApiUrlBase = config.dddHttpApiUrlBase.replace('{{hostname}}', location.hostname);
         //console.debug(config);
 
-        Vue.config.productionTip = config.productionTip
+        Vue.config.productionTip = config.productionTip;
 
         Vue.use(VuetifyConfirm, { vuetify })
 
@@ -61,11 +62,15 @@ fetch("/dddconfig.json")  // process.env.BASE_URL +
             defaultCoords: [-8.723, 42.238],  // Vigo Castro
         }*/
 
+        const viewerAppState = new DDDViewerAppState(config.defaultCoords, false); // this.isMobile());
+        viewerAppState.dddConfig = config;
+
         const app = new Vue({
           vuetify,
           router,
           store,
           i18n,
+          data: { viewerAppState: viewerAppState },
           render: (h) => h(App),
           created() {
             store.dispatch('setLocale', store.getters.locale)

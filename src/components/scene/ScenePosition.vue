@@ -25,7 +25,7 @@
                     <div style="overflow: hidden; white-space: nowrap;"><b></b>&nbsp;</div>
                     -->
 
-                    <div><small>{{ viewerState.sceneFPS }} FPS</small> <small>{{ viewerState.sceneTriangles }} tris / {{ viewerState.sceneDrawCalls }} drawcalls</small></div>
+                    <div><small>{{ viewerState.sceneFPS.toFixed(1) }} FPS</small> <small>{{ (viewerState.sceneTriangles / 1000).toFixed(2) }} K tri / {{ viewerState.sceneDrawCalls }} drawcalls</small></div>
 
                 </div>
             </v-card-text>
@@ -55,7 +55,6 @@
 import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import SceneLabel from '@/components/scene/SceneLabel.vue';
-import tiles from '@/services/ddd_http/tiles.js';
 
 export default {
   mounted() {

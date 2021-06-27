@@ -4,32 +4,26 @@
 * MIT License (see LICENSE file)
 */
 
-class ViewerState {
+/**
+ * Global state of the DDDViewerApp.
+ * This class must be JSON serializable.
+ */
+class DDDViewerAppState {
 
     mapVisible = true;
     sceneVisible = false;
 
-    dddConfig = null;
-
     isMobile = null;
 
     positionTileZoomLevel = 9;
-
     positionWGS84 = [-8.726, 42.233]; // [0.0, 0.0];
-
     // Position in scene, in engine coordinates (elevation is Y)
     positionScene = [0, 0, 0];
-
     positionGroundHeight = 150.0;
-
     positionTerrainElevation = 0;
-
     positionHeading = 0.0;
-
     positionTilt = 0.0;
-
     positionName = "";
-
     positionDate = new Date();
     positionDateSeconds = this.positionDate / 1000;
 
@@ -38,19 +32,15 @@ class ViewerState {
     serverInfoShow = true;
 
 
-
     // TODO: These nodes are instrumented: remove selectedMesh from here and use ids.
     // TODO: Try removing this and this.sceneViewer
     sceneSelectedMesh = null;
 
-    // sceneSelectedMeshId = null;
-
-
-    /*
     sceneFPS = 0;
-    sceneDrawCalls = null;
-    sceneTriangles = null;
-    */
+    sceneDrawCalls = 0;
+    sceneTriangles = 0;
+
+    // sceneSelectedMeshId = null;
 
     sceneShadowsEnabled = false;
 
@@ -73,15 +63,16 @@ class ViewerState {
     sceneEnvironmentProbe = 16;  // null to use a static environment (should be associated to the skybox, but it's currently fixed)
     sceneSkybox = "/textures/TropicalSunnyDay"; // "@dynamic"; // ""/textures/TropicalSunnyDay";
 
-    sceneTextureSet = "defaultsplat256";
+    sceneTextureSet = "default256";
 
-    sceneGroundTextureOverride = null;
+    sceneGroundTextureOverrideKey = null;
 
     sceneTitleText = null;
 
     constructor(initialCoords, isMobile) {
 
         this.isMobile = isMobile || false;
+
         if (this.isMobile) {
             this.sceneViewportRescale = 2;
             this.sceneTextureSet = null;  // "default256";
@@ -102,9 +93,8 @@ class ViewerState {
         this.positionDate.setHours(11);
         this.positionDate.setMinutes(0);
 
-
     }
 
 }
 
-export default ViewerState;
+export default DDDViewerAppState;

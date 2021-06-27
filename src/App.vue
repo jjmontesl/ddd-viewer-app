@@ -7,10 +7,10 @@
 
         <div class="ddd-render-back">
 
-            <DDDMap v-if="viewerState.mapVisible" /> <!-- :viewerState="viewerState" /> -->
+            <DDDMap v-if="viewerState.mapVisible" :viewerState="viewerState" />
             <DDDMap3DSwitch v-if="viewerState.mapVisible" />
 
-            <DDDScene v-if="viewerState.sceneVisible" /> <!--  :viewerState="viewerState" -->
+            <DDDScene v-if="viewerState.sceneVisible" :viewerState="viewerState" />
 
         </div>
 
@@ -43,12 +43,14 @@ import Toolbar from '@/components/core/Toolbar.vue'
 import Loading from '@/components/core/Loading.vue'
 //import Footer from '@/components/core/Footer.vue'
 
+import DDDViewerAppState from '@/DDDViewerAppState';
+
 import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
-import { ViewerState } from 'ddd-viewer';
+//import { ViewerState } from 'ddd-viewer';
 
 export default {
   name: 'App',
@@ -109,11 +111,10 @@ export default {
   inject: [
   ],
   provide: function () {
-      const that = this;
       return {
-        getViewerState: function() { return that.viewerState; },
-        getSceneViewer: function() { return that.sceneViewer; },
-        setSceneViewer: function(sceneViewer) { that.sceneViewer = sceneViewer; },
+        //getViewerState: function() { return that.viewerState; },
+        getSceneViewer: () => { return this.sceneViewer; },
+        setSceneViewer: (sceneViewer) => { this.sceneViewer = sceneViewer; },
       }
   },
   data() {
@@ -121,7 +122,7 @@ export default {
       //name: this.$store.state.auth.user.name,
       //showVerifyDialog: !this.$store.state.verify.emailVerified
       //viewer: dddViewer,
-      viewerState: new ViewerState(this.dddConfig.defaultCoords, this.isMobile()),
+      viewerState: this.$root.viewerAppState,
       //viewerState: null,
     }
   },
@@ -138,7 +139,7 @@ export default {
   },
   created() {
       this.parseHref();
-      this.viewerState.dddConfig = this.dddConfig;
+      //this.viewerState.dddConfig = this.dddConfig;
   },
   mounted() {
   },

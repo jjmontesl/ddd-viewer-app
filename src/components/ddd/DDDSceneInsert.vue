@@ -12,7 +12,7 @@
 export default {
 
   inject: [
-      'getViewerState'
+      'getSceneViewer'
   ],
 
   methods: {
@@ -20,8 +20,8 @@ export default {
       resize: function() {
           this.checkMountScene();
 
-          if (this.getViewerState().sceneViewer) {
-              this.getViewerState().sceneViewer.engine.resize();
+          if (this.getSceneViewer()) {
+              this.getSceneViewer().engine.resize();
           }
       },
 
