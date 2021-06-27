@@ -32,7 +32,7 @@
 
     "dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
 
-    "geolocation": true
+    "geolocation": false
 
 
 }

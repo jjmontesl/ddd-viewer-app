@@ -112,7 +112,6 @@ export default {
   ],
   provide: function () {
       return {
-        //getViewerState: function() { return that.viewerState; },
         getSceneViewer: () => { return this.sceneViewer; },
         setSceneViewer: (sceneViewer) => { this.sceneViewer = sceneViewer; },
       }
@@ -123,7 +122,6 @@ export default {
       //showVerifyDialog: !this.$store.state.verify.emailVerified
       //viewer: dddViewer,
       viewerState: this.$root.viewerAppState,
-      //viewerState: null,
     }
   },
   props: {
@@ -139,7 +137,6 @@ export default {
   },
   created() {
       this.parseHref();
-      //this.viewerState.dddConfig = this.dddConfig;
   },
   mounted() {
   },
@@ -148,10 +145,10 @@ export default {
       dddViewerMode(mode) {
         console.debug("Received Viewer Mode change event to: " + mode);
         if (mode !== null) {
-            this.viewerState.mapVisible = mode === 'map';
-            this.viewerState.sceneVisible = mode === 'scene';
+            this.$root.viewerAppState.mapVisible = mode === 'map';
+            this.$root.viewerAppState.sceneVisible = mode === 'scene';
         }
-        setTimeout(function() {
+        setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
         }, 200);
       },
@@ -213,10 +210,10 @@ export default {
 
                 if (matches.length >= 3 && tileCoords !== null) {
                     //console.debug(tileCoords);
-                    this.viewerState.positionWGS84 = this.positionFromTile(tileCoords);
-                    this.viewerState.positionTileZoomLevel = tileCoords[0];
+                    this.$root.viewerAppState.positionWGS84 = this.positionFromTile(tileCoords);
+                    this.$root.viewerAppState.positionTileZoomLevel = tileCoords[0];
                 } else if (matches.length >= 3) {
-                    this.viewerState.positionWGS84 = [parseFloat(matches[2]),parseFloat(matches[1])];
+                    this.$root.viewerAppState.positionWGS84 = [parseFloat(matches[2]),parseFloat(matches[1])];
                 }
 
                 if (matches.length >= 4) {
@@ -225,20 +222,20 @@ export default {
                         let value = parseFloat(match.slice(0, -1));
                         let code = match.slice(-1);
                         if (code === 'z') {
-                            this.viewerState.positionTileZoomLevel = value;
+                            this.$root.viewerAppState.positionTileZoomLevel = value;
                         } else if (code === 'a') {
-                            this.viewerState.positionGroundHeight = value;
+                            this.$root.viewerAppState.positionGroundHeight = value;
                         } else if (code === 'h') {
-                            this.viewerState.positionHeading = value;
+                            this.$root.viewerAppState.positionHeading = value;
                         } else if (code === 't') {
-                            this.viewerState.positionTilt = value;
+                            this.$root.viewerAppState.positionTilt = value;
                         }
                         //console.debug(value, code);
                     }
 
                 }
             } catch(e) {
-                //console.debug("Error parsing location from href: " + e);
+                console.error("Error parsing location from href: " + e);
             }
 
           //let positionWgs84 = this.getViewerState().positionWGS84;

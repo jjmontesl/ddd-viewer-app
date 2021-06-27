@@ -77,8 +77,11 @@ export default {
         splatmap = materialsConfigDef.splatmap;
     }
 
+    console.debug("Initializing DDDViewer (defaultCoords=" + this.viewerState.positionWGS84 + ")");
+
     const dddConfig = {
-        "defaultCoords": [-8.723, 42.238],
+        "defaultCoords": this.viewerState.positionWGS84,
+
         "tileUrlBase": "http://localhost:8000/cache/ddd_http/",
         "assetsUrlbase": "/assets/",
 
@@ -98,6 +101,15 @@ export default {
     const layerDddOsm3d = new GeoTile3DLayer();
     this.sceneViewer.layerManager.addLayer("ddd-osm-3d", layerDddOsm3d);
 
+    // Set camera from ViewerAppState (ie. if set from URL or otherwise)
+    this.sceneViewer.viewerState.positionHeading = this.$root.viewerAppState.positionHeading;
+    this.sceneViewer.viewerState.positionTilt = this.$root.viewerAppState.positionTilt;
+    this.sceneViewer.viewerState.positionGroundHeight = this.$root.viewerAppState.positionGroundHeight;
+    // Forces camera repositioning according to sceneViewer.viewerState
+    // TODO: Provide a setCameraPosition/target, once Cameras are refactored
+    // NOTE: this causes an initial camera change, which can make other bugs surface (eg. wrong shadows if shadowGenerator.autoCalcDepthBounds is true)
+    this.sceneViewer.selectCameraFree();
+
     // Hook a callback to DDDViewer to update state.
     const that = this;
     class DDDSceneProcess extends ViewerProcess {
@@ -115,6 +127,7 @@ export default {
             that.viewerState.positionDate = that.sceneViewer.viewerState.positionDate;
             that.viewerState.positionDateSeconds = that.sceneViewer.viewerState.positionDateSeconds;
 
+            that.viewerState.sceneMoveSpeed = that.sceneViewer.viewerState.sceneMoveSpeed;
         }
     }
     this.sceneViewer.processes.add(new DDDSceneProcess(this.sceneViewer));

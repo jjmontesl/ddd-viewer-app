@@ -44,7 +44,7 @@ export default class {
         const filename = "/assets/seagull/gull-oriented.glb";
         BABYLON.SceneLoader.ImportMesh(null, filename, '', this.scene, //this.scene,
           // onSuccess
-          function(newMeshes, particleSystems, skeletons) {
+          (newMeshes, particleSystems, skeletons) => {
               newMeshes[0].setParent(null);
               newMeshes[0].setEnabled(true);
               newMeshes[0].position = new BABYLON.Vector3(0, 200, 0);
@@ -54,9 +54,9 @@ export default class {
                   that.processes.sceneViewer.shadowGenerator.getShadowMap().renderList.push(mesh);
               });
           },
-          function(event) {
+          (event) => {
           },
-          function(scene, msg, ex) {
+          (scene, msg, ex) => {
               console.log("Could not load model: " + filename, ex);
           }
        );

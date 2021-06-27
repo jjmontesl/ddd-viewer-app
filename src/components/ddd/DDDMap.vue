@@ -74,24 +74,19 @@ export default {
 
           const posString = this.positionString();
 
-          /*
           if (this.$route.name === 'mapMain') {
               this.$router.replace('/maps/' + posString).catch(()=>{});
           } else if (this.$route.name === 'mapPlace')  {
               this.$router.replace('/maps/place/' + this.$route.params.name + '/' + posString).catch(()=>{});
           }
-          */
 
           //that.$emit('dddPosition', 4.positionWGS84(), this.map.getView().getZoom());
 
-          console.debug("TODO: DDDMap move event viewerState updates skipped.");
-          /*
-          this.viewerState.positionWGS84 = that.positionWGS84();
-          this.viewerState.positionTileZoomLevel = this.map.getView().getZoom();
-          this.viewerState.positionHeading = - this.map.getView().getRotation() * 180.0 / Math.PI;
-          this.viewerState.positionTilt = 0.01;
-          this.viewerState.positionGroundHeight = 150.0;
-          */
+          this.$root.viewerAppState.positionWGS84 = this.positionWGS84();
+          this.$root.viewerAppState.positionTileZoomLevel = this.map.getView().getZoom();
+          this.$root.viewerAppState.positionHeading = - this.map.getView().getRotation() * 180.0 / Math.PI;
+          this.$root.viewerAppState.positionTilt = 0.01;
+          this.$root.viewerAppState.positionGroundHeight = 150.0;
 
           this.map.once('rendercomplete', () => {
 
@@ -133,7 +128,7 @@ export default {
         const mapContext = mapCanvas.getContext('2d');
         Array.prototype.forEach.call(
           document.querySelectorAll('.ol-layer canvas'),
-          function (canvas) {
+          (canvas) => {
             if (canvas.width > 0) {
               const opacity = canvas.parentNode.style.opacity;
               mapContext.globalAlpha = opacity === '' ? 1 : Number(opacity);
@@ -156,10 +151,11 @@ export default {
 
 
   mounted() {
-    
-    console.debug('Creating DDD map (tileUrlBase=' + this.viewerState.dddConfig.tileUrlBase + ', position=' + this.viewerState.positionWGS84 + ')');
 
-    this.viewerState.dddMap = this;
+    console.debug('Creating DDD map (tileUrlBase=' + this.viewerState.dddConfig.tileUrlBase + ', position=' + this.$root.viewerAppState.positionWGS84 + ')');
+
+    console.warn("TODO: Setting dddMap attribute on $root.viewerAppState directly. Use a setMapViewer-like approach as in DDDScene.");
+    this.$root.viewerAppState.dddMap = this;
 
     //const el = that.$el.querySelector('.ddd-map');
     //el.style.height = "calc(100%)";
@@ -197,8 +193,8 @@ export default {
 
       target: 'ddd-map',
       view: new View({
-        center: olProj.transform( [-8.726, 42.233] /*that.viewerState.positionWGS84*/, 'EPSG:4326', 'EPSG:3857'),
-        zoom: 10, //that.viewerState.positionTileZoomLevel,
+        center: olProj.transform( this.$root.viewerAppState.positionWGS84, 'EPSG:4326', 'EPSG:3857'),
+        zoom: this.$root.viewerAppState.positionTileZoomLevel,
         maxZoom: 18,
         rotation: 0, // -that.viewerState.positionHeading * Math.PI / 180.0,
       }),

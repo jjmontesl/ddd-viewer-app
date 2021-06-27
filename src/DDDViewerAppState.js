@@ -63,7 +63,7 @@ class DDDViewerAppState {
     sceneEnvironmentProbe = 16;  // null to use a static environment (should be associated to the skybox, but it's currently fixed)
     sceneSkybox = "/textures/TropicalSunnyDay"; // "@dynamic"; // ""/textures/TropicalSunnyDay";
 
-    sceneTextureSet = "default256";
+    sceneTextureSet = "default256"; // "defaultsplat256";
 
     sceneGroundTextureOverrideKey = null;
 
