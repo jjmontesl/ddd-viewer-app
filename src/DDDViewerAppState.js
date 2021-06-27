@@ -13,7 +13,7 @@ class DDDViewerAppState {
     mapVisible = true;
     sceneVisible = false;
 
-    isMobile = null;
+    isMobile = false;
 
     positionTileZoomLevel = 9;
     positionWGS84 = [-8.726, 42.233]; // [0.0, 0.0];
@@ -69,14 +69,7 @@ class DDDViewerAppState {
 
     sceneTitleText = null;
 
-    constructor(initialCoords, isMobile) {
-
-        this.isMobile = isMobile || false;
-
-        if (this.isMobile) {
-            this.sceneViewportRescale = 2;
-            this.sceneTextureSet = null;  // "default256";
-        }
+    constructor(initialCoords) {
 
         this.positionWGS84 = initialCoords;
 
@@ -88,6 +81,18 @@ class DDDViewerAppState {
 
         const textureSet = localStorage.getItem('dddSceneTextureSet');
         this.sceneTextureSet = textureSet ? JSON.parse(textureSet) : this.sceneTextureSet;
+
+        // Mobiles
+        this.isMobile = false;
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            this.isMobile = true;
+        }
+
+        // Hard coded settings for mobile devices
+        if (this.isMobile) {
+            this.sceneViewportRescale = 2;
+            this.sceneTextureSet = null;  // "default256";
+        }
 
         // Start time
         this.positionDate.setHours(11);

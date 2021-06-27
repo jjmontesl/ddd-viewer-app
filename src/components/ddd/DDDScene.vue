@@ -7,7 +7,7 @@
 
         <div class="ddd-scene-overlay" id="ddd-scene-overlay" style="width: 100%; height: 100%; position: absolute; z-index: 2; top: 0px; pointer-events: none;">
 
-            <div v-if="viewerState.sceneTitleText" id="ddd-scene-overlay-text-title" style="white-space: pre-line; line-height: 130%; text-align: center; font-size: 150%; color: white; z-index: 10; bottom: 20%; width: 100%; font-outline: 1px black; position: absolute; text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;"><h2>{{viewerState.sceneTitleText}}</h2></div>
+            <div v-if="viewerState.sceneTitleText" id="ddd-scene-overlay-text-title" style="white-space: pre-line; line-height: 130%; text-align: center; font-size: 150%; color: white; z-index: 10; bottom: 20%; width: 100%; font-outline: 1px black; position: absolute; text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;"><h2>{{ viewerState.sceneTitleText }}</h2></div>
 
             <SceneViewMode v-if="viewerState.sceneVisible && viewerState.sceneViewModeShow" :viewerState="viewerState" />
 
@@ -128,6 +128,8 @@ export default {
             that.viewerState.positionDateSeconds = that.sceneViewer.viewerState.positionDateSeconds;
 
             that.viewerState.sceneMoveSpeed = that.sceneViewer.viewerState.sceneMoveSpeed;
+
+            that.viewerState.sceneTitleText = that.sceneViewer.viewerState.sceneTitleText;
         }
     }
     this.sceneViewer.processes.add(new DDDSceneProcess(this.sceneViewer));

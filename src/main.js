@@ -62,7 +62,7 @@ fetch("/ddd-viewer-app.config.json")  // process.env.BASE_URL +
             defaultCoords: [-8.723, 42.238],  // Vigo Castro
         }*/
 
-        const viewerAppState = new DDDViewerAppState(config.defaultCoords, false); // this.isMobile());
+        const viewerAppState = new DDDViewerAppState(config.defaultCoords);
         viewerAppState.dddConfig = config;
 
         const app = new Vue({
