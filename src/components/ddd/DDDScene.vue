@@ -77,12 +77,12 @@ export default {
         splatmap = materialsConfigDef.splatmap;
     }
 
-    console.debug("Initializing DDDViewer (defaultCoords=" + this.viewerState.positionWGS84 + ")");
+    console.info("Initializing DDDViewer (defaultCoords=" + this.viewerState.positionWGS84 + ")");
 
     const dddConfig = {
         "defaultCoords": this.viewerState.positionWGS84,
 
-        "tileUrlBase": "http://localhost:8000/cache/ddd_http/",
+        "tileUrlBase": this.viewerState.dddConfig.tileUrlBase,
         "assetsUrlbase": "/assets/",
 
         "materialsTextureSet": textures,
@@ -119,6 +119,7 @@ export default {
             that.viewerState.positionScene = that.sceneViewer.viewerState.positionScene;
             that.viewerState.positionGroundHeight = that.sceneViewer.viewerState.positionGroundHeight;
             that.viewerState.positionHeading = that.sceneViewer.viewerState.positionHeading;
+            that.viewerState.positionTileZoomLevel = that.sceneViewer.viewerState.positionTileZoomLevel;
 
             that.viewerState.sceneFPS = that.sceneViewer.viewerState.sceneFPS;
             that.viewerState.sceneDrawCalls = that.sceneViewer.viewerState.sceneDrawCalls;

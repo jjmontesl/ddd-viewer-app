@@ -30,7 +30,7 @@
 
     "defaultCoords": [-8.723, 42.238],
 
-    "dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
+    "dddHttpApiUrlBase": "http://{{hostname}}:8000/api/",
 
     "geolocation": false
 

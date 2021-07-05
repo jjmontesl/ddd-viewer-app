@@ -10,9 +10,7 @@
 </style>
 
 <script>
-import DDDScene from '@/components/ddd/DDDScene.vue';
-import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
-import FlyGameProcess from '@/games/fly/FlyGameProcess.js';
+import { FlyGameProcess } from '@/games/fly/FlyGameProcess.js';
 
 export default {
   mounted() {
@@ -32,7 +30,7 @@ export default {
                   console.debug(data);
 
                   // Launch game
-                  const flyGameProcess = new FlyGameProcess(gameData);
+                  const flyGameProcess = new FlyGameProcess(this.getSceneViewer(), gameData);
                   this.getSceneViewer().processes.add(flyGameProcess);
 
             })
@@ -40,9 +38,8 @@ export default {
 
     }
 
-    const that = this;
-    setTimeout(function() {
-        that.getSceneViewer().loadSkybox("@dynamic");
+    setTimeout(() => {
+      this.getSceneViewer().loadSkybox("@dynamic");
     }, 2000);
 
   },

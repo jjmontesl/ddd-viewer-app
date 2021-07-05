@@ -13,8 +13,6 @@
 <script>
 import tiles from '@/services/ddd_http/tiles.js'
 
-import OSMImage from '@/components/ddd/OSMImage.vue';
-
 export default {
   mounted() {
       this.updateInfo();

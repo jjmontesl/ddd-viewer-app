@@ -1,11 +1,18 @@
 
 
-import * as BABYLON from 'babylonjs';
+import "@babylonjs/loaders/glTF";
+
+import { ViewerProcess } from 'ddd-viewer';
+import { SceneLoader, Vector3 } from '@babylonjs/core';
 
 
-export default class {
+class FlyGameProcess extends ViewerProcess {
 
-    constructor(gameData) {
+    initialized = false;
+
+    constructor(sceneViewer, gameData) {
+
+        super(sceneViewer);
 
         // These attributes are set by the SceneViewer/ViewerProcesses externally
         this.processes = null;
@@ -29,7 +36,7 @@ export default class {
 
         this.seagull = null;
         this.heading = 0;
-        this.velocity = new BABYLON.Vector3();
+        this.velocity = new Vector3();
 
         /*
         this.dtStart = dtStart;
@@ -40,23 +47,28 @@ export default class {
     }
 
     loadPlayerModel() {
-        const that = this;
         const filename = "/assets/seagull/gull-oriented.glb";
-        BABYLON.SceneLoader.ImportMesh(null, filename, '', this.scene, //this.scene,
-          // onSuccess
-          (newMeshes, particleSystems, skeletons) => {
-              newMeshes[0].setParent(null);
-              newMeshes[0].setEnabled(true);
-              newMeshes[0].position = new BABYLON.Vector3(0, 200, 0);
-              that.seagull = newMeshes[0];
+        //const filename = "/assets/parachute/scene.gltf";
+        SceneLoader.ImportMesh(null, filename, '', this.sceneViewer.scene, //this.scene,
+        // onSuccess
+        (newMeshes, particleSystems, skeletons) => {
+            newMeshes[0].setParent(null);
+            newMeshes[0].setEnabled(true);
+            newMeshes[0].position = new Vector3(0, 200, 0);
+            this.seagull = newMeshes[0];
 
-              newMeshes.forEach((mesh, i) => {
-                  that.processes.sceneViewer.shadowGenerator.getShadowMap().renderList.push(mesh);
+            newMeshes[0].scaling = new Vector3(0.75, 0.75, -0.75);
+
+            //console.debug("Loading player model.", this.sceneViewer.scene, newMeshes[0]);
+            newMeshes.forEach((_mesh, _i) => {
+                if (this.sceneViewer.shadowGenerator) {
+                    //this.sceneViewer.shadowGenerator.getShadowMap().renderList.push(mesh);
+                }
               });
           },
-          (event) => {
+          (_event) => {
           },
-          (scene, msg, ex) => {
+          (_scene, _msg, ex) => {
               console.log("Could not load model: " + filename, ex);
           }
        );
@@ -64,10 +76,11 @@ export default class {
 
     initialize() {
 
-        this.sceneViewer = this.processes.sceneViewer;
+        console.info("Initializing FlyGameProcess.");
 
         // Load seagull model
         this.loadPlayerModel();
+        //this.sceneViewer.loadPlayerModel();
 
         // Set player initial position
         //@42.2309465,-8.7266273,34a,35y,24.5h,70.25t
@@ -89,12 +102,13 @@ export default class {
 
         // TODO: Hacky way of initializing the process:
         // This should be called by ViewerProcesses for each new process.
-        if (this.time === 0) {
+        if (this.time > 1.0 && !this.initialized) {
+            this.initialized = true;
             this.initialize();
         }
         this.time += deltaTime;
-        const sceneViewer = this.processes.sceneViewer;
 
+        //this.seagull = this.sceneViewer.seagull;
         // Check needed objects are loaded
         if (this.seagull === null) { return; }
 
@@ -107,11 +121,11 @@ export default class {
 
         // Apply physics
         let inclination = (this.controlsLeft ? -0.2 : (this.controlsRight ? 0.2 : 0.0));
-        this.seagull.rotation = new BABYLON.Vector3(pitch, this.heading, inclination);
+        this.seagull.rotation = new Vector3(pitch, this.heading, inclination);
 
-        let velocityRef = new BABYLON.Vector3(0, -2.0, -7.5);
-        let headingRotation = new BABYLON.Vector3(0, this.heading, 0).toQuaternion();
-        let velocity = velocityRef.rotateByQuaternionToRef(headingRotation, new BABYLON.Vector3());
+        let velocityRef = new Vector3(0, -2.0, -7.5);
+        let headingRotation = new Vector3(0, this.heading, 0).toQuaternion();
+        let velocity = velocityRef.rotateByQuaternionToRef(headingRotation, new Vector3());
 
         const movement = velocity.scale(deltaTime);
 
@@ -121,15 +135,15 @@ export default class {
         this.seagull.position = newPos;
 
         // Update camera to follow target from behind
-        let cameraTargetPos = new BABYLON.Vector3(0, 1, -2);
-        let cameraTargetPosWorld = BABYLON.Vector3.TransformCoordinates(cameraTargetPos, this.seagull.getWorldMatrix());
+        let cameraTargetPos = new Vector3(0, 1, -2);
+        let cameraTargetPosWorld = Vector3.TransformCoordinates(cameraTargetPos, this.seagull.getWorldMatrix());
 
-        let cameraNewPos = BABYLON.Vector3.Lerp(sceneViewer.camera.position, cameraTargetPosWorld, 0.02);
+        let cameraNewPos = Vector3.Lerp(this.sceneViewer.camera.position, cameraTargetPosWorld, 0.02);
 
-        sceneViewer.camera.position = cameraNewPos;
+        this.sceneViewer.camera.position = cameraNewPos;
         //sceneViewer.camera.lookAt(this.seagull.position);
         //new BABYLON.Vector3((90.0 - sceneViewer.viewerState.positionTilt) * (Math.PI / 180.0), sceneViewer.viewerState.positionHeading * (Math.PI / 180.0), 0.0);
-        sceneViewer.camera.setTarget(this.seagull.position);
+        this.sceneViewer.camera.setTarget(this.seagull.position);
 
 
 
@@ -151,3 +165,5 @@ export default class {
     }
 
 }
+
+export { FlyGameProcess };

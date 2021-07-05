@@ -75,21 +75,28 @@
                             or <a href="https://twitter.com/jjmontes" target="_blank">contact me</a>.
                         </p>
 
-                        <h3><!--Patreon / Buymeacoffee-->Author</h3>
-
-                        <p>
-                            I have developed the viewer and software used for 3D generation, and I also
-                            maintain this demostration server. You can contribute to the codebase
-                            of the generator (DDD), this viewer, or to the OpenStreetMap database.
-                        </p>
-                        <p>
-                            You can also <a href="https://twitter.com/jjmontes" target="_blank">follow on Twitter</a> to stay up to date.
-                        </p>
-
                         <h3>Coverage</h3>
                         <p>
                              <center><i>Current Coverage (limited by disk space available for elevation data)</i></center>
                              <center><img src="/img/about-map.png" style="height: 300px;" /></center>
+                        </p>
+
+
+                        <h3>Authors</h3>
+
+                        <p>
+                            DDD viewer and software used for 3D generation were created by Jose Juan Montes,
+                            who also maintains this demostration server. The following contributors
+                            have also contributed to the DDD Viewer project:
+                        </p>
+                        <p>
+                            <ul>
+                                <li>Farvell</li>
+                            </ul>
+                        </p>
+                        <p>You can contribute to the codebase of the generator (DDD), this viewer, or to the OpenStreetMap database.<p>
+
+                            You can also <a href="https://twitter.com/jjmontes" target="_blank">follow on Twitter</a> to stay up to date.
                         </p>
 
                         <h3>Copyright and Attribution</h3>
