@@ -22,6 +22,7 @@
 import { SceneViewer } from 'ddd-viewer';
 import { GeoTile3DLayer } from 'ddd-viewer';
 import { ViewerProcess } from 'ddd-viewer';
+import { DDDObjectRef } from 'ddd-viewer';
 
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
@@ -142,7 +143,7 @@ export default {
     let drag = false;
     canvas.addEventListener('pointerdown', () => {drag = false;});
     canvas.addEventListener('pointermove', () => {drag = true;});
-    canvas.addEventListener('pointerup', () => {if (!drag) { that.click(); } } );
+    canvas.addEventListener('pointerup', (ev) => { if (!drag) { ev.preventDefault(); that.click(); } } );
     //canvas.addEventListener('click', () => { that.click(); } );
 
     //canvas.addEventListener('keydown', (e) => { if (e.keyCode === 16) { that.cycleMoveSpeed(); } });
@@ -267,7 +268,6 @@ export default {
         if (this.sceneViewer.camera.inertialAlphaOffset || this.sceneViewer.camera.inertialBetaOffset) {
             return;
         }
-        event.preventDefault();
 
         const pickResult = this.sceneViewer.scene.pick(this.sceneViewer.scene.pointerX, this.sceneViewer.scene.pointerY);
 
@@ -284,12 +284,13 @@ export default {
             this.$router.push('/3d/pos/').catch(()=>{});
             return;
         } else {
-
-            // WARN: TODO: this transformation is done in other places
-            let meshName = pickResult.pickedMesh.id.split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
-            this.$router.push('/3d/item/' + meshName + '/' + this.sceneViewer.positionString()).catch(()=>{});
-
-            this.sceneViewer.selectMesh(pickResult.pickedMesh, true);
+            //console.debug("Pick result (click): ", pickResult);
+            const objectRef = DDDObjectRef.fromMeshFace(pickResult.pickedMesh, pickResult.faceId);
+            console.debug(objectRef);
+            console.debug("Pick result (objectref metadata): ", objectRef.getMetadata());
+            this.sceneViewer.selectObject(objectRef);
+            //this.$router.push('/3d/item/' + meshName + '/' + this.sceneViewer.positionString()).catch(()=>{});
+            //this.sceneViewer.selectMesh(pickResult.pickedMesh, true);
 
             return;
         }

@@ -255,9 +255,6 @@ export default {
         return null;
     }
 
-
-
-
   },
   props: [
       'viewerState',
@@ -288,8 +285,21 @@ export default {
     NodeHierarchy,
   },
 
-  methods: {
-      setMesh(mesh) {
+    methods: {
+
+        /*
+        setNodeId(nodeId) {
+            if (!nodeId) return;
+            this.nodeId = nodeId;
+            this.loading = false;
+
+            this.metadata = this.getSceneViewer().nodeMetadata(nodeId);
+
+            this.nodeName = 
+        }
+        */
+
+      setMesh(mesh, subindex=null) {
           //this.mesh = mesh;
           if (!mesh) { return; }
           this.nodeId = this.getSceneViewer().viewerState.sceneSelectedMeshId.split("/").pop().replaceAll('#', '_');
@@ -305,7 +315,7 @@ export default {
           //console.debug("Scene Item setMesh called.");
 
           this.resize();
-          setTimeout(function() { window.dispatchEvent(new Event('resize')) }, 200);
+          setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 200);
 
       },
 
