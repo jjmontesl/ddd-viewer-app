@@ -32,6 +32,11 @@ yarn-error.log*
 
 # DDD Viewer App data
 /public/assets
+/public/cache
+
 
 # Maintenance files
 /upload.sh
+
+# Exclude workspace code
+*.code-workspace

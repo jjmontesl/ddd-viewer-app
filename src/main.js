@@ -5,6 +5,8 @@
 */
 
 import Vue from 'vue'
+import tailwindSettings from '@/plugins/tailwind'
+import VueTailwind from 'vue-tailwind'
 import '@/plugins/axios'
 import vuetify from '@/plugins/vuetify'
 import '@/plugins/veevalidate'
@@ -33,6 +35,7 @@ fetch("/ddd-viewer-app.config.json")  // process.env.BASE_URL +
         Vue.config.productionTip = config.productionTip;
 
         Vue.use(VuetifyConfirm, { vuetify })
+        Vue.use(VueTailwind, tailwindSettings)
 
         if (config.analyticsTag) {
             Vue.use(VueGtag, {

@@ -273,6 +273,12 @@ export default {
           icon: 'mdi-home'
         },
         */
+       {
+          title: 'Blog',
+          link: 'blog',
+          icon: 'mdi-map-outline',
+          class: 'btnViewMap'
+        },
         {
           title: 'Map',
           link: 'mapMain',
@@ -345,4 +351,5 @@ export default {
     this.isDark = dark ? JSON.parse(dark) : false
   }
 }
+
 </script>
