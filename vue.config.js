@@ -11,5 +11,12 @@ module.exports = {
       compress: true,
       disableHostCheck: true,
     }
-  }
+    },
+    css: {
+        loaderOptions: {
+            postcss: {
+
+            }
+        }
+    }
 }

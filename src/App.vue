@@ -33,11 +33,7 @@
 </template>
 
 <style lang="scss">
-$green: #61FF3B;
-$meadow: #A9E035;
-$yellow: #F5EB3B;
-$ocre: #DEBB2A;
-$orange: #FAB52A;
+@import "@/scss/variables.scss";
 </style>
 
 <script>

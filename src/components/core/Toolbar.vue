@@ -116,7 +116,7 @@
             :to="{ name: item.link }"
             exact
           >
-            <v-list-item-icon>
+            <v-list-item-icon style="color:#69FF5C">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-title>{{ item.title }}</v-list-item-title>

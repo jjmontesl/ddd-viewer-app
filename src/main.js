@@ -5,18 +5,19 @@
 */
 
 import Vue from 'vue'
+import "@/assets/css/tailwind.css";
 import tailwindSettings from '@/plugins/tailwind'
 import VueTailwind from 'vue-tailwind'
 import '@/plugins/axios'
-import vuetify from '@/plugins/vuetify'
-import '@/plugins/veevalidate'
+// import vuetify from '@/plugins/vuetify'
+// import '@/plugins/veevalidate'
+// import VuetifyConfirm from 'vuetify-confirm'
 import '@/plugins/common'
 import '@/plugins/googleAnalytics'
 import i18n from '@/plugins/i18n'
 import App from '@/App.vue'
 import router from '@/router'
 import { store } from '@/store'
-import VuetifyConfirm from 'vuetify-confirm'
 import VueGtag from "vue-gtag";
 import VueGeolocation from 'vue-browser-geolocation';
 import DDDViewerAppState from './DDDViewerAppState'
