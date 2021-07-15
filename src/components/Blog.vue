@@ -2,17 +2,16 @@
 
     <section class="blog">
         <header class="blog-header">
-            <h1 class="blog-header-title text-green-400">
+            <h1 class="blog-header-title white--text">
                 DDD BLOG
             </h1>
         </header>
-        <article class="blog-article">
+        <v-container class="blog-article">
             <div class="blog-article-date">Jul 3 2021</div>
             <div class="blog-article-title">DDD hits the road!</div>
             <span class="iconify" data-icon="akar-icons:map" data-inline="false"></span>
-            <t-button>Ciao tutti il mundo</t-button>
             <article class="blog-article-content">
-                <h2 class="text-green-400">DDD hits the road!</h2>
+                <h2>DDD hits the road!</h2>
                 <p>Hey!</p>
                 <p>Today I’m proud to bring you news about DDD, a toolchain that allows generating and visualizing 3D Tiles based on OpenStreetMap.</p>
                 <p>There’s been some news lately which I’d like to share with the community:</p>
@@ -39,7 +38,7 @@
                 <p>José Juan Montes</p>
                 <p>DDD - Procedural generation of 2D and 3D geometries and scenes</p>
             </article>
-        </article>
+        </v-container>
     </section>
 </template>
 
@@ -69,6 +68,10 @@
     text-align: center;
     font-size: 96px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.blog-article-content {
+    text-align: left;
 }
 </style>
 

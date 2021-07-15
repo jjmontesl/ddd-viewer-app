@@ -1,21 +1,22 @@
 <template v-slot:activator="{ on }">
   <div>
-    <v-app-bar flat height="40">
-      <span class="hidden-md-and-up">
-        <v-app-bar-nav-icon @click="sidebar = !sidebar"></v-app-bar-nav-icon>
-      </span>
+    <v-app-bar class="white" flat height="40">
       <div class="headline ml-0">
         <div v-resize-text>
+          <div class="ddd_logo"></div>
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer;"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px;"
+            class="corporative--text"
             v-if="isTokenSet"
-            >{{ appTitle }}</router-link>
+            >
+            {{ appTitle }}</router-link>
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer;"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px;"
+            class="corporative--text"
             v-else
             >{{ appTitle }}</router-link>
         </div>
@@ -30,19 +31,17 @@
           exact
           :class="['hidden-sm-and-down', item.class]"
         >
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon style="font-size: 17px; padding-right: 0.35rem;">{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
         </v-btn>
 
-        <!--
-        <v-list-item class="hidden-sm-and-down">
+        <!-- <v-list-item class="hidden-sm-and-down">
           <v-icon>mdi-weather-sunny</v-icon>
           <v-list-item-action>
             <v-switch v-model="isDark" inset></v-switch>
           </v-list-item-action>
           <v-icon class="pl-2">mdi-weather-night</v-icon>
-        </v-list-item>
-        -->
+        </v-list-item> -->
 
         <v-menu v-if="admin" offset-y>
           <template v-slot:activator="{ on }">
@@ -76,6 +75,10 @@
           <v-icon left>mdi-exit-to-app</v-icon>
           {{ $t('menuItems.LOGOUT') }}
         </v-btn>
+
+        <span class="hidden-md-and-up">
+            <v-app-bar-nav-icon class="corporative--text" style="width: 40px; height: 40px; position: relative; right: 0;" @click="sidebar = !sidebar"></v-app-bar-nav-icon>
+        </span>
 
         <!-- <LocaleChanger /> -->
 
@@ -116,7 +119,7 @@
             :to="{ name: item.link }"
             exact
           >
-            <v-list-item-icon style="color:#69FF5C">
+            <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -132,20 +135,34 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <!-- <v-list-item>
           <v-list-item-action></v-list-item-action>
           <v-icon>mdi-weather-sunny</v-icon>
           <v-list-item-action class="ml-2">
             <v-switch id="themeSwitcher" v-model="isDark" inset></v-switch>
           </v-list-item-action>
           <v-icon>mdi-weather-night</v-icon>
-        </v-list-item>
+        </v-list-item> -->
 
       </v-list>
 
     </v-navigation-drawer>
   </div>
 </template>
+
+<style scoped lang="scss">
+.ddd_logo {
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    left: 0;
+    width: 25px;
+    height: 29px;
+    padding: 5px;
+    background-image: url("../../../public/img/ddd-logo.png");
+    background-size: cover;
+}
+</style>
 
 <script>
 import { mapGetters } from 'vuex'
@@ -276,7 +293,7 @@ export default {
        {
           title: 'Blog',
           link: 'blog',
-          icon: 'mdi-map-outline',
+          icon: 'mdi-newspaper',
           class: 'btnViewMap'
         },
         {
@@ -338,17 +355,17 @@ export default {
     }
   },
   watch: {
-    isDark() {
-      this.$vuetify.theme.dark = this.isDark
-      localStorage.setItem('dark', this.isDark)
-    },
+    // isDark() {
+    //   this.$vuetify.theme.dark = this.isDark
+    //   localStorage.setItem('dark', this.isDark)
+    // },
     'viewerState.sceneVisible'() {
         this.$forceUpdate();
     }
   },
   created() {
-    const dark = localStorage.getItem('dark')
-    this.isDark = dark ? JSON.parse(dark) : false
+    // const dark = localStorage.getItem('dark')
+    // this.isDark = dark ? JSON.parse(dark) : false
   }
 }
 

@@ -19,7 +19,7 @@ const mutations = {
 }
 
 const state = {
-  appTitle: 'DDD OSM Viewer',
+  appTitle: '3dsmaps.com',
   appVersion: packageJson.version
 }
 
