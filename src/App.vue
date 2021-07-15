@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="font-family: 'Nunito',  sans-serif;">
 
     <Toolbar :viewerState="viewerState" />
 
@@ -20,6 +20,7 @@
 
           <v-container fluid style="padding: 0px;">
               <router-view :viewerState="viewerState" @dddViewerMode="dddViewerMode" />
+              <div class="federico">Hola</div>
             <!-- <transition name="fade" mode="out-in">
             </transition> -->
           </v-container>
@@ -31,10 +32,6 @@
 
   </v-app>
 </template>
-
-<style lang="scss">
-@import "@/scss/variables.scss";
-</style>
 
 <script>
 import {createXYZ, extentFromProjection} from 'ol/tilegrid.js';
@@ -251,6 +248,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s;

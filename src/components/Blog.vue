@@ -45,16 +45,14 @@
 <style lang="scss">
 .blog {
     background-color: #fff;
-    position: relative;
     min-height: 100vh;
-    z-index: 1;
 }
 
 .blog-header {
     background-image: url("/img/blog_banner.png");
     background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+    background-size: contain cover;
+    background-position: top;
     height: 360px;
 }
 
