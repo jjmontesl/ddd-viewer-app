@@ -87,15 +87,15 @@ const NodeHierarchy = {
       if (!n) {
         this.childPath = null;
         this.nodeLabel = "LOADING";
-          return;
+        return;
       }
 
       if (path === null && n) {
           // Create path from root
-          path = [ n ];
+          path = [n];
 
-          while (n.parent) {
-                n = n.parent;
+          while (n.getParent()) {
+                n = n.getParent();
                 path.splice(0, 0, n);
           }
       }
@@ -109,20 +109,21 @@ const NodeHierarchy = {
       this.nodeSelRel = path.length - 1;
 
       //console.debug(this.childPath);
-      if (path.length > 0 && path[0].id) {
-          this.nodeLabel = path[0].id.split("/").slice(-1)[0];
+      if (path.length > 0 && path[0].getId()) {
+          this.nodeLabel = path[0].getId().split("/").slice(-1)[0];
           this.nodeChildrenCount = path[0].getChildren().length;
           this.nodeChildren = [];
           if (path.length === 1) {
                 for (let i = 0; i < path[0].getChildren().length; i++) {
                     let cn = path[0].getChildren()[i];
                     this.nodeChildren.push({
-                        'id': cn.id,
-                        'label': cn.id.split("/").slice(-1)[0] });
+                        'id': cn.getUrlId(),
+                        'label': cn.getId().split("/").slice(-1)[0] });
                 }
                 //this.nodeChildren = path[0].getChildren();
           }
       } else {
+          //console.debug(path);
           this.nodeLabel = "ERROR";
       }
 
@@ -138,8 +139,8 @@ const NodeHierarchy = {
 
           let node = path[0];
 
-          this.getSceneViewer().selectMesh(node);
-          let meshName = node.id.split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
+          this.getSceneViewer().selectObject(node);
+          let meshName = node.getUrlId(); //split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
           this.$router.push('/3d/item/' + meshName + '/' + this.getSceneViewer().positionString()).catch(()=>{});
 
     },

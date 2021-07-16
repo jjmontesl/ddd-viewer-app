@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ddd-view-mode-selector unselectable" style="text-align: right; pointer-events: auto;">
+    <div class="ddd-view-mode-selector unselectable" style="text-align: right;">
 
         <div style="margin-top: 4px;">
             <small style="color: white;"><v-icon small dark>mdi-clock</v-icon> {{ positionDateFormatted }}</small>
@@ -38,6 +38,9 @@
     right: 10px;
     /*//opacity: .75;*/
     cursor: pointer;
+}
+.ddd-view-mode-selector button {
+    pointer-events: auto;
 }
 *.unselectable {
    -moz-user-select: none;

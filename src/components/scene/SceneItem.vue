@@ -121,6 +121,7 @@ import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import OSMImage from '@/components/ddd/OSMImage.vue';
 import NodeHierarchy from '@/components/scene/NodeHierarchy.vue';
+import { DDDObjectRef } from 'ddd-viewer';
 
 export default {
   mounted() {
@@ -131,13 +132,17 @@ export default {
 
     if (this.getSceneViewer()) {
 
-        this.setMesh(this.getSceneViewer().selectedMesh);
+        //this.setMesh(this.getSceneViewer().selectedMesh);
+        this.setTargetObject(this.getSceneViewer().selectedObject);
 
+        /*
         if (! (this.getSceneViewer().selectedMesh)) {
             let urlNodeId = this.$route.params.id;
             //this.getSceneViewer().viewerState.sceneSelectedMeshId = urlNodeId;
             this.getSceneViewer().selectMeshById(urlNodeId);
         }
+        */
+
     }
 
     window.addEventListener('resize', this.resize);
@@ -261,18 +266,23 @@ export default {
   ],
   watch: {
     '$route' () {
-        //this.setMesh(this.getSceneViewer().selectedMesh);
         let urlNodeId = this.$route.params.id;
-        if (urlNodeId !== this.nodeId) {
-            this.loading = true;
-            this.getSceneViewer().selectMeshById(urlNodeId, ! this.getSceneViewer().sequencer.playing);
-            this.setMesh(this.getSceneViewer().selectedMesh);
-        }
+        if (DDDObjectRef.urlId(urlNodeId) !== this.nodeId) {
+            //this.loading = true;
+            let objectRef = this.getSceneViewer().findObjectById(urlNodeId);
+            console.debug("Found object: ", urlNodeId, objectRef)
 
+            if (objectRef) {
+                const highlight = ! this.getSceneViewer().sequencer.playing;  // avoids highlighting during sequence playback (TODO: make this an option not hardcoded here)
+                this.getSceneViewer().selectObject(objectRef, highlight);
+                this.setTargetObject(objectRef);
+            }
+
+        }
     },
     'viewerState.sceneSelectedMeshId' () {
         this.$forceUpdate();
-        this.setMesh(this.getSceneViewer().selectedMesh);
+        //this.setMesh(this.getSceneViewer().selectedMesh);
         //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
         //this.metadata['_updated']++;
     }
@@ -299,11 +309,13 @@ export default {
         }
         */
 
+      /*
       setMesh(mesh, subindex=null) {
           //this.mesh = mesh;
           if (!mesh) { return; }
           this.nodeId = this.getSceneViewer().viewerState.sceneSelectedMeshId.split("/").pop().replaceAll('#', '_');
           this.loading = false;
+
           this.nodeName = mesh.id.split("/").pop().replaceAll("_", " ");
           if (mesh.metadata && mesh.metadata.gltf && mesh.metadata.gltf.extras) {
               this.metadata = mesh.metadata.gltf.extras;
@@ -318,6 +330,28 @@ export default {
           setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 200);
 
       },
+      */
+
+        setTargetObject(targetObject) {
+            console.debug("Setting target object: ", targetObject);
+
+            if (!targetObject) { return; }
+
+            this.nodeId = targetObject.getUrlId();
+            this.nodeName = decodeURIComponent(targetObject.getUrlId());
+            this.loading = false;
+
+            this.metadata = targetObject.getMetadata();
+            if (this.metadata['osm:name']) {
+                this.nodeName = this.metadata['osm:name'];
+            }
+
+            this.nodeGetter = () => { return targetObject; };
+
+            // Force redraw, so canvases are resized according to right pane size and scrollbar
+            this.resize();
+            setTimeout(() => { window.dispatchEvent(new Event('resize')) }, 200);
+        },
 
       resize() {
         let el = this.$el.querySelector('.v-card');
@@ -351,8 +385,10 @@ export default {
 
       removeNode() {
          //this.getViewerState().sceneViewer.selectMesh(node);
-         let mesh = this.getSceneViewer().selectedMesh;
-         this.getSceneViewer().deselectMesh();
+         let objectRef = this.getSceneViewer().selectedObject;
+         this.getSceneViewer().deselectObject();
+
+         let mesh = objectRef.mesh;
          mesh.setParent(null);
          mesh.dispose();
       }

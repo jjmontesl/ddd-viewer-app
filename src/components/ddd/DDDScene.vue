@@ -132,6 +132,8 @@ export default {
             that.viewerState.sceneMoveSpeed = that.sceneViewer.viewerState.sceneMoveSpeed;
 
             that.viewerState.sceneTitleText = that.sceneViewer.viewerState.sceneTitleText;
+
+            that.viewerState.sceneSelectedMeshId = that.sceneViewer.viewerState.sceneSelectedMeshId;
         }
     }
     this.sceneViewer.processes.add(new DDDSceneProcess(this.sceneViewer));
@@ -286,11 +288,12 @@ export default {
         } else {
             //console.debug("Pick result (click): ", pickResult);
             const objectRef = DDDObjectRef.fromMeshFace(pickResult.pickedMesh, pickResult.faceId);
-            console.debug(objectRef);
             console.debug("Pick result (objectref metadata): ", objectRef.getMetadata());
             this.sceneViewer.selectObject(objectRef);
-            //this.$router.push('/3d/item/' + meshName + '/' + this.sceneViewer.positionString()).catch(()=>{});
             //this.sceneViewer.selectMesh(pickResult.pickedMesh, true);
+
+            // Route to Object detail view
+            this.$router.push('/3d/item/' + objectRef.getUrlId() + '/' + this.sceneViewer.positionString()).catch(()=>{} );
 
             return;
         }

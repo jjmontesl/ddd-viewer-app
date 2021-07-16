@@ -10,7 +10,7 @@
  */
 class DDDViewerAppState {
 
-    mapVisible = true;
+    mapVisible = false;
     sceneVisible = false;
 
     isMobile = false;
@@ -34,13 +34,13 @@ class DDDViewerAppState {
 
     // TODO: These nodes are instrumented: remove selectedMesh from here and use ids.
     // TODO: Try removing this and this.sceneViewer
-    sceneSelectedMesh = null;
+    //sceneSelectedMesh = null;
 
     sceneFPS = 0;
     sceneDrawCalls = 0;
     sceneTriangles = 0;
 
-    // sceneSelectedMeshId = null;
+    sceneSelectedMeshId = null;
 
     sceneShadowsEnabled = false;
 
