@@ -44,8 +44,9 @@ export default {
         fetch(seqUrl).then((response) => {
             response.json().then((data) => {
                   //console.debug(data);
+                  this.viewerState.sceneViewModeShow = false;
                   seq = data;
-                  that.getSceneViewer().sequencer.play(seq);
+                  this.getSceneViewer().sequencer.play(seq);
             })
         })
 
@@ -65,6 +66,7 @@ export default {
             seq = JSON.parse(decodedJSON);
 
             if (seq) {
+                this.viewerState.sceneViewModeShow = false;
                 setTimeout(() => {
                     that.getSceneViewer().sequencer.play(seq);
                 }, 1000);
@@ -72,8 +74,6 @@ export default {
 
         }
     }
-
-
 
   },
 

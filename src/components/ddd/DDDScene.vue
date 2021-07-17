@@ -121,6 +121,7 @@ export default {
             that.viewerState.positionGroundHeight = that.sceneViewer.viewerState.positionGroundHeight;
             that.viewerState.positionHeading = that.sceneViewer.viewerState.positionHeading;
             that.viewerState.positionTileZoomLevel = that.sceneViewer.viewerState.positionTileZoomLevel;
+            that.viewerState.positionName = that.sceneViewer.viewerState.positionName;
 
             that.viewerState.sceneFPS = that.sceneViewer.viewerState.sceneFPS;
             that.viewerState.sceneDrawCalls = that.sceneViewer.viewerState.sceneDrawCalls;
