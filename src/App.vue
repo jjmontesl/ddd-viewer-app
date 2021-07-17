@@ -1,5 +1,5 @@
 <template>
-  <v-app style="font-family: 'Nunito',  sans-serif;">
+  <v-app>
 
     <Toolbar :viewerState="viewerState" />
 
@@ -248,7 +248,7 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 .fade-enter-active,
 .fade-leave-active {

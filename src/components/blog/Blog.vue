@@ -2,8 +2,8 @@
 
     <section class="blog">
         <header class="blog-header">
-            <h1 class="blog-header-title white--text">
-                DDD BLOG
+            <h1 class="blog-header-title">
+                BLOG
             </h1>
         </header>
         <v-container class="blog-article">
@@ -18,9 +18,11 @@
                 <h4>Demo Server</h4>
                 <p>First, I have set up a demo server that can generate tiles upon request and a viewer application is now published. You can view some demo trips here:</p>
                 <nav>
-                    <a href="#">https://3dsmaps.com/play/?u=/trips/acoruna-menhires.json&sb=@dynamic&@43.3861094,-8.4069793,84a,35y,127.1h,94.38t</a>
-                    <a href="#">https://3dsmaps.com/play/?u=/trips/vigo-castro.json&@42.2317848,-8.7279656,131a,35y,28.9h,51.29t</a>
-                    <a href="#">https://3dsmaps.com/play/?u=/trips/munchen-maximilianeum.json&sb=@dynamic&@48.1446598,11.5976389,2a,35y,196.2h,89.86t</a>
+                    <ul>
+                        <li><a href="https://3dsmaps.com/play/?u=/trips/acoruna-menhires.json&sb=@dynamic&@43.3861094,-8.4069793,84a,35y,127.1h,94.38t">A coruña</a></li>
+                        <li><a href="https://3dsmaps.com/play/?u=/trips/vigo-castro.json&@42.2317848,-8.7279656,131a,35y,28.9h,51.29t">Vigo</a></li>
+                        <li><a href="https://3dsmaps.com/play/?u=/trips/munchen-maximilianeum.json&sb=@dynamic&@48.1446598,11.5976389,2a,35y,196.2h,89.86t">München</a></li>
+                    </ul>
                 </nav>
                 <p>You can also access the viewer directly (https://3dsmaps.com/), but note that, if your region of interest hasn’t been generated,  you may need top wait a few minutes (and refresh) for tiles to be created. And data is only available for certain regions, so make sure you check the “About” section before using the viewer ;). Please be patient.</p>
                 <p>If your computer can handle it, you can enable shadows, increase the drawing distance and play with some other settings in the Settings menu.</p>
@@ -59,12 +61,15 @@
 .blog-header-title {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 80%;
     margin: 0 auto;
-    height: 360px;
+    height: 140px;
+    font-weight: bold;
     text-align: center;
-    font-size: 96px;
+    font-family: "Arial";
+    font-size: 118px;
+    color: #419D78;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }
 

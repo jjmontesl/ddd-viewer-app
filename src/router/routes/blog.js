@@ -6,6 +6,6 @@ export default [
       //requiresAuth: true
     },
     component: () =>
-      import(/* webpackChunkName: "profile" */ '@/components/Blog.vue')
+      import(/* webpackChunkName: "profile" */ '@/components/blog/Blog.vue')
   }
 ]

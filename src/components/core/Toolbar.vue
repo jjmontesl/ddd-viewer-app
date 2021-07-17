@@ -7,29 +7,29 @@
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer; position: relative; top: -3px; left: 10px;"
-            class="corporative--text"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
+            class="primary--text"
             v-if="isTokenSet"
             >
             {{ appTitle }}</router-link>
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer; position: relative; top: -3px; left: 10px;"
-            class="corporative--text"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
+            class="primary--text"
             v-else
             >{{ appTitle }}</router-link>
         </div>
       </div>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items class="primary--text">
         <v-btn
           text
           v-for="(item, index) in menuItems"
           :key="index"
           :to="{ name: item.link }"
           exact
-          :class="['hidden-sm-and-down', item.class]"
+          :class="['hidden-sm-and-down', item.class, 'primary--text']"
         >
           <v-icon style="font-size: 17px; padding-right: 0.35rem;">{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
@@ -77,7 +77,7 @@
         </v-btn>
 
         <span class="hidden-md-and-up">
-            <v-app-bar-nav-icon class="corporative--text" style="width: 40px; height: 40px; position: relative; right: 0;" @click="sidebar = !sidebar"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon class="primary--text" style="width: 40px; height: 40px; position: relative; right: 0;" @click="sidebar = !sidebar"></v-app-bar-nav-icon>
         </span>
 
         <!-- <LocaleChanger /> -->
@@ -101,7 +101,7 @@
           :to="{ name: item.link }"
           exact
         >
-          <v-list-item-action>
+          <v-list-item-action class="primary--text">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>{{ item.title }}</v-list-item-content>
@@ -291,43 +291,42 @@ export default {
         },
         */
        {
-          title: 'Blog',
-          link: 'blog',
-          icon: 'mdi-newspaper',
+          title: 'home',
+          link: 'landing',
+          icon: 'mdi-home',
           class: 'btnViewMap'
         },
         {
-          title: 'Map',
+          title: 'map',
           link: 'mapMain',
           icon: 'mdi-map-outline',
           class: 'btnViewMap'
         },
-        {
-          title: '3D',
-          link: 'sceneMain',
-          icon: 'mdi-earth',
-          class: 'btnView3D'
+       {
+          title: 'blog',
+          link: 'blog',
+          icon: 'mdi-newspaper',
+          class: 'btnViewMap'
         },
-         ]
-      if (this.viewerState && this.viewerState.sceneVisible) {
-          /*
-        links.push({
-          title: 'Tools',
-          link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'),
-          icon: 'mdi-wrench',
-          class: 'btnTools'
-        });
-        */
-        links.push({
-          title: 'Settings',
-          link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'), // Rename to Settings
-          icon: 'mdi-cog',
-          class: 'btnSettings'
-        });
 
-      }
+        // {
+        //   title: '3D',
+        //   link: 'sceneMain',
+        //   icon: 'mdi-earth',
+        //   class: 'btnView3D'
+        // },
+         ]
+        //   if (this.viewerState && this.viewerState.sceneVisible) {
+        //     links.push({
+        //       title: 'Settings',
+        //       link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'), // Rename to Settings
+        //       icon: 'mdi-cog',
+        //       class: 'btnSettings'
+        //     });
+
+        //   }
       links.push({
-          title: this.$t('menuItems.ABOUT'),
+          title: "about", //this.$t('menuItems.ABOUT')
           link: 'about',
           icon: 'mdi-help-circle-outline',
           class: 'btnAbout'

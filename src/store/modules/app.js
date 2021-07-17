@@ -19,7 +19,7 @@ const mutations = {
 }
 
 const state = {
-  appTitle: '3dsmaps.com',
+  appTitle: '3DSMAPS',
   appVersion: packageJson.version
 }
 
