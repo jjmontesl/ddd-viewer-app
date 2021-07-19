@@ -1,16 +1,12 @@
 <template>
 
-    <section class="blog">
-        <header class="blog-header">
-            <h1 class="blog-header-title">
-                BLOG
-            </h1>
-        </header>
-        <v-container class="blog-article">
-            <div class="blog-article-date">Jul 3 2021</div>
-            <div class="blog-article-title">DDD hits the road!</div>
+    <section class="home">
+        <header class="home-header"></header>
+        <v-container class="home-article">
+            <div class="home-article-date">Jul 3 2021</div>
+            <div class="home-article-title">DDD hits the road!</div>
             <span class="iconify" data-icon="akar-icons:map" data-inline="false"></span>
-            <article class="blog-article-content">
+            <article class="home-article-content">
                 <h2>DDD hits the road!</h2>
                 <p>Hey!</p>
                 <p>Today I’m proud to bring you news about DDD, a toolchain that allows generating and visualizing 3D Tiles based on OpenStreetMap.</p>
@@ -44,13 +40,13 @@
     </section>
 </template>
 
-<style lang="scss">
-.blog {
+<style scoped lang="scss">
+.home {
     background-color: #fff;
-    min-height: 100vh;
+    width: 100vw;
 }
 
-.blog-header {
+.home-header {
     background-image: url("/img/blog_banner.png");
     background-attachment: fixed;
     background-size: contain cover;
@@ -58,22 +54,7 @@
     height: 360px;
 }
 
-.blog-header-title {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 80%;
-    margin: 0 auto;
-    height: 140px;
-    font-weight: bold;
-    text-align: center;
-    font-family: "Arial";
-    font-size: 118px;
-    color: #419D78;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
-}
-
-.blog-article-content {
+.home-article-content {
     text-align: left;
 }
 </style>
@@ -83,7 +64,7 @@ export default {
   metaInfo() {
     return {
       title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('blog.TITLE')} - %s`
+      titleTemplate: `${this.$t('home.TITLE')} - %s`
     }
   },
   mounted() {

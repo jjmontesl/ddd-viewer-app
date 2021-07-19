@@ -20,7 +20,6 @@
 
           <v-container fluid style="padding: 0px;">
               <router-view :viewerState="viewerState" @dddViewerMode="dddViewerMode" />
-              <div class="federico">Hola</div>
             <!-- <transition name="fade" mode="out-in">
             </transition> -->
           </v-container>
@@ -32,6 +31,79 @@
 
   </v-app>
 </template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+header.v-app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+div.ol-zoom {
+    left: 5px;
+    top: 10px;
+}
+
+
+div.ol-rotate {
+    left: 5px;
+    top: 70px;
+    right: inherit;
+}
+
+div.ol-attribution.ol-uncollapsible {
+    left: 8px;
+    bottom: 5px;
+    right: auto;
+    font-size: 80%;
+}
+
+div.ol-scale-line {
+    bottom: 35px;
+}
+
+aside.v-navigation-drawer--absolute {
+    z-index: 30;
+}
+
+.ddd-render-back {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 40px;
+    /* z-index: 0; */
+}
+
+.ddd-front {
+    /*position: fixed;*/
+    margin-top: 38px;
+    /*top: 38px;*/
+    right: 0px;
+    z-index: 5;
+    /*width: 400px;*/
+    bottom: 0;
+    max-height: 100%;
+    /*height: 100%;*/
+    overflow: auto;
+    width: 100%;
+    pointer-events: none;
+}
+
+</style>
 
 <script>
 import {createXYZ, extentFromProjection} from 'ol/tilegrid.js';
@@ -246,76 +318,3 @@ export default {
   }
 }
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-header.v-app-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-}
-
-div.ol-zoom {
-    left: 5px;
-    top: 10px;
-}
-
-
-div.ol-rotate {
-    left: 5px;
-    top: 70px;
-    right: inherit;
-}
-
-div.ol-attribution.ol-uncollapsible {
-    left: 8px;
-    bottom: 5px;
-    right: auto;
-    font-size: 80%;
-}
-
-div.ol-scale-line {
-    bottom: 35px;
-}
-
-aside.v-navigation-drawer--absolute {
-    z-index: 30;
-}
-
-.ddd-render-back {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 40px;
-    /* z-index: 0; */
-}
-
-.ddd-front {
-    /*position: fixed;*/
-    margin-top: 38px;
-    /*top: 38px;*/
-    right: 0px;
-    z-index: 5;
-    /*width: 400px;*/
-    bottom: 0;
-    max-height: 100%;
-    /*height: 100%;*/
-    overflow: auto;
-    width: 100%;
-    pointer-events: none;
-}
-
-</style>

@@ -2,13 +2,13 @@
   <div>
     <v-app-bar class="white" flat height="40">
       <div class="headline ml-0">
-        <div v-resize-text>
-          <div class="ddd_logo"></div>
+        <div v-resize-text class="ddd-logo-wrapper">
+          <img src="../../../public/img/ddd-logo.png" class="ddd_logo" />
           <router-link
             :to="{ name: 'home' }"
             tag="span"
             style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
-            class="primary--text"
+            class="primary--text ddd-logo-letter"
             v-if="isTokenSet"
             >
             {{ appTitle }}</router-link>
@@ -16,7 +16,7 @@
             :to="{ name: 'home' }"
             tag="span"
             style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
-            class="primary--text"
+            class="primary--text ddd-logo-letter"
             v-else
             >{{ appTitle }}</router-link>
         </div>
@@ -31,7 +31,7 @@
           exact
           :class="['hidden-sm-and-down', item.class, 'primary--text']"
         >
-          <v-icon style="font-size: 17px; padding-right: 0.35rem;">{{ item.icon }}</v-icon>
+          <v-icon style="font-size: 17px; padding: 0.35rem;">{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
         </v-btn>
 
@@ -58,7 +58,7 @@
               exact
               :class="[item.class]"
             >
-              <v-list-item-icon class="mr-2">
+              <v-list-item-icon class="mr-2 primary--text">
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -151,16 +151,20 @@
 </template>
 
 <style scoped lang="scss">
+.ddd-logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .ddd_logo {
     display: inline-block;
-    position: relative;
-    top: 5px;
-    left: 0;
-    width: 25px;
-    height: 29px;
+    width: 36px;
     padding: 5px;
-    background-image: url("../../../public/img/ddd-logo.png");
-    background-size: cover;
+}
+
+.ddd-logo-letter {
+    padding-top: 6px;
+    font-size: 20px;
 }
 </style>
 
@@ -290,12 +294,12 @@ export default {
           icon: 'mdi-home'
         },
         */
-       {
-          title: 'home',
-          link: 'landing',
-          icon: 'mdi-home',
-          class: 'btnViewMap'
-        },
+        //    {
+        //       title: 'home',
+        //       link: 'landing',
+        //       icon: 'mdi-home',
+        //       class: 'btnViewMap'
+        //     },
         {
           title: 'map',
           link: 'mapMain',
