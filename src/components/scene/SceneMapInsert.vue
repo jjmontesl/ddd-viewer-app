@@ -2,7 +2,7 @@
 
     <div style="position: fixed; left: 10px; bottom: 10px; padding: 0px; pointer-events: auto;">
 
-        <v-card class="pa-1" outlined>
+        <v-card class="pa-1" outlined style="width: fit-content;">
 
             <!-- <v-card-title style="padding: 0px;">Position</v-card-title> -->
 
@@ -12,6 +12,10 @@
             </v-card-text>
 
         </v-card>
+
+        <div class="mt-2 text-left">
+          <SceneLabel :viewerState="viewerState"></SceneLabel>
+        </div>
 
     </div>
 
@@ -35,6 +39,8 @@ import ZoomControl from 'ol/control/Zoom';
 //import DragControl from 'ol/control/Drag';
 
 import tiles from '@/services/ddd_http/tiles.js';
+
+import SceneLabel from '@/components/scene/SceneLabel.vue';
 
 
 export default {
@@ -76,6 +82,7 @@ export default {
     }
   },
   components: {
+    SceneLabel
   },
   methods: {
 
@@ -93,7 +100,7 @@ export default {
               target: 'ddd-map-insert',
               view: new View({
                 center: olProj.transform(this.viewerState.positionWGS84, 'EPSG:4326', 'EPSG:3857'),
-                zoom: 17, // this.viewerState.positionTileZoomLevel,
+                zoom: 15, // this.viewerState.positionTileZoomLevel,
                 minZoom: 10,
                 maxZoom: 18,
                 rotation: -this.viewerState.positionHeading * Math.PI / 180.0,
@@ -108,16 +115,19 @@ export default {
               if (!this.map) { return; }
               this.updatePos();
               this.scheduleUpdate();
-          }, 2000);
+          }, 10);
       },
 
       updatePos: function() {
+        /*
         this.map.getView().animate({
             center: olProj.transform(this.viewerState.positionWGS84, 'EPSG:4326', 'EPSG:3857'),
             rotation: -this.viewerState.positionHeading * Math.PI / 180.0,
             duration: 250,
         });
-
+        */
+       this.map.getView().setCenter(olProj.transform(this.viewerState.positionWGS84, 'EPSG:4326', 'EPSG:3857'));
+       this.map.getView().setRotation(-this.viewerState.positionHeading * Math.PI / 180.0);
       },
   },
 
