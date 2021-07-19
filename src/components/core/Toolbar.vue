@@ -1,48 +1,47 @@
 <template v-slot:activator="{ on }">
   <div>
-    <v-app-bar flat height="40">
-      <span class="hidden-md-and-up">
-        <v-app-bar-nav-icon @click="sidebar = !sidebar"></v-app-bar-nav-icon>
-      </span>
+    <v-app-bar class="white" flat height="40">
       <div class="headline ml-0">
-        <div v-resize-text>
+        <div v-resize-text class="ddd-logo-wrapper">
+          <img src="../../../public/img/ddd-logo.png" class="ddd_logo" />
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer;"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
+            class="primary--text ddd-logo-letter"
             v-if="isTokenSet"
-            >{{ appTitle }}</router-link>
+            >
+            {{ appTitle }}</router-link>
           <router-link
             :to="{ name: 'home' }"
             tag="span"
-            style="cursor: pointer;"
+            style="cursor: pointer; position: relative; top: -3px; left: 10px; font-weight: bold;"
+            class="primary--text ddd-logo-letter"
             v-else
             >{{ appTitle }}</router-link>
         </div>
       </div>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items class="primary--text">
         <v-btn
           text
           v-for="(item, index) in menuItems"
           :key="index"
           :to="{ name: item.link }"
           exact
-          :class="['hidden-sm-and-down', item.class]"
+          :class="['hidden-sm-and-down', item.class, 'primary--text']"
         >
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon style="font-size: 17px; padding: 0.35rem;">{{ item.icon }}</v-icon>
           &nbsp;{{ item.title }}
         </v-btn>
 
-        <!--
-        <v-list-item class="hidden-sm-and-down">
+        <!-- <v-list-item class="hidden-sm-and-down">
           <v-icon>mdi-weather-sunny</v-icon>
           <v-list-item-action>
             <v-switch v-model="isDark" inset></v-switch>
           </v-list-item-action>
           <v-icon class="pl-2">mdi-weather-night</v-icon>
-        </v-list-item>
-        -->
+        </v-list-item> -->
 
         <v-menu v-if="admin" offset-y>
           <template v-slot:activator="{ on }">
@@ -59,7 +58,7 @@
               exact
               :class="[item.class]"
             >
-              <v-list-item-icon class="mr-2">
+              <v-list-item-icon class="mr-2 primary--text">
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -76,6 +75,10 @@
           <v-icon left>mdi-exit-to-app</v-icon>
           {{ $t('menuItems.LOGOUT') }}
         </v-btn>
+
+        <span class="hidden-md-and-up">
+            <v-app-bar-nav-icon class="primary--text" style="width: 40px; height: 40px; position: relative; right: 0;" @click="sidebar = !sidebar"></v-app-bar-nav-icon>
+        </span>
 
         <!-- <LocaleChanger /> -->
 
@@ -98,7 +101,7 @@
           :to="{ name: item.link }"
           exact
         >
-          <v-list-item-action>
+          <v-list-item-action class="primary--text">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>{{ item.title }}</v-list-item-content>
@@ -132,20 +135,38 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item>
+        <!-- <v-list-item>
           <v-list-item-action></v-list-item-action>
           <v-icon>mdi-weather-sunny</v-icon>
           <v-list-item-action class="ml-2">
             <v-switch id="themeSwitcher" v-model="isDark" inset></v-switch>
           </v-list-item-action>
           <v-icon>mdi-weather-night</v-icon>
-        </v-list-item>
+        </v-list-item> -->
 
       </v-list>
 
     </v-navigation-drawer>
   </div>
 </template>
+
+<style scoped lang="scss">
+.ddd-logo-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.ddd_logo {
+    display: inline-block;
+    width: 36px;
+    padding: 5px;
+}
+
+.ddd-logo-letter {
+    padding-top: 6px;
+    font-size: 20px;
+}
+</style>
 
 <script>
 import { mapGetters } from 'vuex'
@@ -273,38 +294,43 @@ export default {
           icon: 'mdi-home'
         },
         */
+        //    {
+        //       title: 'home',
+        //       link: 'landing',
+        //       icon: 'mdi-home',
+        //       class: 'btnViewMap'
+        //     },
         {
-          title: 'Map',
+          title: 'map',
           link: 'mapMain',
           icon: 'mdi-map-outline',
           class: 'btnViewMap'
         },
-        {
-          title: '3D',
-          link: 'sceneMain',
-          icon: 'mdi-earth',
-          class: 'btnView3D'
+       {
+          title: 'blog',
+          link: 'blog',
+          icon: 'mdi-newspaper',
+          class: 'btnViewMap'
         },
-         ]
-      if (this.viewerState && this.viewerState.sceneVisible) {
-          /*
-        links.push({
-          title: 'Tools',
-          link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'),
-          icon: 'mdi-wrench',
-          class: 'btnTools'
-        });
-        */
-        links.push({
-          title: 'Settings',
-          link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'), // Rename to Settings
-          icon: 'mdi-cog',
-          class: 'btnSettings'
-        });
 
-      }
+        // {
+        //   title: '3D',
+        //   link: 'sceneMain',
+        //   icon: 'mdi-earth',
+        //   class: 'btnView3D'
+        // },
+         ]
+        //   if (this.viewerState && this.viewerState.sceneVisible) {
+        //     links.push({
+        //       title: 'Settings',
+        //       link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'), // Rename to Settings
+        //       icon: 'mdi-cog',
+        //       class: 'btnSettings'
+        //     });
+
+        //   }
       links.push({
-          title: this.$t('menuItems.ABOUT'),
+          title: "about", //this.$t('menuItems.ABOUT')
           link: 'about',
           icon: 'mdi-help-circle-outline',
           class: 'btnAbout'
@@ -332,17 +358,18 @@ export default {
     }
   },
   watch: {
-    isDark() {
-      this.$vuetify.theme.dark = this.isDark
-      localStorage.setItem('dark', this.isDark)
-    },
+    // isDark() {
+    //   this.$vuetify.theme.dark = this.isDark
+    //   localStorage.setItem('dark', this.isDark)
+    // },
     'viewerState.sceneVisible'() {
         this.$forceUpdate();
     }
   },
   created() {
-    const dark = localStorage.getItem('dark')
-    this.isDark = dark ? JSON.parse(dark) : false
+    // const dark = localStorage.getItem('dark')
+    // this.isDark = dark ? JSON.parse(dark) : false
   }
 }
+
 </script>

@@ -36,3 +36,45 @@ yarn-error.log*
 # Maintenance files
 /upload.sh
 
+*~
+.DS_Store
+node_modules
+/dist
+
+.nyc_output
+/coverage/
+/tests/e2e/reports/
+selenium-debug.log
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+.project
+.settings/
+
+.history/
+
+# DDD Viewer App data
+/public/assets
+/public/cache
+
+
+# Maintenance files
+/upload.sh
+
+# Exclude workspace code
+*.code-workspace

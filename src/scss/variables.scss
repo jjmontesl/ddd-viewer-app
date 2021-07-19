@@ -1,0 +1,40 @@
+// COLORS
+$primary: "#419D78";
+$secondary: "#69FF5C";
+$accent: "#FF6947";
+$info: "#2D3339";
+$corporative: "#473D57";
+$white: "#FFFFFF";
+$cream: "#F7F2C8";
+$error: "#BE3749";
+
+// Globals
+$body-font-family: "Rubik", sans-serif;
+$border-radius-root: 6px;
+$font-size-root: 18px;
+
+// Variables must come before the import
+$btn-font-weight: bold;
+$btn-letter-spacing: 0px;
+$btn-text-transform: none;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: initial;
+$fab-icon-sizes: (
+    "small": 20,
+);
+$btn-sizes: (
+    "default": 41,
+    "large": 54,
+);
+
+$headings: (
+    "h1": (
+        "size": 3.3125rem,
+        "line-height": 1.15em,
+    ),
+    "h2": (
+        "size": 2.25rem,
+        "line-height": 1.5em,
+    ),
+);
