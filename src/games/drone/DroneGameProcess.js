@@ -29,16 +29,20 @@ class DroneGameProcess extends ViewerProcess {
         // JSON encoded game data
         this.gameData = gameData;
 
-        /*
-        this.controlsLeft = false;
-        this.controlsRight = false;
-        this.controlsUp = false;
-        this.controlsDown = false;
-        */
-        this.controlThrottle = 0.0;
-        this.controlRotation = 0.0;
-        this.controlForward = 0.0;
-        this.controlSide = 0.0;
+        this.controlKeys = {
+            'KeyW': false,
+            'KeyA': false,
+            'KeyS': false,
+            'KeyD': false,
+            'ArrowUp': false,
+            'ArrowLeft': false,
+            'ArrowDown': false,
+            'ArrowRight': false,
+        };
+        this.joystickThrottle = 0.0;
+        this.joystickRotation = 0.0;
+        this.joystickForward = 0.0;
+        this.joystickSide = 0.0;
 
         this.rotationSpeed = 0.0 * Math.PI;
         this.maxRotationSpeed = 1.0 * Math.PI;
@@ -126,26 +130,24 @@ class DroneGameProcess extends ViewerProcess {
             })
             gamepad.onleftstickchanged((values)=>{
                 //console.debug(values.x + " " + values.y);
-                this.controlThrottle = -values.y;
-                this.controlRotation = values.x;
+                this.joystickThrottle = -values.y;
+                this.joystickRotation = values.x;
             })
             gamepad.onrightstickchanged((values)=>{
                 //console.debug(values.x + " " + values.y);
-                this.controlForward = values.y;
-                this.controlSide = values.x;
+                this.joystickForward = values.y;
+                this.joystickSide = values.x;
             })
         });
 
-        /*
-        window.addEventListener('keydown', (e) => { if (String.fromCharCode(e.which) === 'A') { this.controlsLeft = true; } });
-        window.addEventListener('keyup', (e) => { if (String.fromCharCode(e.which) === 'A') { this.controlsLeft = false; } });
-        window.addEventListener('keydown', (e) => { if (String.fromCharCode(e.which) === 'D') { this.controlsRight = true; } });
-        window.addEventListener('keyup', (e) => { if (String.fromCharCode(e.which) === 'D') { this.controlsRight = false; } });
-        window.addEventListener('keydown', (e) => { if (String.fromCharCode(e.which) === 'W') { this.controlsUp = true; } });
-        window.addEventListener('keyup', (e) => { if (String.fromCharCode(e.which) === 'W') { this.controlsUp = false; } });
-        window.addEventListener('keydown', (e) => { if (String.fromCharCode(e.which) === 'S') { this.controlsDown = true; } });
-        window.addEventListener('keyup', (e) => { if (String.fromCharCode(e.which) === 'S') { this.controlsDown = false; } });
-        */
+        // console.debug(e.code);
+        window.addEventListener('keydown', (e) => {
+            if (e.code in this.controlKeys) { this.controlKeys[e.code] = true; }
+            if (e.code === "KeyC") {
+                this.cameraMode = (this.cameraMode + 1) % 2;
+            }
+        } );
+        window.addEventListener('keyup', (e) => { if (e.code in this.controlKeys) { this.controlKeys[e.code] = false; } });
 
     }
 
@@ -166,15 +168,34 @@ class DroneGameProcess extends ViewerProcess {
         // Check needed objects are loaded
         if (this.vehicle === null) { return; }
 
+        let keyboardThrottle = 0.0;
+        let keyboardRotation = 0.0;
+        let keyboardForward = 0.0;
+        let keyboardSide = 0.0;
+
+        if (this.controlKeys['KeyW']) { keyboardThrottle += 1.0; }
+        if (this.controlKeys['KeyS']) { keyboardThrottle += -1.0; }
+        if (this.controlKeys['KeyA']) { keyboardRotation += -1.0; }
+        if (this.controlKeys['KeyD']) { keyboardRotation += 1.0; }
+        if (this.controlKeys['ArrowUp']) { keyboardForward += -1.0; }
+        if (this.controlKeys['ArrowDown']) { keyboardForward += 1.0; }
+        if (this.controlKeys['ArrowLeft']) { keyboardSide += -1.0; }
+        if (this.controlKeys['ArrowRight']) { keyboardSide += 1.0; }
+
+        let controlThrottle = Scalar.Clamp(keyboardThrottle + this.joystickThrottle, -1, 1);
+        let controlRotation = Scalar.Clamp(keyboardRotation + this.joystickRotation, -1, 1);
+        let controlForward = Scalar.Clamp(keyboardForward + this.joystickForward, -1, 1);
+        let controlSide = Scalar.Clamp(keyboardSide + this.joystickSide, -1, 1);
+
         // Process input
-        this.throttle = this.controlThrottle;
+        this.throttle = controlThrottle;
         
         // Apply physics
-        let rotationSpeedTarget = this.controlRotation * this.maxRotationSpeed;
+        let rotationSpeedTarget = controlRotation * this.maxRotationSpeed;
         this.rotationSpeed = Scalar.Lerp(this.rotationSpeed, rotationSpeedTarget, 1 - (1 - 0.9) ** deltaTime);
         this.heading += this.rotationSpeed * deltaTime;
         
-        let pitchTarget = this.controlForward * this.maxRollAngle;
+        let pitchTarget = controlForward * this.maxRollAngle;
         let pitchDelta = (pitchTarget - this.pitch) * this.maxRollSpeed;
         pitchDelta = Scalar.Clamp(pitchDelta, -this.maxRollSpeed, this.maxRollSpeed);
         //let pitchSpeedTarget = this.maxRollSpeed * Math.sign(pitchTarget - this.pitch);
@@ -182,7 +203,7 @@ class DroneGameProcess extends ViewerProcess {
         //this.pitchSpeed = Scalar.Lerp(this.pitchSpeed, pitchSpeedTarget, Scalar.Clamp(1 - (1 - 0.9) ** deltaTime, 0, 1));
         this.pitch += pitchDelta * deltaTime;
 
-        let rollTarget = this.controlSide * this.maxRollAngle;
+        let rollTarget = controlSide * this.maxRollAngle;
         let rollDelta = (rollTarget - this.roll) * this.maxRollSpeed;
         rollDelta = Scalar.Clamp(rollDelta, -this.maxRollSpeed, this.maxRollSpeed);
         //let rollSpeedTarget = this.maxRollSpeed * Math.sign(rollTarget - this.roll);
