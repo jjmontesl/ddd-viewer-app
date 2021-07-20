@@ -123,7 +123,6 @@ import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
-//import { ViewerState } from 'ddd-viewer';
 
 export default {
   name: 'App',
@@ -147,7 +146,7 @@ export default {
         {
           rel: 'apple-touch-icon',
           sizes: '180x180',
-          href: '/apple-touch-icon.png'
+          href: '/apple-icon-180x180.png'
         },
         {
           rel: 'icon',
