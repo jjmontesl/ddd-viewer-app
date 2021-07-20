@@ -2,7 +2,7 @@
 
     <div>
 
-    <div style="position: fixed; left: 10px; top: 50px; width: 280px; padding: 0px;">
+    <div style="position: fixed; left: 10px; top: 50px; width: 290px; padding: 0px;">
 
         <v-card class="pa-1" outlined>
 

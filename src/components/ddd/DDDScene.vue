@@ -9,6 +9,8 @@
 
             <div v-if="viewerState.sceneTitleText" id="ddd-scene-overlay-text-title" style="white-space: pre-line; line-height: 130%; text-align: center; font-size: 150%; color: white; z-index: 10; bottom: 20%; width: 100%; font-outline: 1px black; position: absolute; text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;"><h2>{{ viewerState.sceneTitleText }}</h2></div>
 
+            <SceneToolButtons v-if="viewerState.sceneVisible" :viewerState="viewerState" />
+
             <SceneViewMode v-if="viewerState.sceneVisible && viewerState.sceneViewModeShow" :viewerState="viewerState" />
 
         </div>
@@ -25,6 +27,7 @@ import { ViewerProcess } from 'ddd-viewer';
 import { DDDObjectRef } from 'ddd-viewer';
 
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
+import SceneToolButtons from '@/components/scene/SceneToolButtons.vue';
 
 export default {
   metaInfo() {
@@ -35,6 +38,7 @@ export default {
   },
   components: {
       SceneViewMode,
+      SceneToolButtons,
   },
   data() {
     return {

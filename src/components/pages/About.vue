@@ -92,11 +92,11 @@
 
             <p>
                 <ul>
-                    <li>Map Data: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap Contributors</a></li>
-                    <li>Textures: <a href="https://cc0textures.com/">CC0Textures</a></li>
-                    <li>Vector Icons: <a href="http://fontawesome.com/">FontAwesome</a></li>
-                    <li>Graphic Engine: <a href="https://www.babylonjs.com/">BabylonJS</a></li>
-                    <li>3D OSM Generation: <a href="https://github.com/jjmontesl/ddd">DDD123</a></li>
+                    <li>Map Data: <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap Contributors</a></li>
+                    <li>Textures: <a href="https://cc0textures.com/" target="_blank">CC0Textures</a></li>
+                    <li>Vector Icons: <a href="http://fontawesome.com/" target="_blank">FontAwesome</a></li>
+                    <li>Graphic Engine: <a href="https://www.babylonjs.com/" target="_blank">BabylonJS</a></li>
+                    <li>3D OSM Generation: <a href="https://github.com/jjmontesl/ddd" target="_blank">DDD123</a></li>
                     <li>Elevation Data (ES): CC-BY 4.0 ign.es 2010 (data from 2015-2021)</li>
                     <li>Elevation Data (EU): EU-DEM v1.1 Copernicus Data by the European Union</li>
                     <li>Elevation Data (US): US Geographical Survey</li>
@@ -117,6 +117,7 @@
 .about-container {
     max-width: 960px;
     margin: 0 auto 4rem auto;
+    pointer-events: auto;
 }
 
 .about-content {

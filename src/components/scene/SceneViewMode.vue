@@ -21,7 +21,7 @@
         </div>
 
         <div style="margin-top: 8px;">
-            <v-btn @click="cycleMoveSpeed" class="" dark color="secondary"><small><v-icon dark>mdi-fast</v-icon> Move Speed {{ viewerState.sceneMoveSpeed }}</small></v-btn>
+            <v-btn @click="cycleMoveSpeed" class="" dark color="info"><small><v-icon dark>mdi-fast</v-icon> Move Speed {{ viewerState.sceneMoveSpeed }}</small></v-btn>
         </div>
 
         <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState"></ServerInfo>

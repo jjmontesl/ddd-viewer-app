@@ -2,22 +2,26 @@
   <v-footer class="footer d-block text-center">
       <v-container>
         <v-row>
+            <!--
             <v-col class="footer-column">
                 <h2>Términos legales</h2>
                 <a href="#">Cookies policy</a>
                 <a href="#">Privacy policy</a>
                 <a href="#">Legal note</a>
             </v-col>
+            -->
             <v-col class="footer-column">
                 <h2>Connect</h2>
-                <a href="#">Contribute</a>
-                <a href="#">Subscribe to newsletter</a>
+                <a href="https://github.com/jjmontesl/ddd#contributing" target="_blank">Contribute</a>
+                <!-- <a href="#">Subscribe to newsletter</a> -->
+                <a href="https://twitter.com/intent/follow?user_id=3dsmaps" target="_blank">Follow on Twitter</a>
+
             </v-col>
             <v-col class="footer-column">
-                <h2>Github repos</h2>
-                <a href="#">DDD-App</a>
-                <a href="#">DDD-Viewer</a>
-                <a href="#">DDD</a>
+                <h2>GitHub repos</h2>
+                <a href="https://github.com/jjmontesl/ddd" target="_blank">DDD</a>
+                <a href="https://github.com/jjmontesl/ddd-viewer" target="_blank">DDD-Viewer</a>
+                <a href="https://github.com/jjmontesl/ddd-viewer-app" target="_blank">DDD-App</a>
             </v-col>
         </v-row>
     </v-container>
@@ -29,6 +33,7 @@
     padding-top: 2rem;
     background-color: #473d54;
     color: white;
+    pointer-events: auto;
 }
 
 .footer-column {
@@ -42,7 +47,7 @@
 
 .footer-column > a {
     padding: 0.5rem 0;
-    cursor: pointer;
+    /*cursor: pointer;*/
     color: white;
     text-decoration: none;
 }

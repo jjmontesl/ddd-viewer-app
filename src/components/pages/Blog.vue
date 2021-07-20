@@ -6,9 +6,12 @@
             <v-container style="padding: 0;">
 
                 <article class="blog-article-content">
-                    <h2>DDD hits the road!</h2>
-                    <data>Jul 3 2021</data>
-                    <author>JJ Montes</author>
+                    <div class="mb-3">
+                        <h2>DDD hits the road!</h2>
+                        <div class="text--secondary">2021-07-21</div>
+                        <!--<div>JJ Montes</div>-->
+                    </div>
+                    
                     <p>Hey!</p>
                     <p>Today I’m proud to bring you news about DDD, a toolchain that allows generating and visualizing 3D Tiles based on OpenStreetMap.</p>
                     <p>There’s been some news lately which I’d like to share with the community:</p>
@@ -50,6 +53,7 @@
 .blog-container {
     max-width: 960px;
     margin: 0 auto 4rem auto;
+    pointer-events: auto;
 }
 
 .blog-header {
