@@ -27,7 +27,7 @@ export default {
         fetch(gameUrl).then((response) => {
             response.json().then((data) => {
                   let gameData = data;
-                  console.debug(data);
+                  //console.debug(data);
 
                   // Launch game
                   const flyGameProcess = new FlyGameProcess(this.getSceneViewer(), gameData);

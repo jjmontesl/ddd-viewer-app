@@ -152,9 +152,9 @@ export default {
 
   mounted() {
 
-    console.debug('Creating DDD map (tileUrlBase=' + this.viewerState.dddConfig.tileUrlBase + ', position=' + this.$root.viewerAppState.positionWGS84 + ')');
+    //console.debug('Creating DDD map (tileUrlBase=' + this.viewerState.dddConfig.tileUrlBase + ', position=' + this.$root.viewerAppState.positionWGS84 + ')');
 
-    console.warn("TODO: Setting dddMap attribute on $root.viewerAppState directly. Use a setMapViewer-like approach as in DDDScene.");
+    //console.warn("TODO: Setting dddMap attribute on $root.viewerAppState directly. Use a setMapViewer-like approach as in DDDScene.");
     this.$root.viewerAppState.dddMap = this;
 
     //const el = that.$el.querySelector('.ddd-map');

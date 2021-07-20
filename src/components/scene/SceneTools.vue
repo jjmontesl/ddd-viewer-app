@@ -289,7 +289,7 @@ export default {
       },
 
       groundTextureLayerChange(key) {
-        console.debug("Setting ground texture: ", key);
+        //console.debug("Setting ground texture: ", key);
 
         let url = null;
         const layers = this.viewerState.dddConfig.sceneGroundLayers;
@@ -324,7 +324,7 @@ export default {
         let textures = null;
         let splatmap = null;
 
-        console.debug("Setting viewer app texture set to: " + textureSetKey);
+        //console.debug("Setting viewer app texture set to: " + textureSetKey);
 
         const materialsConfigDef = this.viewerState.dddConfig.sceneMaterials.find((o) => { return o.value === textureSetKey; });
         if (materialsConfigDef) {

@@ -60,10 +60,10 @@ export default {
         let url = "https://nominatim.openstreetmap.org/search?";
         url = url + "format=json&q=" + query;
 
-        console.debug("Running nominating query: " + url);
+        //console.debug("Running nominating query: " + url);
         let result = await axios.get(url);
 
-        console.debug(result);
+        //console.debug(result);
         this.results = result.data;
 
 

@@ -270,7 +270,7 @@ export default {
         if (DDDObjectRef.urlId(urlNodeId) !== this.nodeId) {
             //this.loading = true;
             let objectRef = this.getSceneViewer().findObjectById(urlNodeId);
-            console.debug("Found object: ", urlNodeId, objectRef)
+            //console.debug("Found object: ", urlNodeId, objectRef)
 
             if (objectRef) {
                 const highlight = ! this.getSceneViewer().sequencer.playing;  // avoids highlighting during sequence playback (TODO: make this an option not hardcoded here)
@@ -333,7 +333,7 @@ export default {
       */
 
         setTargetObject(targetObject) {
-            console.debug("Setting target object: ", targetObject);
+            //console.debug("Setting target object: ", targetObject);
 
             if (!targetObject) { return; }
 

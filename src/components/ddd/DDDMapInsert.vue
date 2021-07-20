@@ -36,7 +36,7 @@ export default {
       mountMap: function() {
         let el = document.getElementById('ddd-map').firstChild;
         if (el) {
-            console.debug('Mounting DDD map insert.');
+            //console.debug('Mounting DDD map insert.');
             this.$el.querySelector('.ddd-map-insert').appendChild(el);
         }
       },
@@ -44,7 +44,7 @@ export default {
       unmountMap: function() {
         let el = this.$el.querySelector('.ddd-map-insert').firstChild;
         if (el) {
-            console.debug("Unmounting DDD map insert.");
+            //console.debug("Unmounting DDD map insert.");
             document.getElementById('ddd-map').insertBefore(el, document.getElementById('ddd-map').firstChild);  // Must be the first child, as used in Mount
         }
       }

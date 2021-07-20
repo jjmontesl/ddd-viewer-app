@@ -6,7 +6,7 @@ export default [
       requiresAuth: false
     },
     component: () =>
-      import(/* webpackChunkName: "gameFly" */ '@/components/game/drone/DroneGame.vue')
+      import(/* webpackChunkName: "gameDrone" */ '@/components/game/drone/DroneGame.vue')
   }
 ]
 

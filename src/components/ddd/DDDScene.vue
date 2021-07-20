@@ -293,7 +293,7 @@ export default {
         } else {
             //console.debug("Pick result (click): ", pickResult);
             const objectRef = DDDObjectRef.fromMeshFace(pickResult.pickedMesh, pickResult.faceId);
-            console.debug("Pick result (objectref metadata): ", objectRef.getMetadata());
+            //console.debug("Pick result (objectref metadata): ", objectRef.getMetadata());
             this.sceneViewer.selectObject(objectRef);
             //this.sceneViewer.selectMesh(pickResult.pickedMesh, true);
 

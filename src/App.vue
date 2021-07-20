@@ -225,7 +225,7 @@ export default {
   methods: {
 
       dddViewerMode(mode) {
-        console.debug("Received Viewer Mode change event to: " + mode);
+        //console.debug("Received Viewer Mode change event to: " + mode);
         if (mode !== null) {
             this.$root.viewerAppState.mapVisible = mode === 'map';
             this.$root.viewerAppState.sceneVisible = mode === 'scene';
@@ -309,6 +309,7 @@ export default {
 
                 }
             } catch(e) {
+                // eslint-disable-next-line no-console
                 console.error("Error parsing location from href: " + e);
             }
 

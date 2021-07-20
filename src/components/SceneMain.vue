@@ -17,7 +17,6 @@ export default {
     }
   },
   mounted() {
-    console.debug('Enabling DDD Scene');
     this.$emit('dddViewerMode', 'scene');
 
     this.viewerState.scenePickingEnabled = true;

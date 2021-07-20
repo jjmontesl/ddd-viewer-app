@@ -18,6 +18,12 @@
 <script>
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$store.getters.appTitle,
+      titleTemplate: `${this.$t('sequencePlay.TITLE')} - %s`
+    }
+  },
   mounted() {
 
     window.addEventListener('resize', this.resize);
@@ -77,12 +83,6 @@ export default {
 
   },
 
-  metaInfo() {
-    return {
-      title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('sequencePlay.TITLE')} - %s`
-    }
-  },
   inject: [
       'getSceneViewer',
   ],
