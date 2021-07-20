@@ -239,10 +239,14 @@ class DroneGameProcess extends ViewerProcess {
 
         // Floor
         let [terrainElevation, terrainMesh] = this.sceneViewer.elevationMSLFromSceneCoords(newPos);
-        //console.debug(terrainElevation);
+        console.debug(terrainElevation);
         if (terrainElevation !== null && (newPos.y - 0.35 < terrainElevation)) {
             newPos.y = terrainElevation + 0.35;
             this.velocity.y = Math.abs(this.velocity.y * 0.3);
+        }
+        if (terrainElevation !== null && terrainElevation < 2.0 && newPos.y < 1.0) {
+            // Ugly workaround for wrong terrain elevation calculation on the origin of coordinates (need to debug what causes it)
+            newPos.x += 1;
         }
 
         this.vehicle.position = newPos;
@@ -255,7 +259,7 @@ class DroneGameProcess extends ViewerProcess {
             let cameraNewPos = Vector3.Lerp(this.sceneViewer.camera.position, cameraTargetPosWorld, Scalar.Clamp(1.5 * deltaTime, 0, 1));
             this.sceneViewer.camera.position = cameraNewPos;
             this.sceneViewer.camera.rotation = Vector3.Zero();
-            this.sceneViewer.camera.upVector = Axis.Y;
+            this.sceneViewer.camera.upVector = Vector3.Up();
             this.sceneViewer.camera.setTarget(this.vehicle.position);
         } else {
             // Update camera for first person view

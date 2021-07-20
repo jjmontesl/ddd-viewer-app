@@ -18,7 +18,7 @@ export default {
   metaInfo() {
     return {
       title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('home.TITLE')} - %s`
+      titleTemplate: `${this.$t('map.TITLE')} - %s`
     }
   },
   data() {

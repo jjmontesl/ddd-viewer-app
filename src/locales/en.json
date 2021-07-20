@@ -111,7 +111,7 @@
     "FRONTEND_DOCUMENTATION": "Frontend documentation"
   },
   "home": {
-    "TITLE": "DDD123",
+    "TITLE": "Home",
     "GREETING": "Welcome %{0}",
     "DESCRIPTION": "This page is only available privately when the users log in with their credentials",
     "VERIFY_YOUR_ACCOUNT": "IMPORTANT: Verify your account",
@@ -120,7 +120,27 @@
   },
   "about": {
     "TITLE": "About",
-    "DESCRIPTION": "This page is publicly available"
+    "DESCRIPTION": "About the DDD project and 3DSMAPS"
+  },
+  "map": {
+    "TITLE": "Map",
+    "DESCRIPTION": "2D Map view in 3DSMAP"
+  },
+  "scene": {
+    "TITLE": "3D Map",
+    "DESCRIPTION": "3D Map View"
+  },
+  "sceneTools": {
+    "TITLE": "3D Settings",
+    "DESCRIPTION": "3D Map View Settings"
+  },
+  "sceneItem": {
+    "TITLE": "3D Item Detail",
+    "DESCRIPTION": "3D Map Item Detail View"
+  },
+  "sequencePlay": {
+    "TITLE": "Animation",
+    "DESCRIPTION": "3D Sequenced Travelling Playback View"
   },
   "login": {
     "TITLE": "Login",
@@ -129,6 +149,9 @@
     "PASSWORD": "Password",
     "LOGIN": "Login",
     "FORGOT_PASSWORD": "Forgot password?"
+  },
+  "blog": {
+    "TITLE": "Blog"
   },
   "forgotPassword": {
     "TITLE": "Forgot my password",

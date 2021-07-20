@@ -96,7 +96,7 @@
                     <li>Textures: <a href="https://cc0textures.com/" target="_blank">CC0Textures</a></li>
                     <li>Vector Icons: <a href="http://fontawesome.com/" target="_blank">FontAwesome</a></li>
                     <li>Graphic Engine: <a href="https://www.babylonjs.com/" target="_blank">BabylonJS</a></li>
-                    <li>3D OSM Generation: <a href="https://github.com/jjmontesl/ddd" target="_blank">DDD123</a></li>
+                    <li>3D OSM Generation Tool: <a href="https://github.com/jjmontesl/ddd" target="_blank">DDD (Procedural 3D Generator)</a></li>
                     <li>Elevation Data (ES): CC-BY 4.0 ign.es 2010 (data from 2015-2021)</li>
                     <li>Elevation Data (EU): EU-DEM v1.1 Copernicus Data by the European Union</li>
                     <li>Elevation Data (US): US Geographical Survey</li>

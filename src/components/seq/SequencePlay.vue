@@ -79,8 +79,8 @@ export default {
 
   metaInfo() {
     return {
-      //title: this.$store.getters.appTitle,
-      //titleTemplate: `${this.$t('home.TITLE')} - %s`
+      title: this.$store.getters.appTitle,
+      titleTemplate: `${this.$t('sequencePlay.TITLE')} - %s`
     }
   },
   inject: [
