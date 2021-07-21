@@ -85,12 +85,12 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="sidebar" absolute disable-resize-watcher>
+    <v-navigation-drawer v-model="sidebar" fixed disable-resize-watcher>
       <v-list>
         <v-list-item>
-          <v-list-item-content>{{ appTitle }}</v-list-item-content>
+          <v-list-item-content></v-list-item-content>
           <v-list-item-action>
-            <v-btn icon @click.stop="sidebar = !sidebar">
+            <v-btn icon class="my-8" @click.stop="sidebar = !sidebar">
               <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
           </v-list-item-action>

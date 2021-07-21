@@ -2,7 +2,7 @@
 
     <div class="blog">
         <div class="blog-container">
-            <header class="blog-header"></header>
+            <v-img src="/img/banner-blog.png" />
             <v-container style="padding: 0;">
 
                 <article class="blog-article-content">
@@ -11,7 +11,7 @@
                         <div class="text--secondary">2021-07-21</div>
                         <!--<div>JJ Montes</div>-->
                     </div>
-                    
+
                     <p>Hey!</p>
                     <p>Today I’m proud to bring you news about DDD, a toolchain that allows generating and visualizing 3D Tiles based on OpenStreetMap.</p>
                     <p>There’s been some news lately which I’d like to share with the community:</p>
@@ -28,9 +28,9 @@
                     <p>If your computer can handle it, you can enable shadows, increase the drawing distance and play with some other settings in the Settings menu.</p>
                     <p>Hopefully we can improve this workflow in the future. The viewer deserves a separate post so stay tuned for more info.</p>
                     <h4>
-                        Welcome @Farvel! => TypeScript + Embeddable viewer
+                        Welcome Farvell! => TypeScript + Embeddable viewer
                     </h4>
-                    <p>I am happy to announce that @Farvel, a new contributor, has joined the ddd-viewer project. He is a junior developer but has already been pushing hard and helping to migrate ddd-viewer to TypeScript and separate the viewer library.</p>
+                    <p>I am happy to announce that Farvell, a new contributor, has joined the ddd-viewer project. He is a junior developer but has already been pushing hard and helping to migrate ddd-viewer to TypeScript and separate the viewer library.</p>
                     <p>This has been a bit of a painful process, but the results are already showing: the ddd-viewer core has been separated and can now be reused or embedded as an independent component much like other map or 3d globe viewers (more on that coming up soon). In addition, the library is now written in TypeScript, which we believe helps writing better code for this kind of solution.</p>
                     <h4>Help wanted!</h4>
                     <p>DDD OSM has been in development for more than 18 months and it is still far from “usable”. I started this as a hobby project trying to create a “race-in-your-town driving game”, but now it aims to be a tool that is useful to OSM mappers and users, to artists, web developers, game developers and who knows :).</p>
@@ -47,17 +47,16 @@
 </template>
 
 <style scoped lang="scss">
-
 .blog { background-color: #fff; }
 
 .blog-container {
-    max-width: 960px;
+    max-width: 1024px;
     margin: 0 auto 4rem auto;
     pointer-events: auto;
 }
 
 .blog-header {
-    background-image: url("/img/banner-blog.png");
+    background-image: url();
     background-size: cover;
     background-position: left;
     margin-bottom: 2rem;

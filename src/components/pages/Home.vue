@@ -1,18 +1,15 @@
 <template>
 
-    <section class="home">
+    <div class="home">
         <header class="home-header"></header>
-        <div class="home-container">
+        <v-container fluid="false" class="home-container">
             <LandingSection />
-        </div>
+        </v-container>
         <Footer />
-    </section>
+    </div>
 </template>
 
 <style scoped lang="scss">
-body {
-    overflow-x: hidden;
-}
 .home {
     color: #473D54;
 }
@@ -23,11 +20,6 @@ body {
     background-size: cover;
     background-position: center;
     height: 560px;
-}
-
-.home-container {
-    max-width: 960px;
-    margin: 0 auto;
 }
 </style>
 

@@ -29,6 +29,11 @@
 </template>
 
 <style scoped lang="scss">
+a {
+    &:hover {
+        color: #69ff5c !important;
+    }
+}
 .footer {
     padding-top: 2rem;
     background-color: #473d54;
