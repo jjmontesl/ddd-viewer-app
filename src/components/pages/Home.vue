@@ -2,9 +2,7 @@
 
     <div class="home">
         <header class="home-header"></header>
-        <v-container fluid="false" class="home-container">
-            <LandingSection />
-        </v-container>
+        <LandingSection />
         <Footer />
     </div>
 </template>
@@ -12,6 +10,7 @@
 <style scoped lang="scss">
 .home {
     color: #473D54;
+    overflow: hidden;
 }
 
 .home-header {
@@ -35,8 +34,14 @@ export default {
     }
   },
   mounted() {
-
     this.$emit('dddViewerMode', "site");
+    window.addEventListener("scroll", () => {
+        const target = this.$el.getElementsByClassName("home-header")[0];
+        const offset = window.scrollY;
+        const movement = ( offset ) * -0.6;
+
+        target.style.transform = `translateY( ${ movement }px)`;
+    });
 
   },
   components: {

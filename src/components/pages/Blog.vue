@@ -70,9 +70,9 @@
     background-color: aliceblue;
 }
 
-.blog-article-content > h2 {
+.blog-article-content h2 {
     padding: 0.5em 0;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #473D54;
 }
@@ -92,8 +92,8 @@
     color: #473D54;
 }
 
-.blog-article-content > ul {
-    padding-bottom: 0.5em;
+.blog-article-content ul {
+    padding-bottom: 1rem;
 }
 </style>
 
