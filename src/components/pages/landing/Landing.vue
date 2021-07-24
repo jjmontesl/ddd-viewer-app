@@ -1,7 +1,7 @@
 <template>
-    <v-container fluid class="pa-0">
-        <v-container>
-            <v-row class="landing-row my-16" style="padding-bottom: 120px;">
+    <v-container fluid class="pa-0" style="position: relative;">
+        <v-container class="scroll-left">
+            <v-row v-scrollanimation class="my-16" style="padding-bottom: 120px;">
                 <v-col>
                     <h3 class="landing-title">Navigate 3d Earth built from OpenStreetMap</h3>
                     <p class="landing-paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus explicabo culpa modi et sed enim natus ipsum praesentium quos tempore distinctio quidem fuga, eius impedit labore earum, veniam similique omnis.</p>
@@ -12,8 +12,8 @@
             </v-row>
         </v-container>
         <v-container fluid class="skewed-box">
-            <v-container>
-                <v-row class="landing-row pt-8 my-16">
+            <v-container class="scroll-right">
+                <v-row v-scrollanimation class="pt-8 my-16">
                     <v-col>
                         <h3 class="landing-title">Modelling, videogames, map auditing and more...</h3>
                         <p class="landing-paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus explicabo culpa modi et sed enim natus ipsum praesentium quos tempore distinctio quidem fuga, eius impedit labore earum, veniam similique omnis.</p>
@@ -24,8 +24,8 @@
                 </v-row>
             </v-container>
         </v-container>
-        <v-container style="max-width:560px;">
-            <v-row class="landing-row my-16" style="padding-top: 80px;">
+        <v-container class="scroll-bottom" style="max-width:560px;">
+            <v-row v-scrollanimation class="my-16" style="padding-top: 80px;">
                 <v-col>
                     <h3 class="landing-title">Contribute</h3>
                     <p class="landing-paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus explicabo culpa modi et sed enim natus ipsum praesentium quos tempore distinctio quidem fuga, eius impedit labore earum, veniam similique omnis.</p>
@@ -92,11 +92,59 @@
     border-style: solid;
     border-color: transparent transparent transparent #473d54;
 }
+
+.scroll-left .before-enter,
+.scroll-right .before-enter,
+.scroll-bottom .before-enter {
+    position: relative;
+    opacity: 0;
+    transition: all 0.7s cubic-bezier(0,1.13,.9,.89);
+}
+
+.scroll-left .enter,
+.scroll-right .enter,
+.scroll-bottom .enter {
+    opacity: 1 !important;
+}
+
+.scroll-left {
+    & .before-enter {
+        left: -100px;
+    }
+
+    & .enter {
+        left: 0;
+    }
+}
+
+.scroll-right {
+    & .before-enter {
+        right: -100px;
+    }
+
+    & .enter {
+        right: 0;
+    }
+}
+
+.scroll-bottom {
+    & .before-enter {
+        bottom: -100px;
+    }
+
+    & .enter {
+        bottom: 0;
+    }
+}
 </style>
 
 <script>
+
 export default {
   name: 'LandingSection',
+  mounted() {
+
+  },
   computed: {
     appVersion() {
       return this.$store.getters.appVersion

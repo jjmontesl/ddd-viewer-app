@@ -17,7 +17,11 @@ import router from '@/router'
 import { store } from '@/store'
 import VueGtag from "vue-gtag";
 import VueGeolocation from 'vue-browser-geolocation';
-import DDDViewerAppState from './DDDViewerAppState'
+import DDDViewerAppState from './DDDViewerAppState';
+
+import ScrollAnimatedObserver from "./directives/scrollanimation";
+
+Vue.directive( "scrollanimation", ScrollAnimatedObserver );
 
 fetch("/ddd-viewer-app.config.json")  // process.env.BASE_URL +
   .then((response) => {

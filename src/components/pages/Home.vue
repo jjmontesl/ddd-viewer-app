@@ -24,7 +24,7 @@
 
 <script>
 import Footer from "../core/Footer";
-import LandingSection from "../core/LandingSection.vue"
+import LandingSection from "./landing/Landing.vue"
 
 export default {
   metaInfo() {
