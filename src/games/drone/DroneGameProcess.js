@@ -88,6 +88,7 @@ class DroneGameProcess extends ViewerProcess {
             //console.debug("Loading player model.", this.sceneViewer.scene, newMeshes[0]);
             newMeshes.forEach((mesh, _i) => {
                 mesh.isPickable = false;
+                mesh.receiveShadows = true;
                 if ((mesh.id === "Mesh_1") || (mesh.id === "Mesh_3") || (mesh.id === "Mesh_4") || (mesh.id === "Mesh_7")) {
                     this.propellers.push(mesh);
                 }
@@ -246,7 +247,7 @@ class DroneGameProcess extends ViewerProcess {
         }
         if (terrainElevation !== null && terrainElevation < 2.0 && newPos.y < 1.0) {
             // Ugly workaround for wrong terrain elevation calculation on the origin of coordinates (need to debug what causes it)
-            newPos.x += 1;
+            newPos.x += 1 * deltaTime;
         }
 
         this.vehicle.position = newPos;
@@ -273,7 +274,7 @@ class DroneGameProcess extends ViewerProcess {
         // Propellers
         const propellerAngularSpeed = 10.0 * Math.PI;
         for (let i = 0; i < this.propellers.length; i++) {
-            this.propellers[i].rotate(Axis.Z, propellerAngularSpeed * deltaTime, Space.LOCAL);
+            this.propellers[i].rotate(Axis.Z, propellerAngularSpeed * deltaTime * ((i % 2) ? -1 : 1), Space.LOCAL);
         }
 
     }
