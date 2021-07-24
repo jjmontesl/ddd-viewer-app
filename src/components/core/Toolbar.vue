@@ -85,12 +85,12 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="sidebar" absolute disable-resize-watcher>
+    <v-navigation-drawer v-model="sidebar" fixed disable-resize-watcher>
       <v-list>
         <v-list-item>
-          <v-list-item-content>{{ appTitle }}</v-list-item-content>
+          <v-list-item-content></v-list-item-content>
           <v-list-item-action>
-            <v-btn icon @click.stop="sidebar = !sidebar">
+            <v-btn icon class="my-8" @click.stop="sidebar = !sidebar">
               <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
           </v-list-item-action>
@@ -243,7 +243,7 @@ export default {
           {
             title: this.$t('menuItems.ABOUT'),
             link: 'about',
-            icon: 'mdi-help-circle-outline',
+            icon: 'mdi-help-circle',
             class: 'btnAbout'
           },
           {
@@ -263,22 +263,22 @@ export default {
           icon: 'mdi-home'
         },
         */
-        //    {
-        //       title: 'home',
-        //       link: 'landing',
-        //       icon: 'mdi-home',
-        //       class: 'btnViewMap'
-        //     },
+        {
+            title: 'home',
+            link: 'landing',
+            icon: 'mdi-home',
+            class: 'btnViewMap'
+        },
         {
           title: 'map',
           link: 'mapMain',
-          icon: 'mdi-map-outline',
+          icon: 'mdi-map',
           class: 'btnViewMap'
         },
        {
           title: 'blog',
           link: 'blog',
-          icon: 'mdi-newspaper',
+          icon: 'mdi-lead-pencil',
           class: 'btnViewMap'
         },
 
@@ -301,7 +301,7 @@ export default {
       links.push({
           title: "about", //this.$t('menuItems.ABOUT')
           link: 'about',
-          icon: 'mdi-help-circle-outline',
+          icon: 'mdi-help-circle',
           class: 'btnAbout'
         });
         /*

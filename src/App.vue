@@ -88,8 +88,6 @@ div.ol-control button:hover, div.ol-control button:focus {
     background-color: #5e5964; // $primary;
 }
 
-
-
 .ddd-render-back {
     position: fixed;
     left: 0;

@@ -8,6 +8,14 @@ $white: "#FFFFFF";
 $cream: "#F7F2C8";
 $error: "#BE3749";
 
+a {
+    transition: all 0.4s ease;
+
+    &:hover {
+        color: #36925cd0 !important;
+    }
+}
+
 // Globals
 $body-font-family: "Rubik", sans-serif;
 $border-radius-root: 2px;
