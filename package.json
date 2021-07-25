@@ -1,6 +1,6 @@
 {
     "name": "ddd-viewer-app",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "license": "MIT",
     "description": "DDD(3Ds) web viewer app for DDD-generated OSM and GIS environments",
     "author": "Jose Juan Montes",

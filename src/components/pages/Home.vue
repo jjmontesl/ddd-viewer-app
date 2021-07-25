@@ -11,6 +11,7 @@
 .home {
     color: #473D54;
     overflow: hidden;
+    pointer-events: auto;
 }
 
 .home-header {
@@ -24,7 +25,7 @@
 
 <script>
 import Footer from "../core/Footer";
-import LandingSection from "./landing/Landing.vue"
+import LandingSection from "./landing/Landing.vue";
 
 export default {
   metaInfo() {
