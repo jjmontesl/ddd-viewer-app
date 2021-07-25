@@ -6,9 +6,9 @@
 
             <v-row>
                 <v-col cols="12" md="6">
-                    <h2>About DDD-OSM</h2>
+                    <h2>About 3DSMAPS</h2>
                     <p>
-                        DDD-OSM is a set of tools designed to generate 3D scenes from
+                        3dsmaps, ddd and ddd-viewer are a set of projects designed to generate 3D scenes from
                         <a href="https://www.openstreetmap.org/about">OpenStreetMap</a> data.
                     </p>
 
@@ -70,10 +70,10 @@
                     </p>
                 </v-col>
                 <v-col cols="12" md="6">
-                    <h3>DDD</h3>
+                    <h2>DDD</h2>
 
                     <p>
-                        OSM 3D data is rendered using the <a href="https://github.com/jjmontesl/ddd">DDD123 Procedural Geometry Generation Tool</a>.
+                        OSM 3D data is rendered using the <a href="https://github.com/jjmontesl/ddd">DDD Procedural Geometry Generation Tool</a>.
                     </p>
 
                     <p>
