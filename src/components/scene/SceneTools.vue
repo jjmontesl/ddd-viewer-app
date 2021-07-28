@@ -56,6 +56,7 @@
                         <div>
                             <h3>Links</h3>
 
+                            <div><router-link to="/3d/layers">Layers</router-link></div>
                             <div><router-link to="/3d/inspector">Inspector</router-link></div>
                             <!--
                             <div><a :href="osmLink" target="_blank">OpenStreetMap Object</a></div>

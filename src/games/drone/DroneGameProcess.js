@@ -240,7 +240,7 @@ class DroneGameProcess extends ViewerProcess {
 
         // Floor
         let [terrainElevation, terrainMesh] = this.sceneViewer.elevationMSLFromSceneCoords(newPos);
-        console.debug(terrainElevation);
+        //console.debug(terrainElevation);
         if (terrainElevation !== null && (newPos.y - 0.35 < terrainElevation)) {
             newPos.y = terrainElevation + 0.35;
             this.velocity.y = Math.abs(this.velocity.y * 0.3);

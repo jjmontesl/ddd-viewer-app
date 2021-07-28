@@ -23,7 +23,6 @@
 
 import { SceneViewer } from 'ddd-viewer';
 import { GeoTile3DLayer } from 'ddd-viewer';
-import { GeoJson3DLayer } from 'ddd-viewer';
 import { ViewerProcess } from 'ddd-viewer';
 import { DDDObjectRef } from 'ddd-viewer';
 
@@ -106,9 +105,6 @@ export default {
 
     const layerDddOsm3d = new GeoTile3DLayer();
     this.sceneViewer.layerManager.addLayer("ddd-osm-3d", layerDddOsm3d);
-
-    const geoJsonLayer = new GeoJson3DLayer();
-    this.sceneViewer.layerManager.addLayer("test-geojson", geoJsonLayer);
 
     // Set camera from ViewerAppState (ie. if set from URL or otherwise)
     this.sceneViewer.viewerState.positionHeading = this.$root.viewerAppState.positionHeading;

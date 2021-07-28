@@ -62,7 +62,7 @@
 }
 
 .blog-header {
-    background-image: url();
+    /*background-image: url();*/
     background-size: cover;
     background-position: left;
     margin-bottom: 2rem;
