@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="layer in layers" :key="layer.key">
+                            <tr v-for="layer in viewerState.layers" :key="layer.key">
                                 <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                                     <v-btn class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
                                 </td>
@@ -351,12 +351,7 @@ export default {
   ],
   data() {
     return {
-        selectedLayer: null,
-        layers: [
-            {"key": "test-geojson-points", "label": "Example GeoJSON Points", "url": "", "visible": true, },
-            {"key": "test-geojson-lines", "label": "Example GeoJSON Lines", "url": "", "visible": true },
-            {"key": "test-geojson-madrid-transport", "label": "Madrid Transport", "url": "", "visible": true },
-        ],
+        selectedLayer: null
     }
   },
   computed: {
