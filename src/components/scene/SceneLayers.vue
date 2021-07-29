@@ -365,8 +365,6 @@ export default {
       'viewerState',
   ],
   watch: {
-    '$route' () {
-    },
   },
 
     components: {
