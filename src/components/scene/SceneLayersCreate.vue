@@ -124,7 +124,7 @@ export default {
 
             this.viewerState.layers.push(layerObject)
             const geoJsonLayerPoints = new GeoJson3DLayer(fileObject);
-            this.getSceneViewer().layerManager.addLayer("test-geojson-points", geoJsonLayerPoints);
+            this.getSceneViewer().layerManager.addLayer(layerKey, geoJsonLayerPoints);
 
             this.$router.replace('/3d/layers/').catch(()=>{});
         },

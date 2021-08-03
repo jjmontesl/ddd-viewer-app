@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@babylonjs/core": "^5.0.0-alpha.17",
+        "@babylonjs/inspector": "^4.2.0",
         "@babylonjs/loaders": "^5.0.0-alpha.25",
         "@babylonjs/materials": "^5.0.0-alpha.17",
         "@mdi/font": "^5.1.45",

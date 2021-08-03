@@ -341,8 +341,8 @@ export default {
             this.nodeName = decodeURIComponent(targetObject.getUrlId());
             this.loading = false;
 
-            this.metadata = targetObject.getMetadata();
-            if (this.metadata['osm:name']) {
+            this.metadata = targetObject.getMetadata() || {};
+            if (this.metadata && 'osm:name' in this.metadata) {
                 this.nodeName = this.metadata['osm:name'];
             }
 

@@ -26,8 +26,8 @@
                     </p>
                     <p>
                         Tiles are loaded dynamically. Tiles shown as gray squares are being loaded. Tiles
-                        shown in 3D as OpenStreetMap squares are enqueued for server generation (this may
-                        take minutes or hours depending on server load). Generated tiles are currently
+                        shown in 3D as OpenStreetMap <b>squares are enqueued for server generation (currently this may
+                        take minutes or hours depending on server load)</b>. Generated tiles are currently
                         shown after reloading the 3D view. Tiles shown as red squares have errored and cannot
                         be generated in current version.
                     </p>
@@ -113,6 +113,7 @@
                     </p>
                     <p>
                         <ul>
+                            <li>Yopaseopor</li>
                             <li>Maria Torres</li>
                             <li>Leobar37</li>
                         </ul>

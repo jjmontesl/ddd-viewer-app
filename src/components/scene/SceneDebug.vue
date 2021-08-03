@@ -11,11 +11,16 @@ import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import tiles from '@/services/ddd_http/tiles.js';
 
+import '@babylonjs/inspector';
+
 export default {
   mounted() {
     this.$emit('dddViewerMode', 'scene');
     this.viewerState.sceneViewModeShow = false;
-    this.showDebugView();
+    
+    setTimeout(() => {
+      this.showDebugView();
+    }, 1000);
   },
 
   metaInfo() {
@@ -55,7 +60,7 @@ export default {
           if (this.viewerState) {
                 //console.debug("Show debug view.");
               this.viewerState.scenePickingEnabled = false;
-              this.getSceneViewer().showDebugView();
+              this.getSceneViewer().scene.debugLayer.show({ overlay: true });
           }
       }
 

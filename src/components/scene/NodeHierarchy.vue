@@ -76,6 +76,20 @@ const NodeHierarchy = {
   //},
 
   methods: {
+
+    nodeParentByPath(path) {
+      if (!path) { return null; }
+
+      let parts = path.split("/");
+      if (parts.length === 1) { return null; }
+
+      let parentId = parts.slice(0, parts.length - 1).join("/");
+      let parentNode = this.getSceneViewer().findObjectById(parentId);
+
+      return parentNode ? parentNode.mesh : null;
+
+    },
+
     updateNode() {
 
       let path = null;
@@ -94,8 +108,9 @@ const NodeHierarchy = {
           // Create path from root
           path = [n];
 
-          while (n.getParent()) {
-                n = n.getParent();
+          let parent = this.nodeParentByPath(n.getId());
+          while (parent) {
+                n = parent;
                 path.splice(0, 0, n);
           }
       }

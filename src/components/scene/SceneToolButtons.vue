@@ -3,9 +3,7 @@
     <div class="ddd-scene-tool-buttons unselectable" style="text-align: right;">
 
         <div>
-            <router-link :to="{name: 'sceneTools'}">
-                <v-btn class="primary"><small><v-icon dark>mdi-cog</v-icon> Settings</small></v-btn>
-            </router-link>
+              <v-btn :to="{name: 'sceneTools'}" class="primary"><small><v-icon dark>mdi-cog</v-icon> Settings</small></v-btn>
         </div>
 
         <div v-if="dddConfig.geolocation" style="margin-top: 4px;">
@@ -24,6 +22,9 @@
     right: 10px;
     /*//opacity: .75;*/
     cursor: pointer;
+}
+.ddd-scene-tool-buttons div {
+    pointer-events: auto;
 }
 .ddd-scene-tool-buttons button {
     pointer-events: auto;
