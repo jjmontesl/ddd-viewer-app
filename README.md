@@ -13,6 +13,10 @@ You can find DDD Viewer online at the 3dsmaps.com site, which uses
 
 ## Development
 
+Clone the repository:
+
+	git clone core.autocrlf=false https://github.com/jjmontesl/ddd-viewer-app.git
+
 ### Compiles and hot-reloads for development
 
 	npm run serve

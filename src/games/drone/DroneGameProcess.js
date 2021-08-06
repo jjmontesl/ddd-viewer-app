@@ -79,7 +79,7 @@ class DroneGameProcess extends ViewerProcess {
         (newMeshes, particleSystems, skeletons) => {
             newMeshes[0].setParent(null);
             newMeshes[0].setEnabled(true);
-            newMeshes[0].position = new Vector3(0, 0, 0);
+            newMeshes[0].position = new Vector3(0, 10, 0);
             this.vehicle = newMeshes[0];
 
             const scale = 0.75; // FIXME: This scale affects some vectors caculated below from this matrix
@@ -245,9 +245,23 @@ class DroneGameProcess extends ViewerProcess {
             newPos.y = terrainElevation + 0.35;
             this.velocity.y = Math.abs(this.velocity.y * 0.3);
         }
-        if (terrainElevation !== null && terrainElevation < 2.0 && newPos.y < 1.0) {
+
+        // Check horizontal collision (only if over ground)
+        const previousAltitude = this.vehicle.position.y;
+        if (Math.abs(newPos.y - previousAltitude) > 4) {
+            //console.debug("Hit");
+            newPos = this.vehicle.position;
+            this.velocity.scaleInPlace(-0.4);
+        }
+
+        if (terrainElevation !== null && newPos.y < 1.0) {
             // Ugly workaround for wrong terrain elevation calculation on the origin of coordinates (need to debug what causes it)
             newPos.x += 1 * deltaTime;
+            
+            if (newPos.y < terrainElevation) {
+                // Move up if below surface
+                newPos.y = terrainElevation + 1;
+            }
         }
 
         this.vehicle.position = newPos;
@@ -267,7 +281,7 @@ class DroneGameProcess extends ViewerProcess {
             let cameraTargetPos = new Vector3(0, 0.6, 0);
             let cameraTargetPosWorld = Vector3.TransformCoordinates(cameraTargetPos, this.vehicle.getWorldMatrix());
             this.sceneViewer.camera.position = cameraTargetPosWorld;
-            this.sceneViewer.camera.rotation = new Vector3(-this.pitch, this.heading + Math.PI, -this.roll);
+            this.sceneViewer.camera.rotation = new Vector3(-this.pitch - (25.0 * Math.PI / 360.0), this.heading + Math.PI, -this.roll);
             //this.sceneViewer.camera.upVector = ;
         }
 
