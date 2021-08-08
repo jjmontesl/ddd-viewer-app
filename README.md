@@ -15,19 +15,19 @@ You can find DDD Viewer online at the 3dsmaps.com site, which uses
 
 Clone the repository:
 
-	git clone core.autocrlf=false https://github.com/jjmontesl/ddd-viewer-app.git
+    git clone core.autocrlf=false https://github.com/jjmontesl/ddd-viewer-app.git
 
 ### Compiles and hot-reloads for development
 
-	npm run serve
+    npm run serve
 
 or
 
-	npm run serve-pub-https
+    npm run serve-pub-https
 
 The build toolchain accepts some environment variables that configure the application:
 
-	DDD_VIEWER_APP_TILE_URL_BASE="http://localhost:8000/cache/ddd_http/" npm run serve
+    DDD_VIEWER_APP_TILE_URL_BASE="http://localhost:8000/cache/ddd_http/" npm run serve
 
 ### Assets
 

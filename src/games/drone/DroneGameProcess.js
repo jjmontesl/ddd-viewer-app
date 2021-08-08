@@ -46,7 +46,7 @@ class DroneGameProcess extends ViewerProcess {
 
         this.rotationSpeed = 0.0 * Math.PI;
         this.maxRotationSpeed = 1.0 * Math.PI;
-        
+
         this.rollSpeed = 0.0;
         this.pitchSpeed = 0.0;
         this.maxRollSpeed = 2.0 * Math.PI;
@@ -120,7 +120,7 @@ class DroneGameProcess extends ViewerProcess {
         this.sceneViewer.viewerState.sceneViewModeShow = false;
 
         // Initialize joystick
-        
+
         const gamepadManager = new GamepadManager();
         gamepadManager.onGamepadConnectedObservable.add((gamepad, state)=>{
             console.debug("Joystick connected.");
@@ -190,12 +190,12 @@ class DroneGameProcess extends ViewerProcess {
 
         // Process input
         this.throttle = controlThrottle;
-        
+
         // Apply physics
         let rotationSpeedTarget = controlRotation * this.maxRotationSpeed;
         this.rotationSpeed = Scalar.Lerp(this.rotationSpeed, rotationSpeedTarget, 1 - (1 - 0.9) ** deltaTime);
         this.heading += this.rotationSpeed * deltaTime;
-        
+
         let pitchTarget = controlForward * this.maxRollAngle;
         let pitchDelta = (pitchTarget - this.pitch) * this.maxRollSpeed;
         pitchDelta = Scalar.Clamp(pitchDelta, -this.maxRollSpeed, this.maxRollSpeed);
@@ -211,7 +211,7 @@ class DroneGameProcess extends ViewerProcess {
         //rollSpeedTarget = rollSpeedTarget * Scalar.Clamp(Math.abs(rollTarget - this.roll) * 5.0, 0, 1)
         //this.rollSpeed = Scalar.Lerp(this.rollSpeed, rollSpeedTarget, Scalar.Clamp(1 - (1 - 0.9) ** deltaTime, 0, 1));
         this.roll += rollDelta * deltaTime;
-        
+
         this.vehicle.rotation = new Vector3(this.pitch, this.heading, this.roll);
 
         // Forces
@@ -221,7 +221,7 @@ class DroneGameProcess extends ViewerProcess {
         const throttleAccel = 16.0 * deltaTime * (this.throttle + 1.0) * 0.5;  // Acceleration downwards is 9.8
         liftAccelRotated.scaleInPlace(throttleAccel);
         this.velocity.addInPlace(liftAccelRotated);
-        
+
         const gravity = new Vector3(0, -9.8, 0);
         gravity.scaleInPlace(deltaTime);
         this.velocity.addInPlace(gravity);
@@ -257,7 +257,7 @@ class DroneGameProcess extends ViewerProcess {
         if (terrainElevation !== null && newPos.y < 1.0) {
             // Ugly workaround for wrong terrain elevation calculation on the origin of coordinates (need to debug what causes it)
             newPos.x += 1 * deltaTime;
-            
+
             if (newPos.y < terrainElevation) {
                 // Move up if below surface
                 newPos.y = terrainElevation + 1;

@@ -104,8 +104,20 @@ class DDDViewerAppState {
         this.positionDate.setHours(11);
         this.positionDate.setMinutes(0);
 
+        // Load layers on localstorage
+        this.loadLayers();
+
     }
 
+    saveLayers() {
+        const layers = JSON.stringify(this.layers);
+        localStorage.setItem("dddLayers", layers);
+    }
+
+    loadLayers() {
+        const layers = localStorage.getItem('dddLayers');
+        this.layers = layers ? JSON.parse(layers) : this.layers;
+    }
 }
 
 export default DDDViewerAppState;

@@ -31,7 +31,7 @@
                                 <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                                     <v-btn class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
                                 </td>
-                                <td style="white-space: nowrap; width: 100%;" :title="layer.key">
+                                <td style="white-space: nowrap; width: 100%; cursor: pointer;" @click="selectLayer(layer)" :title="layer.key">
                                     {{ layer.label }}
                                 </td>
                             </tr>
@@ -45,7 +45,9 @@
                         <v-btn to="/3d/layers/create" class="mx-2" dark color="primary"><v-icon dark>mdi-plus</v-icon> Add Layer</v-btn>
                     </v-card-text>
 
-
+                    <div v-if="selectedLayer">
+                        <SceneLayerDetails :viewerState="viewerState" :layer="selectedLayer" />
+                    </div>
                 </v-card>
 
             </div>
@@ -72,6 +74,7 @@
 <script>
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
+import SceneLayerDetails from '@/components/scene/SceneLayerDetails.vue';
 import { GeoJson3DLayer } from 'ddd-viewer';
 
 
@@ -126,6 +129,7 @@ export default {
     components: {
         DDDScene,
         DDDSceneInsert,
+        SceneLayerDetails
     },
 
     methods: {

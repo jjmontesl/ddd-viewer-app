@@ -20,7 +20,6 @@
                         <v-form class="p-4">
                             <v-file-input
                                 v-model="file"
-                                truncate-length="15"
                                 label="Source GeoJSON file"
                             ></v-file-input>
 
@@ -122,7 +121,9 @@ export default {
             const layerKey = `custom${this.viewerState.layers.length + 1}`; // FIXME This will not be unique if layers are removed
             const layerObject = { "key": layerKey, "label": `Custom: ${fileName}`, "url": "", "visible": true };
 
-            this.viewerState.layers.push(layerObject)
+            this.viewerState.layers.push(layerObject);
+            this.viewerState.saveLayers();
+
             const geoJsonLayerPoints = new GeoJson3DLayer(fileObject);
             this.getSceneViewer().layerManager.addLayer(layerKey, geoJsonLayerPoints);
 
