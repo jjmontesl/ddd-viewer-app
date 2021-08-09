@@ -2,21 +2,39 @@
 
     <v-card class="" style="overflow-x: hidden;">
 
-        <v-card-title class="pb-8" style="text-align: left; word-break: break-word; width: 95%;"> Settings layer</v-card-title>
+        <v-card-title class="pb-8" style="text-align: left; word-break: break-word; width: 95%;">Settings layer</v-card-title>
 
         <v-card-text class="text-left">
             <v-form>
-                <v-btn @click="showColorPicker = !showColorPicker">
-                    Pick a color
-                </v-btn>
+                <div class="ddd-row-layer">
+                    <p>Name</p>
+                    <p>{{this.layer.label}}</p>
+                </div>
+
+                <div class="ddd-row-layer">
+                    <p>Altitude Offset</p>
+                    <v-slider
+                        v-model="layer.altitude"
+                        @change="changeAltitude(altitude)"
+                        :hint="layer.altitude + ' m'"
+                        max="160"
+                        min="60"
+                    ></v-slider>
+                </div>
+
+                <div class="ddd-row-layer">
+                    <p>Color</p>
+                    <v-btn depressed :color="layer.color" @click="showColorPicker = !showColorPicker">
+
+                    </v-btn>
+                </div>
                 <v-color-picker
-                    v-model="color"
+                    v-model="layer.color"
                     @input="changeColor( color )"
                     v-if="showColorPicker"
                     dot-size="25"
                     swatches-max-height="200"
                 ></v-color-picker>
-
                 <v-slider
                     v-model="altitude"
                     @input="changeAltitude(altitude)"
@@ -24,13 +42,16 @@
                     min="-10"
                     max="100"
                 ></v-slider>
+
+                <v-btn color="error"><v-icon>mdi-delete-outline</v-icon>Remove layer</v-btn>
+
             </v-form>
         </v-card-text>
     </v-card>
 
 </template>
 
-<style>
+<style lang="scss">
 /*tbody tr:nth-of-type(odd) {
    background-color: rgba(0, 0, 0, .05);
 }*/
@@ -39,15 +60,18 @@
     padding: 2px;
 }
 */
+
+.ddd-row-layer {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+
+    & p { padding-right: 1rem; }
+}
 </style>
 
 
 <script>
-import DDDScene from '@/components/ddd/DDDScene.vue';
-import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
-import { GeoJson3DLayer } from 'ddd-viewer';
-
-
 export default {
   mounted() {
 
@@ -66,8 +90,6 @@ export default {
   ],
   data() {
     return {
-        altitude: "60",
-        color: "#ff00ff",
         file: null,
         showColorPicker: false
     }
@@ -86,36 +108,13 @@ export default {
     },
 
     methods: {
-        // async addLayer() {
-        //     const fileData = await this.file.text();
-        //     const fileName = this.file.name;
-        //     const fileObject = JSON.parse(fileData);
-        //     const layerKey = `custom${this.viewerState.layers.length + 1}`; // FIXME This will not be unique if layers are removed
-        //     const layerObject = { "key": layerKey, "label": `Custom: ${fileName}`, "url": "", "visible": true };
-
-        //     this.viewerState.layers.push(layerObject)
-        //     const geoJsonLayerPoints = new GeoJson3DLayer(fileObject);
-        //     this.getSceneViewer().layerManager.addLayer(layerKey, geoJsonLayerPoints);
-
-        //     this.$router.replace('/3d/layers/').catch(()=>{});
-        // },
-        // selectLayer(layer) {
-        //     this.selectedLayer = layer;
-        // },
-
-        // showHideLayer(layer) {
-        //     layer.visible = ! layer.visible;
-        //     let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(layer.key);
-        //     sceneViewerLayer.setVisible(layer.visible)
-        // }
-
-        async changeColor(color) {
+        changeColor(color) {
             console.log( color );
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setColor(color);
         },
 
-        async changeAltitude(altitude) {
+        changeAltitude(altitude) {
             console.log( altitude );
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setAltitudeOffset(altitude);
