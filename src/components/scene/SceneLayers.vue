@@ -27,9 +27,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="layer in viewerState.layers" :key="layer.key">
-                                <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                    <v-btn class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
+                            <tr v-for="layer in $root.layerManagerApp.layers" :key="layer.key">
+                                <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0;">
+                                    <v-btn depressed class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
                                 </td>
                                 <td style="white-space: nowrap; width: 100%; cursor: pointer;" @click="selectLayer(layer)" :title="layer.key">
                                     {{ layer.label }}
@@ -75,7 +75,6 @@
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import SceneLayerDetails from '@/components/scene/SceneLayerDetails.vue';
-import { GeoJson3DLayer } from 'ddd-viewer';
 
 
 export default {

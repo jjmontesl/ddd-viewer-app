@@ -66,7 +66,6 @@
 <script>
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
-import { GeoJson3DLayer } from 'ddd-viewer';
 
 
 export default {
@@ -117,15 +116,8 @@ export default {
         async addLayer() {
             const fileData = await this.file.text();
             const fileName = this.file.name;
-            const fileObject = JSON.parse(fileData);
-            const layerKey = `custom${this.viewerState.layers.length + 1}`; // FIXME This will not be unique if layers are removed
-            const layerObject = { "key": layerKey, "label": `Custom: ${fileName}`, "url": "", "visible": true };
 
-            this.viewerState.layers.push(layerObject);
-            this.viewerState.saveLayers();
-
-            const geoJsonLayerPoints = new GeoJson3DLayer(fileObject);
-            this.getSceneViewer().layerManager.addLayer(layerKey, geoJsonLayerPoints);
+            this.$root.layerManagerApp.addLayer( fileData, fileName, this.getSceneViewer() );
 
             this.$router.replace('/3d/layers/').catch(()=>{});
         },

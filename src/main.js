@@ -20,6 +20,7 @@ import VueGeolocation from 'vue-browser-geolocation';
 import DDDViewerAppState from './DDDViewerAppState';
 
 import ScrollAnimatedObserver from "./directives/scrollanimation";
+import LayerManagerApp from './utils/layers'
 
 Vue.directive( "scrollanimation", ScrollAnimatedObserver );
 
@@ -69,12 +70,14 @@ Vue.prototype.dddConfig = {
 const viewerAppState = new DDDViewerAppState(config.defaultCoords);
 viewerAppState.dddConfig = config;
 
+const layerManagerApp = new LayerManagerApp(viewerAppState);
+
 const app = new Vue({
   vuetify,
   router,
   store,
   i18n,
-  data: { viewerAppState: viewerAppState },
+  data: { viewerAppState, layerManagerApp },
   render: (h) => h(App),
   created() {
     store.dispatch('setLocale', store.getters.locale)
