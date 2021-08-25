@@ -19,10 +19,10 @@
 
                 <v-slider
                     v-model="altitude"
-                    @change="changeAltitude(altitude)"
+                    @input="changeAltitude(altitude)"
                     hint="Altitude"
-                    max="160"
-                    min="60"
+                    min="-10"
+                    max="100"
                 ></v-slider>
             </v-form>
         </v-card-text>

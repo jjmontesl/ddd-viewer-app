@@ -1,6 +1,7 @@
 <template>
 
     <div>
+        <!--
         <div><a @click="selectNode">
             <span v-show="nodeSelRel !== 0">{{ nodeLabel }}</span>
             <span v-show="nodeSelRel === 0" style="font-weight: bold;">{{ nodeLabel }}</span>
@@ -11,6 +12,14 @@
                 <div v-for="child in nodeChildren" :key="child.id"><a @click="selectChild(child)">{{ child.label }}</a></div>
             </div>
         </div>
+        -->
+
+        <v-treeview open-all dense hoverable activatable rounded v-model="treeModel"
+              :items="nodeTreeListItems" @update:active="nodeActivated">
+            <template v-slot:label="{item, active}">
+              <span :class="active ? 'font-weight-bold' : ''">{{ item.name }}</span>
+            </template>
+        </v-treeview>
     </div>
 
 </template>
@@ -41,6 +50,8 @@ const NodeHierarchy = {
   ],
   data() {
     return {
+      treeModel: [],
+      /*
       nodeChildrenCount: null,
       nodeChildren: null,
       nodeSelRel: 0,
@@ -50,12 +61,47 @@ const NodeHierarchy = {
       childPathGetter: () => {
           return this.childPath;
       }
-
+      */
+     //nodeTreeListItems = [];
     }
   },
   computed: {
+    nodeTreeListItems: function() {
+
+      let objRef = this.objectRef;
+
+      // Add children
+      let objChildrenItems = [];
+      for (let child of objRef.getChildren()) {
+        let item = {'id': child.getId(), 'name': child.getLabel()};
+        objChildrenItems.push(item);
+      }
+
+      // Compose items from current up to root
+      let lastItem = null;
+      while (objRef) {
+        let item = {'id': objRef.getId(), 'name': objRef.getLabel()}
+        if (lastItem !== null) {
+          item['children'] = [ lastItem ];
+        } else {
+          // Current element children
+          item['children'] = objChildrenItems;
+        }
+        objRef = objRef.getParent();
+        lastItem = item;
+      }
+
+      //let item = {'id': "ROOT", 'name': "Root"};
+      //if (lastItem !== null) { item['children'] = [ lastItem ]; }
+
+      let items = [ lastItem ];
+
+      //return [{'id': 1, 'name': 'A', 'children': [{'id': 2, 'name': 'B', 'children': [{'id': 3, 'name': 'C' }]}]}];
+      return items;
+    }
   },
   watch: {
+    /*
     'nodeGetter' () {
         //console.debug("NodeHierarchy node updated.");
         //this.pathGetter = null;
@@ -63,11 +109,13 @@ const NodeHierarchy = {
         this.updateNode();
         this.$forceUpdate();
     }
+    */
   },
   props: [
       'viewerState',
-      'nodeGetter',
-      'pathGetter',
+      'objectRef',
+      //'nodeGetter',
+      //'pathGetter',
       'depth',
   ],
 
@@ -100,7 +148,7 @@ const NodeHierarchy = {
       if (this.nodeGetter) { n = this.nodeGetter(); }
       if (!n) {
         this.childPath = null;
-        this.nodeLabel = "LOADING";
+        this.nodeLabel = "Loading...";
         return;
       }
 
@@ -160,11 +208,20 @@ const NodeHierarchy = {
 
     },
 
+    /*
     selectChild(node) {
-          let meshName = node.id.split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
+        let meshName = node.id.split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
         this.$router.push('/3d/item/' + meshName + '/' + this.getSceneViewer().positionString()).catch(()=>{});
     },
+    */
 
+    nodeActivated(active) {
+      console.debug(active);
+      if (active[0]) {
+        let meshName = active[0].split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
+        this.$router.push('/3d/item/' + meshName + '/' + this.getSceneViewer().positionString()).catch(()=>{});
+      }
+    }
 
 
   },

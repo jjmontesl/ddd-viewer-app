@@ -94,11 +94,12 @@
                     <p>
                         DDD viewer and software used for 3D generation were created by Jose Juan Montes,
                         who also maintains this demostration server. The following contributors
-                        have also contributed to the DDD Viewer project:
+                        have also contributed to the DDD Viewer projects:
                     </p>
                     <p>
                         <ul>
                             <li>Farvell</li>
+                            <li>Alex Zituz</li>
                         </ul>
                     </p>
                     <p>
@@ -109,13 +110,13 @@
                     <h3>Thanks to</h3>
 
                     <p>
-                        Thanks to the following people who has greatly helped us with development and design.
+                        Thanks to the following people who have greatly helped us with development and design.
                     </p>
                     <p>
                         <ul>
-                            <li>Yopaseopor</li>
-                            <li>Maria Torres</li>
                             <li>Leobar37</li>
+                            <li>Maria Torres</li>
+                            <li>Yopaseopor</li>
                         </ul>
                     </p>
                 </v-col>

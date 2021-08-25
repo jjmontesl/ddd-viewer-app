@@ -166,6 +166,10 @@
     padding-top: 6px;
     font-size: 20px;
 }
+
+.ddd-toolbar-map-button {
+  font-size: 1rem;
+}
 </style>
 
 <script>
@@ -223,16 +227,16 @@ export default {
       if (this.isTokenSet) {
         return [
           {
+            title: this.$t('menuItems.VIEW_MAP'),
+            link: 'map',
+            icon: 'mdi-video-map',
+            class: 'btnViewMap ddd-toolbar-map-button'
+          },
+          {
             title: this.$t('menuItems.HOME'),
             link: 'home',
             icon: 'mdi-home',
             class: 'btnHome'
-          },
-          {
-            title: this.$t('menuItems.VIEW_MAP'),
-            link: 'view-map',
-            icon: 'mdi-video-map',
-            class: 'btnViewMap'
           },
           {
             title: this.$t('menuItems.VIEW_3D'),
@@ -264,16 +268,16 @@ export default {
         },
         */
         {
+            title: 'map',
+            link: 'mapMain',
+            icon: 'mdi-map',
+            class: 'btnViewMap ddd-toolbar-map-button'
+        },
+        {
             title: 'home',
             link: 'landing',
             icon: 'mdi-home',
             class: 'btnViewMap'
-        },
-        {
-          title: 'map',
-          link: 'mapMain',
-          icon: 'mdi-map',
-          class: 'btnViewMap'
         },
        {
           title: 'blog',

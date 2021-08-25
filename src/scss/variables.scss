@@ -25,18 +25,24 @@ $font-size-root: 16px;
 $btn-font-weight: bold;
 $btn-letter-spacing: 0px;
 $btn-text-transform: none;
+
 $list-item-title-font-size: 0.929rem;
 $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
+
 $fab-icon-sizes: (
     "small": 20,
 );
+
 $btn-sizes: (
     "default": 41,
     "large": 54,
     "small": 28,
     "xsmall": 20
 );
+
+$treeview-node-height-dense: 12px !default;
+$treeview-node-level-width: 12px !default;
 
 $headings: (
     "h1": (

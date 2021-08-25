@@ -58,6 +58,7 @@
                             </tbody>
                             </v-simple-table>
 
+                            <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadata.length }} bytes)</div>
                             <div v-if="!loading" style="text-align: right;"><a @click="showJSON = !showJSON;">JSON View</a></div>
 
                         </div>
@@ -84,7 +85,8 @@
                     <v-card-text v-if="!loading" class="text-left">
                         <div>
                             <h3>Node Tree</h3>
-                            <NodeHierarchy :nodeGetter="nodeGetter" :viewerState="viewerState" depth="1"></NodeHierarchy>
+                            <!--<NodeHierarchy :nodeGetter="nodeGetter" :viewerState="viewerState" depth="1"></NodeHierarchy>-->
+                            <NodeHierarchy :objectRef="targetObjectRef" :viewerState="viewerState" depth="1"></NodeHierarchy>
                         </div>
                     </v-card-text>
 
@@ -113,6 +115,14 @@ tbody tr:nth-of-type(odd) {
     padding: 2px;
 }
 */
+
+.v-treeview-node__content, .v-treeview-node__label {
+  flex-shrink: 1;
+  white-space: normal;
+}
+.v-treeview-node__root {
+  height: auto;
+}
 </style>
 
 
@@ -168,11 +178,14 @@ export default {
   ],
   data() {
     return {
+      loading: true,
+
       nodeId: null,  // currently this is the nodeId in the URL (last part with # replaced)
+      targetObjectRef: null,
+      //nodeGetter: () => { return (this.viewerState.sceneSelectedMeshId ? this.getSceneViewer().selectedMesh : null); },
       nodeName: null,
       metadata: {},
-      loading: true,
-      nodeGetter: () => { return (this.viewerState.sceneSelectedMeshId ? this.getSceneViewer().selectedMesh : null); },
+
       showJSON: false,
     }
   },
@@ -276,6 +289,8 @@ export default {
                 const highlight = ! this.getSceneViewer().sequencer.playing;  // avoids highlighting during sequence playback (TODO: make this an option not hardcoded here)
                 this.getSceneViewer().selectObject(objectRef, highlight);
                 this.setTargetObject(objectRef);
+            } else {
+                this.setTargetObject(null);
             }
 
         }
@@ -305,7 +320,7 @@ export default {
 
             this.metadata = this.getSceneViewer().nodeMetadata(nodeId);
 
-            this.nodeName = 
+            this.nodeName =
         }
         */
 
@@ -332,21 +347,25 @@ export default {
       },
       */
 
-        setTargetObject(targetObject) {
+        setTargetObject(targetObjectRef) {
             //console.debug("Setting target object: ", targetObject);
 
-            if (!targetObject) { return; }
+            if (!targetObjectRef) { return; }
 
-            this.nodeId = targetObject.getUrlId();
-            this.nodeName = decodeURIComponent(targetObject.getUrlId());
+            this.nodeId = targetObjectRef.getUrlId();
+            this.nodeName = decodeURIComponent(targetObjectRef.getUrlId());
             this.loading = false;
 
-            this.metadata = targetObject.getMetadata() || {};
+            this.metadata = targetObjectRef.getMetadata() || {};
             if (this.metadata && 'osm:name' in this.metadata) {
                 this.nodeName = this.metadata['osm:name'];
+            } else if (this.metadata && 'ddd:rpath' in this.metadata) {
+                this.nodeName = this.metadata['ddd:rpath'].split("/").slice(-1)[0];
             }
 
-            this.nodeGetter = () => { return targetObject; };
+            //this.nodeGetter = () => { return targetObject; };
+            Object.freeze(targetObjectRef);  // This is CRITICAL to avoid Vue proxying every node and Babylon object
+            this.targetObjectRef = targetObjectRef;
 
             // Force redraw, so canvases are resized according to right pane size and scrollbar
             this.resize();
