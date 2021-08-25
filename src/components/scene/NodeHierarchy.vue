@@ -14,7 +14,7 @@
         </div>
         -->
 
-        <v-treeview open-all dense hoverable activatable rounded v-model="treeModel"
+        <v-treeview v-if="nodeTreeListItems" open-all dense hoverable activatable rounded v-model="treeModel"
               :items="nodeTreeListItems" @update:active="nodeActivated">
             <template v-slot:label="{item, active}">
               <span :class="active ? 'font-weight-bold' : ''">{{ item.name }}</span>
@@ -218,7 +218,8 @@ const NodeHierarchy = {
     nodeActivated(active) {
       console.debug(active);
       if (active[0]) {
-        let meshName = active[0].split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
+        //let meshName = active[0].split("/").pop().replaceAll('#', '_'); // .replaceAll("_", " ");
+        let meshName = active[0].replaceAll('/', '-').replaceAll('#', '_'); // .replaceAll("_", " ");
         this.$router.push('/3d/item/' + meshName + '/' + this.getSceneViewer().positionString()).catch(()=>{});
       }
     }
