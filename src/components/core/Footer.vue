@@ -14,7 +14,7 @@
                 <h2>Connect</h2>
                 <a href="https://github.com/jjmontesl/ddd#contributing" target="_blank">Contribute</a>
                 <!-- <a href="#">Subscribe to newsletter</a> -->
-                <a href="https://twitter.com/intent/follow?user_id=3dsmaps" target="_blank">Follow on Twitter</a>
+                <a href="https://twitter.com/3dsmaps" target="_blank">Follow on Twitter</a>
 
             </v-col>
             <v-col class="footer-column">

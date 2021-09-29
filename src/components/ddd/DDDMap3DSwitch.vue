@@ -9,7 +9,7 @@
             </span>
         </v-card>
         -->
-          <div style="margin-top: 4px;">
+          <div style="margin-top: 4px; text-align: right; pointer-events: auto;">
             <v-btn @click="switch3D" class="primary"><small><v-icon dark>mdi-earth</v-icon> 3D</small></v-btn>
         </div>
     </div>
@@ -18,10 +18,10 @@
 
 <style>
 .ddd-map-3d-switch {
-    position: fixed;
+    /* position: fixed;*/
     z-index: 2;
-    top: 50px;
-    right: 10px;
+    /*top: 50px;*/
+    margin: 10px;
     /* opacity: .75; */
     cursor: pointer;
 }

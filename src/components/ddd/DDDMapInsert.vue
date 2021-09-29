@@ -12,7 +12,7 @@
 export default {
 
   inject: [
-      'getViewerState'
+      //'getViewerState'
   ],
 
   methods: {
@@ -25,19 +25,28 @@ export default {
             // Check if insert is visible as per https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
             let el = this.$el.querySelector('.ddd-map-insert').parentNode;
             let visible = window.getComputedStyle(el).display !== 'none'; // ; (el.parentNode.parentOffset !== null);
+            console.debug("CheckMountMap");
 
             if (visible) {
-                this.mountMap();
+                if (this.mountedMap === null) {
+                    this.mountMap();
+                }
             } else {
-                this.unmountMap();
+                if (this.mountedMap !== null) {
+                  this.unmountMap();
+                }
             }
       },
 
       mountMap: function() {
-        let el = document.getElementById('ddd-map').firstChild;
+        let el = document.getElementById('ddd-map-parent');
         if (el) {
-            //console.debug('Mounting DDD map insert.');
+            console.debug('Mounting DDD map insert.');
+            this.renderBackEl = el.parentNode;
             this.$el.querySelector('.ddd-map-insert').appendChild(el);
+            this.mountedMap = el;
+
+            window.dispatchEvent(new Event('resize'));
         }
       },
 
@@ -45,7 +54,12 @@ export default {
         let el = this.$el.querySelector('.ddd-map-insert').firstChild;
         if (el) {
             //console.debug("Unmounting DDD map insert.");
-            document.getElementById('ddd-map').insertBefore(el, document.getElementById('ddd-map').firstChild);  // Must be the first child, as used in Mount
+            //document.getElementById('ddd-map-parent').insertBefore(el, document.getElementById('ddd-map').firstChild);  // Must be the first child, as used in mount
+            this.renderBackEl.appendChild(el);  // Must be first child as used in mount
+            this.mountedMap = null;
+            this.renderBackEl = null;
+
+            window.dispatchEvent(new Event('resize'));
         }
       }
 
@@ -53,6 +67,7 @@ export default {
 
 
   mounted() {
+    this.mountedMap = null;
     this.checkMountMap();
     window.addEventListener('resize', this.resize);
   },

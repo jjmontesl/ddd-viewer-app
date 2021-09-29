@@ -8,7 +8,6 @@
         <div class="ddd-render-back">
 
             <DDDMap v-if="viewerState.mapVisible" :viewerState="viewerState" />
-            <DDDMap3DSwitch v-if="viewerState.mapVisible" />
 
             <DDDScene v-if="viewerState.sceneVisible" :viewerState="viewerState" />
 
@@ -127,7 +126,6 @@ import Loading from '@/components/core/Loading.vue'
 import DDDViewerAppState from '@/DDDViewerAppState';
 
 import DDDMap from '@/components/ddd/DDDMap.vue';
-import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 
@@ -179,7 +177,6 @@ export default {
     Loading,
     //Footer
     DDDMap,
-    DDDMap3DSwitch,
     DDDScene,
     SceneViewMode,
   },

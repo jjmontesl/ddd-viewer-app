@@ -21,6 +21,8 @@
 
                     <v-card-text v-if="showJSON" class="text-left">
                         <pre style="font-size: 80%; line-height: 100%; width: 100%; overflow-x: scroll; overflow-y: hidden;">{{ jsonMetadata }}</pre>
+                        <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadata.length }} bytes)</div>
+                        <div v-if="!loading" style="text-align: right;"><a @click="showJSON = !showJSON;">Keys View</a></div>
                     </v-card-text>
 
                     <v-card-text v-if="!showJSON" class="text-left">
@@ -60,7 +62,6 @@
 
                             <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadata.length }} bytes)</div>
                             <div v-if="!loading" style="text-align: right;"><a @click="showJSON = !showJSON;">JSON View</a></div>
-
                         </div>
                     </v-card-text>
 

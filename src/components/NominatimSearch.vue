@@ -29,7 +29,7 @@ import axios from 'axios';
 export default {
 
   inject: [
-      'getViewerState'
+      //'getViewerState'
   ],
 
   data() {
