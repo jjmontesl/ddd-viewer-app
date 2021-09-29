@@ -1,3 +1,4 @@
+
 <template>
   <v-app>
 
@@ -8,7 +9,11 @@
         <div class="ddd-render-back">
 
             <DDDMap v-if="viewerState.mapVisible" :viewerState="viewerState" />
+<<<<<<< HEAD
 
+=======
+            <DDDSearch v-if="viewerState.sceneVisible || viewerState.mapVisible"/>
+>>>>>>> db660b5 (Add searchBox to page and style this.)
             <DDDScene v-if="viewerState.sceneVisible" :viewerState="viewerState" />
 
         </div>
@@ -128,7 +133,7 @@ import DDDViewerAppState from '@/DDDViewerAppState';
 import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
-
+import DDDSearch from '@/components/ddd/DDDSearch.vue';
 
 export default {
   name: 'App',
@@ -178,6 +183,7 @@ export default {
     //Footer
     DDDMap,
     DDDScene,
+    DDDSearch,
     SceneViewMode,
   },
   computed: {
