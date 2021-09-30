@@ -6,8 +6,8 @@
 
         <div class="ddd-map-overlay" id="ddd-map-overlay" style="width: 100%; height: 100%; position: absolute; z-index: 2; top: 0px; pointer-events: none;">
 
-          <DDDMap3DSwitch />
-
+        <DDDMap3DSwitch />
+        <DDDSearch v-if="viewerState.sceneVisible || viewerState.mapVisible"/>
         </div>
 
     </div>
@@ -26,6 +26,7 @@ import View from 'ol/View';
 import {createXYZ, extentFromProjection} from 'ol/tilegrid.js';
 import {ScaleLine, defaults as defaultControls} from 'ol/control';
 import DDDMap3DSwitch from '@/components/ddd/DDDMap3DSwitch.vue';
+import DDDSearch from '@/components/ddd/DDDSearch.vue';
 
 export default {
 
@@ -42,7 +43,8 @@ export default {
   },
 
   components: {
-    DDDMap3DSwitch
+    DDDMap3DSwitch,
+    DDDSearch
   },
   props: [
       'viewerState',
