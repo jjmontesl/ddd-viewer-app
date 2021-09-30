@@ -32,9 +32,13 @@
 
 
 <script>
+import axios from 'axios';
+
+
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import DDDMapInsert from '@/components/ddd/DDDMapInsert.vue';
+
 
 export default {
   async mounted() {
@@ -90,7 +94,7 @@ export default {
 
         const url = `https://nominatim.openstreetmap.org/search?q=${query}`;
 
-        return await fetch(url);
+        // const results = axios.get(url)
       }
 
 
