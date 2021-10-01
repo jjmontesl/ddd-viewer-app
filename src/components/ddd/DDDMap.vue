@@ -191,6 +191,10 @@ export default {
 
       },
 
+      getMap: function() {
+        return this.map;
+      },
+
       positionWGS84: function() {
         const extent = this.map.getView().calculateExtent(this.map.getSize());
         let point = [(extent[0] + extent[2]) / 2, (extent[1] + extent[3]) / 2];

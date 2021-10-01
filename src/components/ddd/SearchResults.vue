@@ -3,7 +3,7 @@
     <div style="padding: 0px;" ref="dddViewPanel">
 
         <v-row style="margin: 0px;">
-        <v-col style="padding: 0px; pointer-events: auto;" sm="6" offset-sm="6" md="5" offset-md="7" lg="4" offset-lg="8" >
+          <v-col style="padding: 0px; pointer-events: auto;" sm="6" offset-sm="6" md="5" offset-md="7" lg="4" offset-lg="8" >
 
             <div style="background-color: white;">
 
@@ -16,36 +16,7 @@
 
                     <v-card-text>
                       <div class="text-query" v-for="result in searchResults" :key="result.osm_id">
-                        <v-card class="ma-3">
-                          <v-card-text>
-                            <v-layout>
-                              <v-flex class="text-center" style="max-width: 36px; min-width: 36px;">
-                                <img :src="result.icon" alt="">
-                              </v-flex>
-                              <v-flex class="text-left">
-                                <b><h3 class="mb-1">{{result.namedetails.name}}</h3></b>
-
-                                <p>
-                                  <span class="grey--text text--lighten-1" v-if="result.address.road">{{result.address.road}}, </span>
-                                  <span>
-                                    <span v-if="result.address.city"><b>{{result.address.city}}, </b></span>
-                                    <span v-else-if="result.address.town" class="black--text">{{result.address.town}}, </span>
-                                  </span>
-
-                                  <span v-if="result.address.state">
-                                    {{result.address.state}},
-                                  </span>
-                                  <span v-if="result.address.country">
-                                    {{result.address.country}}
-                                  </span> 
-                                </p>
-
-                                <a class="a-decoration mr-1" v-if="result.extratags['contact:instagram']" :href="result.extratags['contact:instagram']"><v-icon>mdi-instagram</v-icon></a>
-                                <a class="a-decoration" v-if="result.extratags['contact:facebook']" :href="result.extratags['contact:facebook']"><v-icon>mdi-facebook</v-icon></a>
-                              </v-flex>
-                            </v-layout>
-                          </v-card-text>
-                        </v-card>
+                        <DDDCardSearchResults :result="result" />
                       </div>
                     </v-card-text>
                 </v-card>
@@ -75,7 +46,7 @@ import axios from 'axios';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import DDDMapInsert from '@/components/ddd/DDDMapInsert.vue';
-
+import DDDCardSearchResults from '@/components/ddd/DDDCardSearch.vue';
 
 export default {
   async mounted() {
@@ -119,6 +90,7 @@ export default {
   components: {
     DDDScene,
     DDDMapInsert,
+    DDDCardSearchResults
   },
 
     methods: {

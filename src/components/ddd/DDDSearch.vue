@@ -4,12 +4,14 @@
         <v-col style="padding: 0px; pointer-events: auto;" sm="5" offset-sm="7" md="4" offset-md="8" >
           <v-card>
             <v-card-text class="pa-0">
-              <v-layout>
-                  <v-text-field @keypress.enter="this.goPageSearch" class="my-0" hide-details="true" label="Search" solo placeholder="Address or place" v-model="query"></v-text-field>
-                  <v-btn class="cream" x-large @click="this.goPageSearch">
-                    <v-icon>mdi-magnify</v-icon>
-                  </v-btn>
-              </v-layout>
+                <v-form action="" @submit.prevent="goPageSearch">
+                  <v-layout>
+                    <v-text-field @keypress.enter="this.goPageSearch" class="my-0" hide-details="true" label="Search" solo placeholder="Address or place" v-model="query"></v-text-field>
+                    <v-btn class="cream" x-large @click="this.goPageSearch">
+                      <v-icon>mdi-magnify</v-icon>
+                    </v-btn>
+                  </v-layout>
+                </v-form>
             </v-card-text>
           </v-card>
         </v-col>
