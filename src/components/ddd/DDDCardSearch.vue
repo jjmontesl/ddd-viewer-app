@@ -1,67 +1,27 @@
 <template>
+    <!-- TODO: put code postal -->
     <v-card class="ma-3 hoverme" @click="goMapAndMovement(result) ">
         <v-card-text>
             <v-layout>
                 <div>
-                <v-flex v-if="result.icon" class="text-center" style="max-width: 36px; min-width: 36px;">
-                    <img :src="result.icon" alt="">
-                </v-flex>
-                <v-flex v-else-if="result.type == 'parking'" style="max-width: 36px; min-width: 36px;">
-                    <v-icon>mdi-parking</v-icon>
-                </v-flex>
-                <v-flex v-else style="max-width: 36px; min-width: 36px;">
-                    
-                </v-flex>
+                    <IconTitle :result="this.result"/>
                 </div>
                 <v-flex class="text-left">
-                    <b><h3 class="mb-1">{{result.namedetails.name}}</h3></b>
+                    <Title :result="this.result"/>
 
-                    <p>
-                        <span class="grey--text text--lighten-1" v-if="result.address.road">{{result.address.road}}, </span>
-                        <span>
-                            <span v-if="result.address.city"><b>{{result.address.city}}, </b></span>
-                            <span v-else-if="result.address.town" class="black--text">{{result.address.town}}, </span>
-                        </span>
+                    <Direction :result="this.result"/>
 
-                        <span v-if="result.address.state">
-                            {{result.address.state}},
-                        </span>
-                        <span v-if="result.address.country">
-                            {{result.address.country}}
-                        </span> 
-                    </p>
+                    <Population :result="this.result"/>
 
-                    <p v-if="result.extratags.population">
-                        <v-icon class="info--text">mdi-account</v-icon>
-                        <span class="info--text">{{result.extratags.population}}</span>
-                    </p>
+                    <OpeningHours :result="this.result"/>
 
-                    <p v-if="result.extratags.opening_hours">
-                        <v-row>
-                            <v-col class="col-1">
-                                <v-icon class="info--text">mdi-clock</v-icon>
-                            </v-col>
-                            <v-col class="col-11">
-                                <span class="info--text">{{result.extratags.opening_hours}}</span>
-                            </v-col>
-                        </v-row>
-                    </p>
-
-                    <div v-if="result.extratags.wheelchair == 'yes'">
-                        <v-icon class="info--text">mdi-wheelchair-accessibility</v-icon>
-                    </div>
+                    <Wheelchair :result="this.result"/>
 
                     <div>
                         <v-flex class="">
                                 <v-row>
-                                    <v-col class="text-left col-6">
-                                        <a class="a-decoration mr-1" v-if="result.extratags['contact:instagram']" :href="result.extratags['contact:instagram']"><v-icon>mdi-instagram</v-icon></a>
-                                        <a class="a-decoration mr-1" v-if="result.extratags['contact:facebook']" :href="result.extratags['contact:facebook']"><v-icon>mdi-facebook</v-icon></a>
-                                        <a class="a-decoration " v-if="result.extratags['contact:youtube']" :href="result.extratags['contact:youtube']"><v-icon>mdi-youtube</v-icon></a>
-                                    </v-col>
-                                    <v-col class="text-right col-6">
-                                        <a class="a-decoration " v-if="result.extratags.email" :href="`mailto:${result.extratags.email}`"><v-icon>mdi-gmail</v-icon></a>
-                                    </v-col>
+                                    <SocialMedia :result="this.result"/>
+                                    <Contact :result="this.result"/>
                                 </v-row>
                         </v-flex>
                     </div>
@@ -79,13 +39,29 @@
 import 'ol/ol.css';
 import * as olProj from 'ol/proj';
 
+// Importacion de info
+import IconTitle from '@/components/info/IconTitle.vue';
+import Title from '@/components/info/Title.vue';
+import Direction from '@/components/info/Direction.vue'
+import Population from '@/components/info/Population.vue'
+import OpeningHours from '@/components/info/OpeningHours.vue'
+import SocialMedia from '@/components/info/SocialMedia.vue'
+import Wheelchair from '@/components/info/Wheelchair.vue'
+
 export default {
     props: ['result'],
 
-    methods: {
-        
+    components: {
+        IconTitle,
+        Title,
+        Direction,
+        Population,
+        OpeningHours,
+        SocialMedia,
+        Wheelchair
+    },
 
-        
+    methods: {
         goMapAndMovement(result) {
             const view = this.$root.viewerAppState.dddMap.map.getView();
             const positionCenter = olProj.transform( [result.lon, result.lat], 'EPSG:4326', 'EPSG:3857')
@@ -96,7 +72,11 @@ export default {
                 rotation: 0
             });
         },
+        
     }
+        
+
+        
 }
 
 </script>
