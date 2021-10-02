@@ -1,7 +1,8 @@
+
 export default [
   {
-    path: '/maps/place/:name/:position(@[^\/]+)?',
-    name: 'mapPlace',
+    path: '/maps/position/:name/:position(@[^\/]+)?',
+    name: 'mapPosition',
     meta: {
       requiresAuth: false
     },
@@ -9,3 +10,4 @@ export default [
       import(/* webpackChunkName: "mapPlace" */ '@/components/map/MapPlace.vue')
   }
 ]
+

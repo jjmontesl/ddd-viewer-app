@@ -41,7 +41,7 @@
 
 <script>
 import axios from 'axios';
-
+import * as olProj from 'ol/proj';
 
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
@@ -110,7 +110,14 @@ export default {
       async getDataNominatim() {
         const { query } = this.$route.params;
 
-        const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=11&addressdetails=1&extratags=1&namedetails=1`;
+        const olmap = this.$root.viewerAppState.dddMap.map;
+        const boundingBox = olmap.getView().calculateExtent(olmap.getSize())
+        const LatLonBounBox = olProj.transform( [boundingBox[0], boundingBox[1]], 'EPSG:3857', 'EPSG:4326')
+        const LatLonBounBoxMax = olProj.transform( [boundingBox[2], boundingBox[3]], 'EPSG:3857', 'EPSG:4326')
+
+        const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=11&addressdetails=1&extratags=1&namedetails=1&viewbox=${LatLonBounBox[0]},${LatLonBounBox[1]},${LatLonBounBoxMax[0]},${LatLonBounBoxMax[1]}&bounded=1`;
+
+
 
         const results = await axios.get(url);
 

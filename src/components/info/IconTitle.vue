@@ -7,7 +7,7 @@
             <v-icon>mdi-parking</v-icon>
         </v-flex>
         <v-flex v-else style="max-width: 36px; min-width: 36px;">
-            
+            <v-icon>mdi-map-marker</v-icon>
         </v-flex>
     </div>
 </template>

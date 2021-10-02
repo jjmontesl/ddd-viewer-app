@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="text-right mt-2 a-decoration">
-                        <a href="#">More info</a>
+                        <a @click="changeRouteToMoreInfo(result)">More info</a>
                     </div>
                 </v-flex>
             </v-layout>
@@ -42,11 +42,12 @@ import * as olProj from 'ol/proj';
 // Importacion de info
 import IconTitle from '@/components/info/IconTitle.vue';
 import Title from '@/components/info/Title.vue';
-import Direction from '@/components/info/Direction.vue'
-import Population from '@/components/info/Population.vue'
-import OpeningHours from '@/components/info/OpeningHours.vue'
-import SocialMedia from '@/components/info/SocialMedia.vue'
-import Wheelchair from '@/components/info/Wheelchair.vue'
+import Direction from '@/components/info/Direction.vue';
+import Population from '@/components/info/Population.vue';
+import OpeningHours from '@/components/info/OpeningHours.vue';
+import SocialMedia from '@/components/info/SocialMedia.vue';
+import Wheelchair from '@/components/info/Wheelchair.vue';
+import Contact from '@/components/info/Contact.vue';
 
 export default {
     props: ['result'],
@@ -58,7 +59,8 @@ export default {
         Population,
         OpeningHours,
         SocialMedia,
-        Wheelchair
+        Wheelchair, 
+        Contact
     },
 
     methods: {
@@ -73,6 +75,13 @@ export default {
             });
         },
         
+        changeRouteToMoreInfo(result) {
+            const letterType = result.osm_type[0].toUpperCase();
+
+            this.$router.push(`/maps/place/${letterType}${result.osm_id}`);
+        }
+
+
     }
         
 
