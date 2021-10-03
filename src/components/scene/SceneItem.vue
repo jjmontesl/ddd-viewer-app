@@ -203,7 +203,7 @@ export default {
       keys = keys.filter((key) => { return ! (key.indexOf('_') === 0); });
       //keys = keys.filter((key) => { return (key.indexOf('osm:') === 0); });
       keys.sort();
-      keys.sort((a, b) => { return (b.indexOf('osm:') - a.indexOf('osm:'));});
+      keys.sort((a, b) => { return ((b.indexOf('osm:') === 0 ? 1 : 0) - (a.indexOf('osm:') === 0 ? 1 : 0));});
       return keys; // Do your custom sorting here
     },
     sceneLinkGoogleMaps: function() {

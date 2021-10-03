@@ -26,7 +26,8 @@
                     </p>
                     <p>
                         Tiles are loaded dynamically. Tiles shown as gray squares are being loaded. Tiles
-                        shown in 3D as OpenStreetMap <b>squares are enqueued for server generation (currently this may
+                        shown in 3D as flat <b>flat square images mean that the tile is
+                        enqueued for server generation (currently this may
                         take minutes or hours depending on server load)</b>. Generated tiles are currently
                         shown after reloading the 3D view. Tiles shown as red squares have errored and cannot
                         be generated in current version.
@@ -92,9 +93,9 @@
                     <h3>Authors</h3>
 
                     <p>
-                        DDD viewer and software used for 3D generation were created by Jose Juan Montes,
-                        who also maintains this demostration server. The following contributors
-                        have also contributed to the DDD Viewer projects:
+                        DDD Viewer and 3D Generator were created by Jose Juan Montes,
+                        who also maintains this demostration server. The following contributors have
+                        also participated in DDD Viewer projects development:
                     </p>
                     <p>
                         <ul>
@@ -104,7 +105,7 @@
                     </p>
                     <p>
                         You can contribute to the codebase of the generator (DDD), this viewer, or to the OpenStreetMap database.
-                        You can also <a href="https://twitter.com/jjmontes" target="_blank">follow on Twitter</a> to stay up to date.
+                        You can also <a href="https://twitter.com/3dsmaps" target="_blank">follow on Twitter</a> to stay up to date.
                     </p>
 
                     <h3>Thanks to</h3>

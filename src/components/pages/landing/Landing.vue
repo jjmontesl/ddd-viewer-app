@@ -6,7 +6,7 @@
                     <h3 class="landing-title">Navigate "3D Earth" built from OpenStreetMap</h3>
                     <p class="landing-paragraph">
                         3DSMAPS showcases the <a href="https://github.com/jjmontesl/ddd">ddd</a> and <a href="https://github.com/jjmontesl/ddd-viewer">ddd-viewer</a> projects which generate
-                        3D tiles from <a href="https://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a> data, and allow them to be visualized from the web.
+                        3D tiles from <a href="https://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a> data and allow them to be visualized on the web.
                     </p>
                     <p class="landing-paragraph">
                         <v-icon>mdi-help-circle</v-icon> <a href="/about">Read more...</a>
@@ -39,7 +39,7 @@
                 <v-col>
                     <h3 class="landing-title">Contribute</h3>
                     <p class="landing-paragraph">Interested? want to help? if so do not hesitate to <a href="/about">get in touch</a>!</p>
-                    <p class="landing-paragraph"><a href="https://twitter.com/intent/follow?user_id=3dsmaps" target="_blank">Follow @3dsmaps on Twitter</a> to stay up to date.</p>
+                    <p class="landing-paragraph"><a href="https://twitter.com/3dsmaps" target="_blank">Follow @3dsmaps on Twitter</a> to stay up to date.</p>
                 </v-col>
             </v-row>
         </v-container>
