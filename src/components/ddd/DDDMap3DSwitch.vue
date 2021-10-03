@@ -9,8 +9,8 @@
             </span>
         </v-card>
         -->
-          <div style="margin-top: 4px; text-align: right; pointer-events: auto;">
-            <v-btn @click="switch3D" class="primary"><small><v-icon dark>mdi-earth</v-icon> 3D</small></v-btn>
+        <div style="margin-top: 4px; text-align: right; pointer-events: auto;">
+          <v-btn @click="switch3D" class="primary"><small><v-icon dark>mdi-earth</v-icon> 3D</small></v-btn>
         </div>
     </div>
 

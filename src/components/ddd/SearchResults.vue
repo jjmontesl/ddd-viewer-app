@@ -16,8 +16,9 @@
 
                     <v-card-text>
                       <div class="text-query" v-for="result in searchResults" :key="result.osm_id">
-                        <DDDCardSearchResults :result="result" />
+                        <DDDCardSearch :result="result" />
                       </div>
+                      <h4 v-if="searchResults && searchResults.length == 0" class="mt-3">No hay Resultados</h4>
                     </v-card-text>
                 </v-card>
 
@@ -46,11 +47,15 @@ import * as olProj from 'ol/proj';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import DDDMapInsert from '@/components/ddd/DDDMapInsert.vue';
-import DDDCardSearchResults from '@/components/ddd/DDDCardSearch.vue';
+import DDDCardSearch from '@/components/ddd/DDDCardSearch.vue';
+
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import {Icon, Style} from 'ol/style';
 
 export default {
   async mounted() {
-
+    
     window.addEventListener('resize', this.resize);
     this.resize();
 
@@ -77,27 +82,31 @@ export default {
     }
   },
   properties: [
-      'viewerState',
+    'viewerState',
   ],
   inject: [
     'getSceneViewer',
   ],
 
   props: [
-      'viewerState',
+    'viewerState',
   ],
 
   components: {
     DDDScene,
     DDDMapInsert,
-    DDDCardSearchResults
+    DDDCardSearch
   },
 
     methods: {
-
+      
       async updateData () {
         const response = await this.getDataNominatim();
         this.searchResults = response.data;
+
+
+        this.displayResultsMap(this.searchResults);
+
         console.log(this.searchResults);
       },
 
@@ -122,8 +131,42 @@ export default {
         const results = await axios.get(url);
 
         return results;
-      }
+      },
 
+      displayResultsMap(searchResults) {
+
+        
+        const iconStyle = new Style({
+          image: new Icon({
+            anchor: [0.5, 1],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            color: '#2c3e50',
+            src: '/img/map-icons/map-marker.png',
+          }),
+        })
+
+        const layer = this.$root.viewerAppState.dddMap.mapMarkersLayer;
+        const layerSource = layer.getSource()
+
+        layerSource.clear();
+
+        for (let i = 0; i < searchResults.length; i++) {
+          const result = searchResults[i];
+
+
+          const xy = olProj.transform( [result.lon, result.lat], 'EPSG:4326', 'EPSG:3857');
+
+          const iconFeature = new Feature({
+            geometry: new Point(xy),
+            name: result.namedetails.name,
+            osmId: result.osm_id
+          });
+
+          iconFeature.setStyle(iconStyle);
+          layerSource.addFeature(iconFeature);
+        }
+      }
 
   },
 

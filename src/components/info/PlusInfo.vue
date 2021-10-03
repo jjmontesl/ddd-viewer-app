@@ -1,11 +1,11 @@
 <template>
     <div>
         <p v-if="result.address.suburb">Suburb: {{this.result.address.suburb}}</p>
-        <p v-if="result.class">{{result.class}}</p>
+        <p v-if="result.class">Class: {{result.class}}</p>
+        <p v-if="result.type">Type: {{result.type}}</p>
         <p v-if="result.extratags.start_dates">Start Date: {{result.extratags.start_date}}</p>
-        <a :href="`https://es.wikipedia.org/wiki/${this.result.extratags.wikipedia}`"></a>
-        <p v-if="result.type">{{result.type}}</p>
-        <a :href="result.extratags.website"></a>
+        <br>
+        <a v-if="result.extratags.website" :href="result.extratags.website">{{result.extratags.website}}</a>
     </div>
 </template>
 

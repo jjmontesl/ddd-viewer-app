@@ -22,6 +22,8 @@ import OSM from 'ol/source/OSM';
 import XYZ from 'ol/source/XYZ';
 import TileDebug from 'ol/source/TileDebug';
 import TileLayer from 'ol/layer/Tile';
+import {Tile, Vector as VectorLayer} from 'ol/layer';
+import VectorSource from 'ol/source/Vector';
 import View from 'ol/View';
 import {createXYZ, extentFromProjection} from 'ol/tilegrid.js';
 import {ScaleLine, defaults as defaultControls} from 'ol/control';
@@ -79,8 +81,19 @@ export default {
     //el.style.height = "calc(100%)";
 
     const scaleLine = new ScaleLine({
-          units: 'metric',
+      units: 'metric',
     });
+
+    // CAPA DE ICONOS
+
+    
+    
+    this.mapMarkersLayer = new VectorLayer({
+      source: new VectorSource({
+        features: [],
+      }),
+    });
+
 
     this.map = new Map({
       controls: defaultControls().extend([scaleLine]),
@@ -105,9 +118,12 @@ export default {
           }),
           minZoom: 16.6,
           maxZoom: 17.4
-        }) ],
+        }),
 
+        this.mapMarkersLayer
+      ],
 
+      
 
       target: 'ddd-map',
       view: new View({
