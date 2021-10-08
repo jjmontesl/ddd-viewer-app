@@ -6,7 +6,7 @@
             <v-card-text class="pa-0">
                 <v-form action="" @submit.prevent="goPageSearch">
                   <v-layout>
-                    <v-text-field @keypress.enter="this.goPageSearch" class="my-0" hide-details="true" label="Search" solo placeholder="Address or place" v-model="query"></v-text-field>
+                    <v-text-field class="my-0" hide-details="true" label="Search" solo placeholder="Address or place" v-model="query"></v-text-field>
                     <v-btn class="cream" x-large @click="this.goPageSearch">
                       <v-icon>mdi-magnify</v-icon>
                     </v-btn>

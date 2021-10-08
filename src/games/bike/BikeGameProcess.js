@@ -1,3 +1,8 @@
+/*
+* DDDViewer - DDD(3Ds) Viewer library for DDD-generated GIS 3D models
+* Copyright 2021 Jose Juan Montes and contributors
+* MIT License (see LICENSE file)
+*/
 
 
 import "@babylonjs/loaders/glTF";
@@ -136,6 +141,9 @@ class BikeGameProcess extends ViewerProcess {
         this.animTime = animTime;
         //console.debug("Datetime anim from " + dtStart + " to " + dtEnd);
         */
+
+        // This is to allow viewing the bike close up, but should be changed only for that model
+        this.sceneViewer.scene.activeCamera.minZ = 0.1;
     }
 
     loadPlayerModel() {

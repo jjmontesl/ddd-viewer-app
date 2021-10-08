@@ -94,8 +94,8 @@
 
                     <p>
                         DDD Viewer and 3D Generator were created by Jose Juan Montes,
-                        who also maintains this demostration server. The following contributors have
-                        also participated in DDD Viewer projects development:
+                        who also maintains this demostration server. The project is developed
+                        along with the following contributors:
                     </p>
                     <p>
                         <ul>
@@ -111,7 +111,7 @@
                     <h3>Thanks to</h3>
 
                     <p>
-                        Thanks to the following people who have greatly helped us with development and design.
+                        Thanks to the following persons who have greatly helped us with development or design.
                     </p>
                     <p>
                         <ul>
