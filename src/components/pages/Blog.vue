@@ -2,14 +2,64 @@
 
     <div class="blog">
         <div class="blog-container">
-            <v-img src="/img/banner-blog.png" />
+
+            <v-img src="/img/banner-blog.png" class="blog-header" />
+
             <v-container style="padding: 0;">
 
                 <article class="blog-article-content">
                     <div class="mb-3">
-                        <h2>DDD hits the road!</h2>
+                        <h2 class="py-0">Autumn news</h2>
+                        <div class="text--secondary">2021-10-09</div>
+                        <div><i>JJ Montes</i></div>
+                    </div>
+
+                    <h4>Client side improvements</h4>
+
+                    <p>Last few weeks there's been some improvements in the ddd-viewer projects. First of all, we have a new
+                        contributor: <b>Zituz</b>! (more on that below), and he has been working on a much needed
+                        Search feature! (currently for the 2D view only), and more.
+
+                    <p>I have also been working on coherent subdivision and <b>mesh batching</b> optimizations, which have greatly
+                        improved viewer performance. These required some heavy changes to both ddd generator and ddd-viewer.
+                        Still far from good (since LOD and several other techniques are
+                        still not in use) but a great improvement all in all. I have adapted the node hierarchy viewer
+                        and mesh selection to account for batched meshes.
+                    </p>
+
+                    <h4>Hello Zituz!</h4>
+
+                    <p>The project has a new contributor, Alex Zituz, a very young programmer who has surprised us by
+                        writing code, examples, and pushing to add momentum.</p>
+                    <p>He has been working on the <b>search feature</b>, and added a <b>ddd-viewer client example
+                        using Webpack</b> and the ES6 version of the library (we only had a basic UMD example before).
+                    </p>
+                    <p>Thanks a lot Alex for your awesome work and congratulations for your fantastic progression and
+                        achievements. Keep it up!
+                    </p>
+
+                    <h4>Status</h4>
+
+                    <p>I'd like to get back to the OSM 3D generation pipeline, focusing on roads and buldings and formalizing
+                        data structures (metadata and hierarchy) for those two areas.</p>
+                    <p>I have also been playing with the idea of writing a lightweight ddd server that allows
+                        pipeline generation inspection and see changes to code dynamically. It'd work on the web,
+                        using ddd-viewer-app as frontend, which will admitedly be slow, but I really miss
+                        a tool to inspect the 3D generation pipeline at any point, so I think I'll try to
+                        put something together. Let's see.</p>
+
+                    <p>Have a good one!</p>
+
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6degvmbrawg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                </article>
+
+                <hr />
+
+                <article class="blog-article-content">
+                    <div class="mb-3">
+                        <h2 class="py-0">DDD hits the road!</h2>
                         <div class="text--secondary">2021-07-21</div>
-                        <!--<div>JJ Montes</div>-->
                     </div>
 
                     <p>Hey!</p>
@@ -36,16 +86,17 @@
                     <p>This has been a bit of a painful process, but the results are already showing: the ddd-viewer core has been separated and can now be reused or embedded as an independent component much like other map or 3d globe viewers (more on that coming up soon). In addition, the library is now written in TypeScript, which we believe helps writing better code for this kind of solution.</p>
                     <h4>Help wanted!</h4>
                     <p>DDD OSM has been in development for more than 18 months and it is still far from “usable”. I started this as a hobby project trying to create a “race-in-your-town driving game”, but now it aims to be a tool that is useful to OSM mappers and users, to artists, web developers, game developers and who knows :).</p>
-                    <p>There are several areas where DDD can use help of senior and junior developers: procedural modelling, client application UI and features, 
-                        JS/TS programming and GIS/3D programming, shader programming, JS buildchain and packaging, documentation, examples…  
-                        The project is not mature and there’s a lot of space for improvement, but also note that it’s also poorly documented and getting 
-                        started will require patience and some back and forth collaboration initially. You can see an example of the kind of things that 
+                    <p>There are several areas where DDD can use help of senior and junior developers: procedural modelling, client application UI and features,
+                        JS/TS programming and GIS/3D programming, shader programming, JS buildchain and packaging, documentation, examples…
+                        The project is not mature and there’s a lot of space for improvement, but also note that it’s also poorly documented and getting
+                        started will require patience and some back and forth collaboration initially. You can see an example of the kind of things that
                         require attention at <a href="https://github.com/jjmontesl/ddd-viewer/issues">DDD Viewer issues</a> (but there are others! :))</p>
                     <p>Interested? Brave enough? Can you help? If so do not hesitate to get in touch!</p>
                     <p>Have a nice map! Yours,</p>
                     <p>José Juan Montes</p>
                     <p>DDD - Procedural generation of 2D and 3D geometries and scenes</p>
                 </article>
+
             </v-container>
         </div>
         <Footer />
@@ -65,8 +116,8 @@
     /*background-image: url();*/
     background-size: cover;
     background-position: left;
-    margin-bottom: 2rem;
-    height: 360px;
+    margin-bottom: 1rem;
+    height: 310px;
 }
 
 .blog-article-content {
