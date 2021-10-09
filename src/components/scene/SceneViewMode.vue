@@ -24,8 +24,6 @@
             <v-btn @click="cycleMoveSpeed" class="" dark color="info"><small><v-icon dark>mdi-fast</v-icon> Move Speed {{ viewerState.sceneMoveSpeed }}</small></v-btn>
         </div>
 
-        <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState"></ServerInfo>
-
     </div>
 
 </template>
@@ -67,8 +65,6 @@ import View from 'ol/View';
 import {createXYZ, extentFromProjection} from 'ol/tilegrid.js';
 import {ScaleLine, defaults as defaultControls} from 'ol/control';
 
-import ServerInfo from '@/components/ddd/ServerInfo.vue';
-
 export default {
 
   metaInfo() {
@@ -90,7 +86,6 @@ export default {
     'getSceneViewer',
   ],
   components: {
-      ServerInfo,
   },
 
   computed: {

@@ -1,5 +1,5 @@
 <template>
-<v-card class="ma-3 hoverme">
+<v-card class="my-3 hoverme">
         <v-card-text>
             <v-layout v-if="result">
                 <div>
@@ -17,7 +17,7 @@
                         <OpeningHours :result="this.result"/>
 
                         <Wheelchair :result="this.result"/>
-                    
+
                     <div>
                         <v-flex class="">
                                 <v-row>
@@ -79,9 +79,9 @@ export default {
 
             this.result = response.data[0];
 
-            
+
         }
-    } 
+    }
 }
 </script>
 

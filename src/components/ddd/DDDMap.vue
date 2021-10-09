@@ -70,12 +70,15 @@ export default {
 
   },
 
+  created() {
+    //console.warn("TODO: Setting dddMap attribute on $root.viewerAppState directly. Use a setMapViewer-like approach as in DDDScene.");
+    this.$root.viewerAppState.dddMap = this;
+  },
+
   mounted() {
 
     this.mapParent = this.$el; // .querySelector('.ddd-scene-parent');
 
-    //console.warn("TODO: Setting dddMap attribute on $root.viewerAppState directly. Use a setMapViewer-like approach as in DDDScene.");
-    this.$root.viewerAppState.dddMap = this;
 
     //const el = that.$el.querySelector('.ddd-map');
     //el.style.height = "calc(100%)";
@@ -86,8 +89,8 @@ export default {
 
     // CAPA DE ICONOS
 
-    
-    
+
+
     this.mapMarkersLayer = new VectorLayer({
       source: new VectorSource({
         features: [],
@@ -123,7 +126,7 @@ export default {
         this.mapMarkersLayer
       ],
 
-      
+
 
       target: 'ddd-map',
       view: new View({
@@ -272,7 +275,7 @@ export default {
 
           const posString = this.positionString();
 
-          this.$router.push('/maps/place/' + pointString + '/' + posString).catch(()=>{});
+          this.$router.push('/maps/search/' + pointString + '/' + posString).catch(()=>{});
 
       },
 

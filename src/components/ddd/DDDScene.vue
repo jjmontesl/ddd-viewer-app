@@ -60,6 +60,11 @@ export default {
       this.sceneViewer = null;
   },
 
+    created() {
+        // Store a reference
+        this.$root.dddViewer = this;
+    },
+
   mounted() {
     //console.debug('Creating 3D scene.');
 
@@ -115,7 +120,7 @@ export default {
     // NOTE: this causes an initial camera change, which can make other bugs surface (eg. wrong shadows if shadowGenerator.autoCalcDepthBounds is true)
     this.sceneViewer.selectCameraFree();
 
-    // Hook a callback to DDDViewer to update state.
+    // Hook a callback (a ViewerProcess) to DDDViewer to update state.
     const that = this;
     class DDDSceneProcess extends ViewerProcess {
         update(deltaTime) {

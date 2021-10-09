@@ -213,7 +213,7 @@ export default {
       //Object.freeze(this.viewerState);
   },
   created() {
-      this.parseHref();
+    this.parseHref();
   },
   mounted() {
   },

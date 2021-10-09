@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/maps/search/:query',
+    path: '/maps/search/:query/:position(@[^\/]+)?',
     name: 'search',
     meta: {
       requiresAuth: false

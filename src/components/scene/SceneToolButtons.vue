@@ -4,10 +4,8 @@
 
         <div>
               <v-btn :to="{name: 'sceneTools'}" class="primary"><small><v-icon class="mr-1" dark>mdi-cog</v-icon> Settings</small></v-btn>
-        </div>
-
-        <div>
               <v-btn :to="{name: 'sceneLayers'}" class="primary mt-2"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
+              <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState" />
         </div>
 
         <div v-if="dddConfig.geolocation" style="margin-top: 4px;">
@@ -47,6 +45,8 @@
 </style>
 
 <script>
+import ServerInfo from '@/components/ddd/ServerInfo.vue';
+
 export default {
 
   metaInfo() {
@@ -68,6 +68,7 @@ export default {
     'getSceneViewer',
   ],
   components: {
+    ServerInfo
   },
 
   computed: {

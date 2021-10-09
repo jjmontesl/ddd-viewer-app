@@ -1,9 +1,20 @@
 <template>
 
-    <div>
+    <div v-if="queuedCount > 0"><!--v-if="!serverInfo.queue_size"-->
 
         <div style="color: white; margin: 5px;">
-            <small><b>Server Generation Queue: ~{{ serverInfo.queue_size }} jobs</b></small>
+
+            <v-card class="">
+              <!--<v-card-title>Queued tiles</v-card-title>-->
+              <v-card-text class="text-left">
+                  <div>
+                    <!-- <small><b>Server Generation Queue: ~{{ serverInfo.queue_size }} jobs</b></small><br /> -->
+                    <small><b>Pending tiles: {{ queuedCount }}</b></small><br/>
+                    <small><b>Time: {{ queuedEta }}</b></small>
+                  </div>
+              </v-card-text>
+            </v-card>
+
         </div>
 
     </div>
@@ -15,7 +26,7 @@ import tiles from '@/services/ddd_http/tiles.js'
 
 export default {
   mounted() {
-      this.updateInfo();
+      this.getServerQueueSize();
   },
   metaInfo() {
     return {
@@ -31,29 +42,65 @@ export default {
   inject: [
       'getViewerState'
   ],
-  computed: {
-      'viewerState': function() { return this.getViewerState(); }
-  },
-  */
+    */
   data() {
     return {
-      serverInfo: {}
+      serverInfo: {},
+      queuedCount: 0,
+      queuedEta: null
     }
+  },
+  computed: {
+  },
+  watch: {
+    /*
+    '$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus': function() {
+
+      this.$root.dddViewer;
+      this.$root.dddViewer.sceneViewer;
+
+      this.queuedCount = this.$root.dddViewer && this.$root.dddViewer.sceneViewer ? this.$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus.length : 0;
+
+      // Return shortest ETA
+      // TODO: currently just returning first
+      if (!(this.$root.dddViewer && this.$root.dddViewer.sceneViewer)) { return "-"; }
+      const queue = this.$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus;
+      if (queue.length > 0) {
+        this.queuedEta = "~" + Math.ceil(queue[0]['task_eta'] / 60) + " min";
+      } else {
+        this.queuedEta = null;
+      }
+    }
+    */
   },
   components: {
   },
-  watch: {
-  },
   methods: {
-      updateInfo() {
 
+      updateQueueInfo() {
+          if (!(this.$root.dddViewer && this.$root.dddViewer.sceneViewer)) { return; }
+
+          this.queuedCount = this.$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus.length;
+
+          // Return shortest ETA
+          // TODO: currently just returning first
+          const queue = this.$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus;
+          if (queue.length > 0) {
+            this.queuedEta = "~" + Math.ceil(queue[0]['task_eta'] / 60) + " min";
+          } else {
+            this.queuedEta = "-";
+          }
+      },
+
+      getServerQueueSize() {
+          /*
           tiles.getQueueSize().then((r) => {
               //console.debug(r);
               this.serverInfo = r.data;
           });
-
-          setTimeout(() => { this.updateInfo() }, 60000);
-
+          */
+          this.updateQueueInfo();
+          setTimeout(() => { this.getServerQueueSize() }, 10000);  /* 60000 */
       }
   }
 }

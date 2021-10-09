@@ -1,6 +1,6 @@
 <template>
     <!-- TODO: put code postal -->
-    <v-card class="ma-3 hoverme" @click="goMapAndMovement(result)" @mouseenter="changeColour(result, true)" @mouseleave="changeColour(result, false)">
+    <v-card class="my-3 hoverme" @click="goMapAndMovement(result)" @mouseenter="changeColour(result, true)" @mouseleave="changeColour(result, false)">
         <v-card-text>
             <v-layout>
                 <div>
@@ -61,14 +61,14 @@ export default {
         Population,
         OpeningHours,
         SocialMedia,
-        Wheelchair, 
+        Wheelchair,
         Contact
     },
 
     methods: {
         goMapAndMovement(result) {
             const view = this.$root.viewerAppState.dddMap.map.getView();
-            
+
             const boundingBox = result.boundingbox;
 
             const LatLonBounBox = olProj.transform( [boundingBox[2], boundingBox[0]], 'EPSG:4326', 'EPSG:3857');
@@ -78,7 +78,7 @@ export default {
 
             view.fit(extent, { duration: 1000 });
         },
-        
+
         changeRouteToMoreInfo(result) {
             const letterType = result.osm_type[0].toUpperCase();
 
@@ -86,7 +86,7 @@ export default {
         },
 
         changeColour(result, isColored) {
-            
+
             const iconStyle = new Style({
                 image: new Icon({
                     anchor: [0.5, 1],
@@ -110,9 +110,9 @@ export default {
             }
         }
     }
-        
 
-        
+
+
 }
 
 </script>
