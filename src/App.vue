@@ -28,6 +28,8 @@
 
     <!--<Footer />-->
 
+    <DDDServer />
+
   </v-app>
 </template>
 
@@ -128,6 +130,7 @@ import DDDViewerAppState from '@/DDDViewerAppState';
 import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
+import DDDServer from '@/components/dddserver/DDDServer.vue';
 
 
 export default {
@@ -179,6 +182,7 @@ export default {
     DDDMap,
     DDDScene,
     SceneViewMode,
+    DDDServer
   },
   computed: {
     appTitle() {
