@@ -24,7 +24,6 @@ import LayerManagerApp from './utils/layers'
 
 Vue.directive( "scrollanimation", ScrollAnimatedObserver );
 
-
 // dddViewerAppConfig is expected to be defined at this point
 // eslint-disable-next-line no-undef
 const config = dddViewerAppConfig;

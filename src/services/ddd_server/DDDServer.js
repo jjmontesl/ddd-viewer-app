@@ -1,7 +1,15 @@
 
 import { io } from "socket.io-client";
+import { TASKS_SET } from "../../store/mutation-types";
 
 class DDDServerClient {
+
+  status = null;
+
+  constructor(comp, store) {
+    this.comp = comp;
+    this.$store = store;
+  }
 
   initialize() {
 
@@ -14,19 +22,29 @@ class DDDServerClient {
 
       socket.emit('chat_message', 'test'); // emit an event to the socket
       socket.emit('status_get', null); // emit an event to the socket
+      socket.emit('result_get', null); // emit an event to the socket
 
       //io.emit('broadcast', 'test'); // emit an event to all connected sockets
 
     });
 
-    socket.on('status', this.status ); // listen to the event
+    socket.on('status', (data) => { this.onStatus(data); } ); // listen to the event
+    socket.on('result', (data) => { this.onResult(data); } ); // listen to the event
     //socket.on('pipeline', () => { /* … */ }); // listen to the event
 
   }
 
-  status(data) {
+  onStatus(data) {
     console.debug("Status received");
     console.debug(data);
+
+    this.$store.dispatch("setTasks", {'tasks': data.tasks});
+  }
+
+  onResult(data) {
+    console.debug("Result received");
+    //this.$store.dispatch("setResult", {'result': data.result});
+    this.comp.setResult(data);
   }
 
 }

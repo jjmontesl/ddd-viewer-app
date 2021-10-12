@@ -29,3 +29,7 @@ export const TOTAL_CITIES = 'TOTAL_CITIES'
 // Admin - Users
 export const USERS = 'USERS'
 export const TOTAL_USERS = 'TOTAL_USERS'
+
+// DDDServer
+export const TASKS_SET = 'TASKS_SET'
+

@@ -109,7 +109,7 @@ export default {
     this.setSceneViewer(this.sceneViewer);  // Set the reference to App so it can be accessed by other components
 
     const layerDddOsm3d = new GeoTile3DLayer();
-    this.sceneViewer.layerManager.addLayer("ddd-osm-3d", layerDddOsm3d);
+    this.sceneViewer.layerManager.addLayer(layerDddOsm3d);
 
     // Set camera from ViewerAppState (ie. if set from URL or otherwise)
     this.sceneViewer.viewerState.positionHeading = this.$root.viewerAppState.positionHeading;

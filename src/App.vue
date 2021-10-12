@@ -130,7 +130,7 @@ import DDDViewerAppState from '@/DDDViewerAppState';
 import DDDMap from '@/components/ddd/DDDMap.vue';
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
-import DDDServer from '@/components/dddserver/DDDServer.vue';
+import DDDServer from '@/dddserver/components/DDDServerClient.vue';
 
 
 export default {
