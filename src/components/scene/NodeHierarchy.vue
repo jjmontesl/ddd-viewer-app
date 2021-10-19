@@ -18,6 +18,7 @@
               :items="nodeTreeListItems" @update:active="nodeActivated">
             <template v-slot:label="{item, active}">
               <span :class="active ? 'font-weight-bold' : ''">{{ item.name }}</span>
+              <small v-if="item.childrenCount" class="ml-1">({{ item.childrenCount }})</small>
             </template>
         </v-treeview>
     </div>
@@ -25,7 +26,10 @@
 </template>
 
 <style>
-
+.v-treeview-node.v-treeview-node--rounded .v-treeview-node__root {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 </style>
 
 <script>
@@ -87,6 +91,7 @@ const NodeHierarchy = {
           // Current element children
           item['children'] = objChildrenItems;
         }
+        item['childrenCount'] = objRef.getChildren().length;
         objRef = objRef.getParent();
         lastItem = item;
       }

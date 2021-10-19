@@ -3,7 +3,7 @@
     <div style="padding: 0px;" ref="dddViewPanel">
 
       <v-row style="margin: 0px;">
-        <v-col style="padding: 0px; pointer-events: auto;" sm="6" offset-sm="6" md="5" offset-md="7" lg="4" offset-lg="8" >
+        <v-col style="padding: 0px; pointer-events: auto;" sm="6" offset-sm="6" md="5" offset-md="7" lg="5" offset-lg="7" >
 
             <div style="background-color: white;">
 
@@ -16,22 +16,44 @@
                     <v-card-title style="text-align: left; word-break: break-word; width: 95%;">Tasks</v-card-title>
 
                     <v-card-text class="text-left">
+
+                        <v-data-table
+                            dense
+                            :headers="headers"
+                            :items="tasks">
+
+                            <template v-slot:item.order_num="{ item }">
+                                <v-chip color="blue" dark small>
+                                    {{ item.order_num }}
+                                </v-chip>
+                            </template>
+                            <template v-slot:item.name="{ item }">
+                                {{ item.name }}
+                            </template>
+                            <template v-slot:item.run_seconds="{ item }">
+                                {{ item.run_seconds ? item.run_seconds.toFixed(3) : '' }}
+                            </template>
+
+                        </v-data-table>
+
+                        <!--
                         <v-simple-table dense>
                             <thead>
                                 <tr>
-                                    <th>Key</th>
+                                    <th>Order</th>
                                     <th>Name</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="task in $store.state.dddserver.tasks" :key="task.order_num.join('.')">
-                                <td>{{ task.order_num }}</td>
-                                <td>{{ task.name }}</td>
-                                <td>X</td>
-                            </tr>
+                                <tr v-for="task in $store.state.dddserver.tasks" :key="task.order_num.join('.')">
+                                    <td class="text-no-wrap">{{ task.order_num }}</td>
+                                    <td>{{ task.name }}</td>
+                                    <td>X</td>
+                                </tr>
                             </tbody>
-                            </v-simple-table>
+                        </v-simple-table>
+                        -->
 
 
 
@@ -80,6 +102,11 @@ export default {
 
         this.$emit('dddViewerMode', 'scene');
 
+        // Initialize DDDServer component (which initializes the client if needed)
+        this.$nextTick(() => {
+            this.$root.dddServerComponent.initialize();
+        })
+
         window.addEventListener('resize', this.resize);
         //this.resize();
 
@@ -92,7 +119,6 @@ export default {
 
         // Show selected (or last) result
 
-
     },
 
     beforeDestroy() {
@@ -100,8 +126,8 @@ export default {
 
     metaInfo() {
         return {
-        title: this.$store.getters.appTitle,
-        titleTemplate: `${this.$t('sceneItem.TITLE')} - %s`
+            title: this.$store.getters.appTitle,
+            titleTemplate: `${this.$t('sceneItem.TITLE')} - %s`
         }
     },
     properties: [
@@ -112,10 +138,18 @@ export default {
     ],
     data() {
         return {
+            'headers': [
+                { text: 'Order', value: 'order_num' },
+                { text: 'Name', value: 'name' },
+                { text: 'Selected', value: 'run_selected' },
+                { text: 'Time', value: 'run_seconds' },
+            ]
         }
     },
     computed: {
-
+        'tasks': function() {
+            return this.$store.state.dddserver.tasks;
+        },
     },
     props: [
         'viewerState',

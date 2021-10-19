@@ -3,8 +3,10 @@
     "productionTip": false,
 
     "analyticsTag": null,
-    
+
     "showDevelLinks": true,
+
+    "showDDDServerLinks": true,
 
     "tileUrlBase": "http://{{hostname}}:8080/cache/ddd_http/",
 

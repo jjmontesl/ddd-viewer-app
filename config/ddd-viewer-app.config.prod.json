@@ -2,11 +2,13 @@
 
     "productionTip": false,
 
-    "tileUrlBase": "https://{{hostname}}/cache/ddd_http/",
+    "analyticsTag": "G-C94KZNB3L3",
 
     "showDevelLinks": false,
 
-    "analyticsTag": "G-C94KZNB3L3",
+    "showDDDServerLinks": false,
+
+    "tileUrlBase": "https://{{hostname}}/cache/ddd_http/",
 
     "sceneGroundLayers": {
         "osm": {"text": "OpenStreetMap", "url": "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"}

@@ -58,6 +58,9 @@
 
                             <div><router-link to="/3d/layers">Layers</router-link></div>
                             <div><router-link to="/3d/inspector">Inspector</router-link></div>
+
+                            <div v-if="viewerState.dddConfig.showDDDServerLinks"><router-link to="/dddserver/tasks">DDD Server</router-link></div>
+
                             <!--
                             <div><a :href="osmLink" target="_blank">OpenStreetMap Object</a></div>
                             <div><a :href="osmchaLink" target="_blank">OSMCha (Change Analyzer)</a></div>

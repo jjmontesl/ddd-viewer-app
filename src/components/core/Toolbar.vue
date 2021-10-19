@@ -19,6 +19,9 @@
             class="primary--text ddd-logo-letter"
             v-else
             >{{ appTitle }}</router-link>
+
+          <small class="ml-5" style="font-size: 50%; vertical-align: bottom;">experimental</small>
+
         </div>
       </div>
       <v-spacer></v-spacer>
