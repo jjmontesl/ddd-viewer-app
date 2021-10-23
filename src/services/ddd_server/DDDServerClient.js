@@ -34,11 +34,10 @@ class DDDServerClient {
 
   }
 
-  onStatus(data) {
+  onStatus(status) {
     console.debug("Status received");
-    console.debug(data);
-
-    this.$store.dispatch("setTasks", {'tasks': data.tasks});
+    console.debug(status);
+    this.$store.dispatch("setStatus", status);
   }
 
   onResult(data) {

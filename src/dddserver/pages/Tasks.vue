@@ -17,18 +17,34 @@
 
                     <v-card-text class="text-left">
 
+                        <v-text-field
+                            v-model="search"
+                            append-icon="mdi-magnify"
+                            label="Search"
+                            single-line
+                            hide-details
+                        ></v-text-field>
+
                         <v-data-table
                             dense
                             :headers="headers"
-                            :items="tasks">
+                            :items="tasks"
+                            :search="search"
+                            :loading="loading"
+                            item-key="order_num"
+                            :items-per-page="itemsPerPage"
+                            show-select
+                            hide-default-footer >
 
                             <template v-slot:item.order_num="{ item }">
                                 <v-chip color="blue" dark small>
-                                    {{ item.order_num }}
+                                    {{ item.order_num.join(".") }}
                                 </v-chip>
                             </template>
                             <template v-slot:item.name="{ item }">
-                                {{ item.name }}
+                                <div class="text-truncate" style="max-width: 200px;" :title="item.name">
+                                    {{ item.name }}
+                                </div>
                             </template>
                             <template v-slot:item.run_seconds="{ item }">
                                 {{ item.run_seconds ? item.run_seconds.toFixed(3) : '' }}
@@ -54,11 +70,7 @@
                             </tbody>
                         </v-simple-table>
                         -->
-
-
-
                     </v-card-text>
-
                 </v-card>
 
             </div>
@@ -86,6 +98,10 @@ tbody tr:nth-of-type(odd) {
 }
 .v-treeview-node__root {
   height: auto;
+}
+
+.table-column-name {
+    width: 50px;
 }
 </style>
 
@@ -138,11 +154,14 @@ export default {
     ],
     data() {
         return {
+            'loading': false,
+            'search': '',
+            'itemsPerPage': 99999,
             'headers': [
                 { text: 'Order', value: 'order_num' },
-                { text: 'Name', value: 'name' },
-                { text: 'Selected', value: 'run_selected' },
-                { text: 'Time', value: 'run_seconds' },
+                { text: 'Name', value: 'name'},
+                { text: 'Selected', value: 'run_selected', align: 'end', },
+                { text: 'Time', value: 'run_seconds', align: 'end', },
             ]
         }
     },
@@ -155,12 +174,14 @@ export default {
         'viewerState',
     ],
     watch: {
+        /*
         'viewerState.sceneSelectedMeshId' () {
             this.$forceUpdate();
             //this.setMesh(this.getSceneViewer().selectedMesh);
             //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
             //this.metadata['_updated']++;
         }
+        */
     },
 
     components: {

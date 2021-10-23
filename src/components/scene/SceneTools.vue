@@ -46,6 +46,7 @@
                         <v-checkbox v-model="viewerState.sceneShadowsEnabled" @change="sceneShadowsEnabledChange" label="Shadows" style="margin-top: 2px;"></v-checkbox>
 
                         <v-checkbox v-model="viewerState.sceneTextsEnabled" @change="sceneTextsEnabledChange" label="Texts" style="margin-top: 2px;"></v-checkbox>
+                        <!--<small>(Slow / High Mem)</small>-->
 
                         <!--
                         <v-checkbox v-model="viewerState.scenePostprocessingEnabled" @change="scenePostprocessingEnabledChange" label="Postprocessing" style="margin-top: 2px;"></v-checkbox>
@@ -59,7 +60,8 @@
                             <div><router-link to="/3d/layers">Layers</router-link></div>
                             <div><router-link to="/3d/inspector">Inspector</router-link></div>
 
-                            <div v-if="viewerState.dddConfig.showDDDServerLinks"><router-link to="/dddserver/tasks">DDD Server</router-link></div>
+                            <div v-if="viewerState.dddConfig.showDDDServerLinks"><router-link to="/dddserver/tasks">DDD Server- Tasks</router-link></div>
+                            <div v-if="viewerState.dddConfig.showDDDServerLinks"><router-link to="/dddserver/params">DDD Server - Params</router-link></div>
 
                             <!--
                             <div><a :href="osmLink" target="_blank">OpenStreetMap Object</a></div>

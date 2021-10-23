@@ -32,4 +32,5 @@ export const TOTAL_USERS = 'TOTAL_USERS'
 
 // DDDServer
 export const TASKS_SET = 'TASKS_SET'
+export const DATA_SET = 'DATA_SET'
 
