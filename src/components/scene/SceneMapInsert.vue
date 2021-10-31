@@ -66,12 +66,12 @@ export default {
       'viewerState',
   ],
   inject: [
-      'getViewerState',
+      //'getViewerState',
       'getSceneViewer'
   ],
   /*
   computed: {
-      'viewerState': function() { return this.getViewerState(); }
+      //'viewerState': function() { return this.getViewerState(); }
   },
   */
   data() {

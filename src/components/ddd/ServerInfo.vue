@@ -38,11 +38,6 @@ export default {
   props: [
       'viewerState',
   ],
-  /*
-  inject: [
-      'getViewerState'
-  ],
-    */
   data() {
     return {
       serverInfo: {},

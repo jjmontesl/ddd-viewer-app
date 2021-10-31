@@ -27,7 +27,7 @@ export default {
   ],
   /*
   inject: [
-      'getViewerState'
+      //'getViewerState'
   ],
   computed: {
       'viewerState': function() { return this.getViewerState(); }

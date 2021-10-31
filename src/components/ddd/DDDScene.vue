@@ -11,7 +11,7 @@
 
             <SceneToolButtons v-if="viewerState.sceneVisible" :viewerState="viewerState" />
 
-            <SceneViewMode v-if="viewerState.sceneVisible && viewerState.sceneViewModeShow" :viewerState="viewerState" />
+            <SceneViewMode v-if="viewerState.sceneVisible && viewerState.sceneViewModeShow" :viewerState="viewerState" @cycleMoveSpeed="cycleMoveSpeed" />
 
         </div>
 
@@ -25,6 +25,9 @@ import { SceneViewer } from 'ddd-viewer';
 import { GeoTile3DLayer } from 'ddd-viewer';
 import { ViewerProcess } from 'ddd-viewer';
 import { DDDObjectRef } from 'ddd-viewer';
+import { FreeCameraController } from 'ddd-viewer';
+import { OrbitCameraController } from 'ddd-viewer';
+import { WalkCameraController } from 'ddd-viewer';
 
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 import SceneToolButtons from '@/components/scene/SceneToolButtons.vue';
@@ -63,6 +66,7 @@ export default {
     created() {
         // Store a reference
         this.$root.dddViewer = this;
+        this.$root.dddViewerComponent = this;
     },
 
   mounted() {
@@ -89,7 +93,7 @@ export default {
 
     console.info("Initializing DDDViewer (defaultCoords=" + this.viewerState.positionWGS84 + ")");
 
-    const dddConfig = {
+    const dddViewerConfig = {
         "defaultCoords": this.viewerState.positionWGS84,
 
         "tileUrlBase": this.viewerState.dddConfig.tileUrlBase,
@@ -102,10 +106,12 @@ export default {
         // TODO: move to viewer-app?
         //"dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
     }
+    console.debug("Merging DDDViewer options: ", dddViewerConfig, this.viewerState);
+    Object.assign(dddViewerConfig, this.viewerState.dddConfig.dddViewer);
 
     // Initialize DDDViewer
     const canvas = document.getElementById('ddd-scene');
-    this.sceneViewer = new SceneViewer(canvas, dddConfig);
+    this.sceneViewer = new SceneViewer(canvas, dddViewerConfig);
     this.setSceneViewer(this.sceneViewer);  // Set the reference to App so it can be accessed by other components
 
     const layerDddOsm3d = new GeoTile3DLayer();
@@ -115,10 +121,11 @@ export default {
     this.sceneViewer.viewerState.positionHeading = this.$root.viewerAppState.positionHeading;
     this.sceneViewer.viewerState.positionTilt = this.$root.viewerAppState.positionTilt;
     this.sceneViewer.viewerState.positionGroundHeight = this.$root.viewerAppState.positionGroundHeight;
+
     // Forces camera repositioning according to sceneViewer.viewerState
     // TODO: Provide a setCameraPosition/target, once Cameras are refactored
     // NOTE: this causes an initial camera change, which can make other bugs surface (eg. wrong shadows if shadowGenerator.autoCalcDepthBounds is true)
-    this.sceneViewer.selectCameraFree();
+    //this.sceneViewer.selectCameraFree();
 
     // Hook a callback (a ViewerProcess) to DDDViewer to update state.
     const that = this;
@@ -172,11 +179,32 @@ export default {
     //this.sceneViewer.engine.resize();
     this.resize();
 
+    this.cameras = [
+        new OrbitCameraController(this.sceneViewer),
+        new WalkCameraController(this.sceneViewer),
+        new FreeCameraController(this.sceneViewer),
+    ];
+
   },
 
-  methods: {
+    methods: {
 
-      checkUpdateHref: function() {
+        selectCamera(cameraIndex) {
+            const camera = this.cameras[cameraIndex];
+            this.sceneViewer.setCameraController(camera);
+        },
+
+        selectCameraOrbit() {
+            this.selectCamera(0);
+        },
+        selectCameraWalk() {
+            this.selectCamera(1);
+        },
+        selectCameraFree() {
+            this.selectCamera(2);
+        },
+
+        checkUpdateHref: function() {
 
           // Check movement and camera are stopped
 
@@ -210,9 +238,19 @@ export default {
 
       },
 
-      cycleMoveSpeed: function() {
-          this.sceneViewer.cycleMoveSpeed();
-      },
+        cycleMoveSpeed() {
+            //const moveSpeeds = [2.0, 5.0, 10.0];
+            const moveSpeeds = this.$root.viewerAppState.dddConfig.moveSpeeds;
+            for (let i = 0; i < moveSpeeds.length; i++) {
+                const ms = moveSpeeds[i];
+                if (ms > this.viewerState.sceneMoveSpeed) {
+                    this.sceneViewer.setMoveSpeed(ms);
+                    return;
+                }
+            }
+            this.sceneViewer.setMoveSpeed(moveSpeeds[0]);
+        },
+
 
       resize: function() {
 

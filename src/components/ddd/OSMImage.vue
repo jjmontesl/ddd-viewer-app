@@ -11,7 +11,7 @@
 export default {
 
   inject: [
-      'getViewerState'
+      //'getViewerState'
   ],
 
   props: [

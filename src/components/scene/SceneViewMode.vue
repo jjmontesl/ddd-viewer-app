@@ -11,7 +11,7 @@
         </div>
 
         <div style="margin-top: 4px;">
-            <v-btn @click="selectCameraOrbit" :disabled="viewerState.geolocationEnabled || viewerState.sceneSelectedMeshId === null" class="" dark color="primary"><small><v-icon dark>mdi-rotate-orbit</v-icon> Orbit</small></v-btn>
+            <v-btn @click="selectCameraOrbit" class="" dark color="primary"><small><v-icon dark>mdi-rotate-orbit</v-icon> Orbit</small></v-btn>
         </div>
         <div style="margin-top: 4px;">
             <v-btn @click="selectCameraFree" class="" dark color="primary"><small><v-icon dark>mdi-axis-arrow</v-icon> Free</small></v-btn>
@@ -101,15 +101,15 @@ export default {
   methods: {
 
       selectCameraOrbit() {
-          this.getSceneViewer().selectCameraOrbit();
+          this.$root.dddViewerComponent.selectCameraOrbit();
       },
 
       selectCameraFree() {
-          this.getSceneViewer().selectCameraFree();
+          this.$root.dddViewerComponent.selectCameraFree();
       },
 
       selectCameraWalk() {
-          this.getSceneViewer().selectCameraWalk();
+          this.$root.dddViewerComponent.selectCameraWalk();
       },
 
       switchGeolocationPosition() {
@@ -117,7 +117,7 @@ export default {
       },
 
       cycleMoveSpeed() {
-          this.getSceneViewer().cycleMoveSpeed();
+          this.$emit('cycleMoveSpeed');
       }
 
   },

@@ -56,8 +56,6 @@ class DDDViewerAppState {
 
     sceneMoveSpeed = 5;
 
-    sceneCameraWalkHeight = 2.0;
-
     sceneViewportRescale = 1;
 
     sceneEnvironmentProbe = 16;  // null to use a static environment (should be associated to the skybox, but it's currently fixed)

@@ -282,7 +282,7 @@ export default {
         links.push({
           title: 'dddserver',
           link: 'dddServerTasks',
-          icon: 'mdi-edit',
+          icon: 'mdi-monitor-edit',
           class: 'btnViewMap'
         });
       }
