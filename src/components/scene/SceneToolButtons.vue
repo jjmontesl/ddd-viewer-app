@@ -6,6 +6,10 @@
               <v-btn :to="{name: 'sceneTools'}" class="primary"><small><v-icon dark>mdi-cog</v-icon> Settings</small></v-btn>
         </div>
 
+        <div>
+              <v-btn :to="{name: 'sceneLayers'}" class="primary mt-2"><small><v-icon dark>mdi-cog</v-icon> Layers</small></v-btn>
+        </div>
+
         <div v-if="dddConfig.geolocation" style="margin-top: 4px;">
             <v-btn @click="switchGeolocationPosition" class="" :color="viewerState.geolocationEnabled ? 'success': 'primary'"><small><v-icon dark>mdi-crosshairs-gps</v-icon> GPS</small></v-btn>
         </div>
