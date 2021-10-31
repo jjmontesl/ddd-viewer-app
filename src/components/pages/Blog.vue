@@ -36,10 +36,10 @@
                     <p>This has been a bit of a painful process, but the results are already showing: the ddd-viewer core has been separated and can now be reused or embedded as an independent component much like other map or 3d globe viewers (more on that coming up soon). In addition, the library is now written in TypeScript, which we believe helps writing better code for this kind of solution.</p>
                     <h4>Help wanted!</h4>
                     <p>DDD OSM has been in development for more than 18 months and it is still far from “usable”. I started this as a hobby project trying to create a “race-in-your-town driving game”, but now it aims to be a tool that is useful to OSM mappers and users, to artists, web developers, game developers and who knows :).</p>
-                    <p>There are several areas where DDD can use help of senior and junior developers: procedural modelling, client application UI and features, 
-                        JS/TS programming and GIS/3D programming, shader programming, JS buildchain and packaging, documentation, examples…  
-                        The project is not mature and there’s a lot of space for improvement, but also note that it’s also poorly documented and getting 
-                        started will require patience and some back and forth collaboration initially. You can see an example of the kind of things that 
+                    <p>There are several areas where DDD can use help of senior and junior developers: procedural modelling, client application UI and features,
+                        JS/TS programming and GIS/3D programming, shader programming, JS buildchain and packaging, documentation, examples…
+                        The project is not mature and there’s a lot of space for improvement, but also note that it’s also poorly documented and getting
+                        started will require patience and some back and forth collaboration initially. You can see an example of the kind of things that
                         require attention at <a href="https://github.com/jjmontesl/ddd-viewer/issues">DDD Viewer issues</a> (but there are others! :))</p>
                     <p>Interested? Brave enough? Can you help? If so do not hesitate to get in touch!</p>
                     <p>Have a nice map! Yours,</p>
@@ -52,7 +52,7 @@
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .blog { background-color: #fff; }
 
 .blog-container {

@@ -279,12 +279,18 @@ export default {
             icon: 'mdi-home',
             class: 'btnViewMap'
         },
-       {
+        {
           title: 'blog',
           link: 'blog',
           icon: 'mdi-lead-pencil',
           class: 'btnViewMap'
         },
+        {
+          title: 'docs',
+          link: 'docs',
+          icon: 'mdi-book',
+          class: 'btnViewMap'
+        }
 
         // {
         //   title: '3D',
