@@ -13,6 +13,7 @@
         "serve": "vue-cli-service serve",
         "serve-pub-https": "vue-cli-service serve --public 127.0.0.1:8080 --https",
         "build": "npm run generate-build-version && vue-cli-service build",
+        "build-prod": "npm run generate-build-version && DDD_VIEWER_APP_BUILD_ENV=prod vue-cli-service build", 
         "format": "prettier --write --config .prettierrc \"**/*.js\"",
         "lint": "vue-cli-service lint --fix",
         "inspect": "vue-cli-service inspect",

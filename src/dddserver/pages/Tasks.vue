@@ -31,7 +31,7 @@
                             :items="tasks"
                             :search="search"
                             :loading="loading"
-                            item-key="order_num"
+                            item-key="key"
                             :items-per-page="itemsPerPage"
                             show-select
                             hide-default-footer >
@@ -167,7 +167,7 @@ export default {
     },
     computed: {
         'tasks': function() {
-            return this.$store.state.dddserver.tasks;
+            return this.$store.state.dddserver.tasks.map((t) => { return { ...t, 'key': t.order_num.join(".") }; });
         },
     },
     props: [

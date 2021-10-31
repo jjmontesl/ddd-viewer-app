@@ -275,7 +275,19 @@ export default {
             link: 'mapMain',
             icon: 'mdi-map',
             class: 'btnViewMap ddd-toolbar-map-button'
-        },
+        }
+      ];
+
+      if (true) {
+        links.push({
+          title: 'dddserver',
+          link: 'dddServerTasks',
+          icon: 'mdi-edit',
+          class: 'btnViewMap'
+        });
+      }
+
+      links.extend([
         {
             title: 'home',
             link: 'landing',
@@ -294,23 +306,8 @@ export default {
           icon: 'mdi-book',
           class: 'btnViewMap'
         }
+      ]);
 
-        // {
-        //   title: '3D',
-        //   link: 'sceneMain',
-        //   icon: 'mdi-earth',
-        //   class: 'btnView3D'
-        // },
-         ]
-        //   if (this.viewerState && this.viewerState.sceneVisible) {
-        //     links.push({
-        //       title: 'Settings',
-        //       link: (this.$route.name === "sceneTools" ? 'sceneMain' : 'sceneTools'), // Rename to Settings
-        //       icon: 'mdi-cog',
-        //       class: 'btnSettings'
-        //     });
-
-        //   }
       links.push({
           title: "about", //this.$t('menuItems.ABOUT')
           link: 'about',
