@@ -8,17 +8,36 @@
             <v-form>
                 <div class="ddd-row-layer">
                     <p>Name</p>
-                    <p>{{this.layer.label}}</p>
+                    <div>
+                        <div v-if="!pressEdit">
+                            <span>{{this.layer.label}}</span>
+                            <v-btn @click="pressEdit = true" x-small class="ml-4"><v-icon>mdi-pencil-outline</v-icon></v-btn>
+                        </div>
+                        <div v-else>
+                            <v-row>
+                                <v-col>
+                                    <v-text-field
+                                        v-model="nameEdit"
+                                        label="Layer Name"
+                                        required
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col>
+                                    <v-btn x-small @click="updateNameClick">Save</v-btn>
+                                </v-col>
+                            </v-row>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="ddd-row-layer">
                     <p>Altitude Offset</p>
                     <v-slider
-                        v-model="layer.altitude"
-                        @change="changeAltitude(altitude)"
-                        :hint="layer.altitude + ' m'"
-                        max="160"
-                        min="60"
+                    v-model="altitude"
+                    @input="changeAltitude(altitude)"
+                    hint="Altitude"
+                    min="-10"
+                    max="100"
                     ></v-slider>
                 </div>
 
@@ -29,21 +48,14 @@
                     </v-btn>
                 </div>
                 <v-color-picker
-                    v-model="layer.color"
+                    v-model="color"
                     @input="changeColor( color )"
                     v-if="showColorPicker"
                     dot-size="25"
                     swatches-max-height="200"
                 ></v-color-picker>
-                <v-slider
-                    v-model="altitude"
-                    @input="changeAltitude(altitude)"
-                    hint="Altitude"
-                    min="-10"
-                    max="100"
-                ></v-slider>
 
-                <v-btn color="error"><v-icon>mdi-delete-outline</v-icon>Remove layer</v-btn>
+                <v-btn color="error" @click="deleteLayerButton()"><v-icon>mdi-delete-outline</v-icon>Remove layer</v-btn>
 
             </v-form>
         </v-card-text>
@@ -72,29 +84,26 @@
 
 
 <script>
+import { mapActions } from 'vuex';
 export default {
-  mounted() {
-
-    //window.addEventListener('resize', this.resize);
-    //this.resize();
-    //window.addEventListener('beforeunload', this.beforeUnload);
-
-    // this.$emit('dddViewerMode', 'scene');
-    // window.dispatchEvent(new Event('resize'));
-
-  },
-  beforeDestroy() {
-  },
+    created() {
+        this.nameEdit = this.layer.label;
+    },
   inject: [
     'getSceneViewer',
   ],
   data() {
     return {
         file: null,
-        showColorPicker: false
+        showColorPicker: false,
+        altitude: this.layer.altitude,
+        color: this.layer.color,
+        pressEdit: false,
+        nameEdit: null
     }
   },
   computed: {
+
   },
   props: [
       'viewerState',
@@ -108,16 +117,30 @@ export default {
     },
 
     methods: {
+        ...mapActions(['deleteLayer', 'saveLayers']),
         changeColor(color) {
             console.log( color );
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setColor(color);
+
+            this.saveLayers();
         },
 
         changeAltitude(altitude) {
             console.log( altitude );
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setAltitudeOffset(altitude);
+
+            this.saveLayers();
+        },
+        deleteLayerButton() {
+
+            this.deleteLayer(this.layer);
+        },
+        updateNameClick() {
+            this.layer.label = this.nameEdit;
+
+            this.updateName({layer: this.layer})
         }
     },
 
