@@ -103,7 +103,7 @@
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .blog { background-color: #fff; }
 
 .blog-container {

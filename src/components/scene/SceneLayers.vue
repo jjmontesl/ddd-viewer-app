@@ -27,9 +27,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="layer in viewerState.layers" :key="layer.key">
-                                <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-                                    <v-btn class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
+                            <tr v-for="layer in this.layers.layers " :key="layer.key">
+                                <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0;">
+                                    <v-btn depressed class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
                                 </td>
                                 <td style="white-space: nowrap; width: 100%; cursor: pointer;" @click="selectLayer(layer)" :title="layer.key">
                                     {{ layer.label }}
@@ -75,13 +75,13 @@
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import SceneLayerDetails from '@/components/scene/SceneLayerDetails.vue';
-import { GeoJson3DLayer } from 'ddd-viewer';
-
+import { mapState } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   mounted() {
 
-    //window.addEventListener('resize', this.resize);
+      //window.addEventListener('resize', this.resize);
     //this.resize();
     //window.addEventListener('beforeunload', this.beforeUnload);
 
@@ -89,20 +89,15 @@ export default {
 
     window.dispatchEvent(new Event('resize'));
 
-    /*
-    setTimeout(() =>  {
-        const geoJsonLayerPoints = new GeoJson3DLayer(testGeoJsonLayerPoints);
-        this.getSceneViewer().layerManager.addLayer("test-geojson-points", geoJsonLayerPoints);
-        const geoJsonLayerLines = new GeoJson3DLayer(testGeoJsonLayerLines);
-        this.getSceneViewer().layerManager.addLayer("test-geojson-lines", geoJsonLayerLines);
-        const geoJsonLayerTest = new GeoJson3DLayer(testGeoJsonLayerTest);
-        this.getSceneViewer().layerManager.addLayer("test-geojson-madrid-transport", geoJsonLayerTest);
+    setTimeout(() => {
+        this.loadLayers(this.getSceneViewer())
     }, 0);
-    */
 
-  },
+
+
+   },
   beforeDestroy() {
-  },
+      },
 
   metaInfo() {
     return {
@@ -119,6 +114,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['layers'])
   },
   props: [
       'viewerState',
@@ -133,14 +129,19 @@ export default {
     },
 
     methods: {
+        ...mapActions(['loadLayers', 'saveLayers', 'getViewerLayer']),
+
         selectLayer(layer) {
             this.selectedLayer = layer;
         },
 
         showHideLayer(layer) {
             layer.visible = ! layer.visible;
-            let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(layer.key);
+            // let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(layer.key);
+            let sceneViewerLayer = this.getViewerLayer({sceneViewer: this.getSceneViewer(), layer: layer})
             sceneViewerLayer.setVisible(layer.visible)
+
+            this.saveLayers()
         }
     },
 

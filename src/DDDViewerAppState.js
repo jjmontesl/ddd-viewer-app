@@ -69,12 +69,6 @@ class DDDViewerAppState {
 
     sceneTitleText = null;
 
-    layers = [
-        // { "key": "test-geojson-points", "label": "Example GeoJSON Points", "url": "", "visible": true, },
-        //{ "key": "test-geojson-lines", "label": "Example GeoJSON Lines", "url": "", "visible": true },
-        //{ "key": "test-geojson-madrid-transport", "label": "Madrid Transport", "url": "", "visible": true },
-    ];
-
     constructor(initialCoords) {
 
         this.positionWGS84 = initialCoords;
@@ -103,21 +97,9 @@ class DDDViewerAppState {
         // Start time
         this.positionDate.setHours(11);
         this.positionDate.setMinutes(0);
-
-        // Load layers on localstorage
-        this.loadLayers();
-
     }
 
-    saveLayers() {
-        const layers = JSON.stringify(this.layers);
-        localStorage.setItem("dddLayers", layers);
-    }
 
-    loadLayers() {
-        const layers = localStorage.getItem('dddLayers');
-        this.layers = layers ? JSON.parse(layers) : this.layers;
-    }
 }
 
 export default DDDViewerAppState;

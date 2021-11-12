@@ -36,7 +36,7 @@
 
 
                     <v-card-text class="text-left">
-                        <v-btn @click="addLayer()" class="mx-2" dark color="primary"><v-icon dark>mdi-plus</v-icon>Add</v-btn>
+                        <v-btn @click="addLayerButton()" class="mx-2" dark color="primary"><v-icon dark>mdi-plus</v-icon>Add</v-btn>
                     </v-card-text>
 
 
@@ -66,7 +66,7 @@
 <script>
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
-import { GeoJson3DLayer } from 'ddd-viewer';
+import { mapActions, mapState } from 'vuex';
 
 
 export default {
@@ -99,6 +99,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['layers'])
   },
   props: [
       'viewerState',
@@ -114,30 +115,16 @@ export default {
     },
 
     methods: {
-        async addLayer() {
+      ...mapActions(['addLayer']),
+
+        async addLayerButton() {
             const fileData = await this.file.text();
             const fileName = this.file.name;
-            const fileObject = JSON.parse(fileData);
-            const layerKey = `custom${this.viewerState.layers.length + 1}`; // FIXME This will not be unique if layers are removed
-            const layerObject = { "key": layerKey, "label": `Custom: ${fileName}`, "url": "", "visible": true };
 
-            this.viewerState.layers.push(layerObject);
-            this.viewerState.saveLayers();
-
-            const geoJsonLayerPoints = new GeoJson3DLayer(fileObject);
-            this.getSceneViewer().layerManager.addLayer(layerKey, geoJsonLayerPoints);
+            this.addLayer( {fileData, fileName, sceneViewer: this.getSceneViewer()} );
 
             this.$router.replace('/3d/layers/').catch(()=>{});
         },
-        // selectLayer(layer) {
-        //     this.selectedLayer = layer;
-        // },
-
-        // showHideLayer(layer) {
-        //     layer.visible = ! layer.visible;
-        //     let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(layer.key);
-        //     sceneViewerLayer.setVisible(layer.visible)
-        // }
     },
 
 }
