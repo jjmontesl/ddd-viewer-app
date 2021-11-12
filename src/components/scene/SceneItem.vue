@@ -20,8 +20,8 @@
                     <OSMImage v-if="imageHref" :imageUrl="imageHref" />
 
                     <v-card-text v-if="showJSON" class="text-left">
-                        <pre style="font-size: 80%; line-height: 100%; width: 100%; overflow-x: scroll; overflow-y: hidden;">{{ jsonMetadata }}</pre>
-                        <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadata.length }} bytes)</div>
+                        <pre style="font-size: 80%; line-height: 100%; width: 100%; overflow-x: scroll; overflow-y: hidden;" v-html="jsonMetadataHtml"></pre>
+                        <div v-if="!loading" style="text-align: right;">(metadata: ~{{ jsonMetadataHtml.length }} bytes)</div>
                         <div v-if="!loading" style="text-align: right;"><a @click="showJSON = !showJSON;">Keys View</a></div>
                     </v-card-text>
 
@@ -60,7 +60,7 @@
                             </tbody>
                             </v-simple-table>
 
-                            <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadata.length }} bytes)</div>
+                            <div v-if="!loading" style="text-align: right;">(metadata: {{ jsonMetadataHtml.length }} bytes)</div>
                             <div v-if="!loading" style="text-align: right;"><a @click="showJSON = !showJSON;">JSON View</a></div>
                         </div>
                     </v-card-text>
@@ -191,10 +191,16 @@ export default {
     }
   },
   computed: {
-    jsonMetadata: function () {
+    jsonMetadataHtml: function () {
       this.viewerState.sceneSelectedMeshId;
       this.$route;  // force dependency on property
-      return JSON.stringify(this.metadata, null, 2);
+
+      //relation-12685963
+      let result = JSON.stringify(this.metadata, null, 2);
+      result = result.replaceAll("<", "&lt;");
+      result = result.replaceAll(">", "&gt;");
+      result = this.parseLinkOSMObjects(result);
+      return result;
     },
     sortedMetadata: function() {
       this.viewerState.sceneSelectedMeshId;
@@ -312,6 +318,16 @@ export default {
   },
 
     methods: {
+
+        parseLinkOSMObjects(val) {
+            const relationRegexp = /relation-(\d+)/g;
+            val = val.replaceAll(relationRegexp, '<a href="https://www.openstreetmap.org/relation/$1" target="_blank">relation-$1</a>');
+            const wayRegexp = /way-(\d+)/g;
+            val = val.replaceAll(wayRegexp, '<a href="https://www.openstreetmap.org/way/$1" target="_blank">way-$1</a>');
+            const nodeRegexp = /node-(\d+)/g;
+            val = val.replaceAll(nodeRegexp, '<a href="https://www.openstreetmap.org/node/$1" target="_blank">node-$1</a>');
+            return val;
+        },
 
         /*
         setNodeId(nodeId) {

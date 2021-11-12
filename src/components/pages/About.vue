@@ -59,7 +59,7 @@
                     <p>
                         <ul>
                             <li>Map Data: <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap Contributors</a></li>
-                            <li>Textures: <a href="https://cc0textures.com/" target="_blank">CC0Textures</a></li>
+                            <li>Textures: <a href="https://cc0textures.com/" target="_blank">CC0Textures</a> and <a href="https://opengameart.org/content/clouds-skybox-1" target="_blank">OpenGameArt</a></li>
                             <li>Vector Icons: <a href="http://fontawesome.com/" target="_blank">FontAwesome</a></li>
                             <li>Graphic Engine: <a href="https://www.babylonjs.com/" target="_blank">BabylonJS</a></li>
                             <li>3D OSM Generation Tool: <a href="https://github.com/jjmontesl/ddd" target="_blank">DDD (Procedural 3D Generator)</a></li>

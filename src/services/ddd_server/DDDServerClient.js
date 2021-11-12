@@ -35,8 +35,7 @@ class DDDServerClient {
   }
 
   onStatus(status) {
-    console.debug("Status received");
-    console.debug(status);
+    console.debug("Status received: ", status);
     this.$store.dispatch("setStatus", status);
   }
 

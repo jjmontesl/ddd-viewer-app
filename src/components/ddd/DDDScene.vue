@@ -27,7 +27,7 @@ import { ViewerProcess } from 'ddd-viewer';
 import { DDDObjectRef } from 'ddd-viewer';
 import { FreeCameraController } from 'ddd-viewer';
 import { OrbitCameraController } from 'ddd-viewer';
-import { WalkCameraController } from 'ddd-viewer';
+import { WalkCollideCameraController } from 'ddd-viewer';
 
 import SceneViewMode from '@/components/scene/SceneViewMode.vue';
 import SceneToolButtons from '@/components/scene/SceneToolButtons.vue';
@@ -181,7 +181,7 @@ export default {
 
     this.cameras = [
         new OrbitCameraController(this.sceneViewer),
-        new WalkCameraController(this.sceneViewer),
+        new WalkCollideCameraController(this.sceneViewer),
         new FreeCameraController(this.sceneViewer),
     ];
 

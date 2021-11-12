@@ -83,7 +83,6 @@
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-vue": "^6.2.2",
         "faker": "^4.1.0",
-        "fibers": "^5.0.0",
         "istanbul-lib-coverage": "^3.0.0",
         "lint-staged": "^10.2.11",
         "nyc": "^15.1.0",

@@ -124,10 +124,10 @@ export default {
         })
 
         window.addEventListener('resize', this.resize);
-        //this.resize();
+        window.dispatchEvent(new Event('resize'));
 
         //setTimeout(() => {
-        //    }, 2000);
+        //}, 2000);
         //this.status = this.$root.dddServer.status;
 
         // Remove default layer (test, devel)
