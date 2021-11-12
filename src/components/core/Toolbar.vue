@@ -287,26 +287,24 @@ export default {
         });
       }
 
-      links.extend([
-        {
-            title: 'home',
-            link: 'landing',
-            icon: 'mdi-home',
-            class: 'btnViewMap'
-        },
-        {
+      links.push({
+          title: 'home',
+          link: 'landing',
+          icon: 'mdi-home',
+          class: 'btnViewMap'
+      });
+      links.push({
           title: 'blog',
           link: 'blog',
           icon: 'mdi-lead-pencil',
           class: 'btnViewMap'
-        },
-        {
+      });
+      links.push({
           title: 'docs',
           link: 'docs',
           icon: 'mdi-book',
           class: 'btnViewMap'
-        }
-      ]);
+      });
 
       links.push({
           title: "about", //this.$t('menuItems.ABOUT')
