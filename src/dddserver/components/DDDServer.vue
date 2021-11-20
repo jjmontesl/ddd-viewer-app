@@ -8,6 +8,7 @@
 <script>
 import { DDDServerClient } from '@/services/ddd_server/DDDServerClient.js';
 import { DDD3DLayer } from 'ddd-viewer';
+import { mapActions } from 'vuex';
 
 export default {
 
@@ -25,7 +26,7 @@ export default {
       //'viewerState': function() {return this.viewerState;}
   },
   inject: [
-      //'getViewerState'
+      'getSceneViewer'
   ],
 
   beforeDestroy() {
@@ -40,6 +41,8 @@ export default {
   },
 
   methods: {
+
+    ...mapActions(['addLayer', 'deleteLayer']),
 
     initialize() {
       if (! this.$root.dddServer) {
@@ -58,21 +61,35 @@ export default {
     },
 
     setResult(result) {
-      console.debug("Received dddserver result: " + result);
-      console.debug(result);
+      console.debug("Received dddserver result:", result);
 
       const sceneViewer = this.$root.dddViewer.sceneViewer;
 
       // Delete result layer if it exists
-      const existingResultLayer = sceneViewer.layerManager.getLayer("dddserver-result");
+
+      //const existingResultLayerApp =
+
+      const layerKey = "dddserver-" + result.key;
+
+      const existingResultLayer = sceneViewer.layerManager.getLayer(layerKey);
       if (existingResultLayer) {
-        sceneViewer.layerManager.removeLayer(existingResultLayer);
+          console.debug("Pre-existing layer: " + layerKey);
+          sceneViewer.layerManager.removeLayer(existingResultLayer);
+          this.deleteLayer(existingResultLayer);
+
       }
 
-      // Add layer for new result
-      const layerDdd = new DDD3DLayer("dddserver-result");
-      sceneViewer.layerManager.addLayer(layerDdd);
-      layerDdd.loadData(result.data);
+      // Add layer to app
+      this.addLayer( {
+          sceneViewer: this.getSceneViewer(),
+          layerConfig: {
+              key: layerKey,
+              label: 'DDDServer: ' + result.key + ' ' + result.label,
+              type: 'DDD3DLayer',
+              save: false,
+          },
+          data: result.data
+      });
 
     }
 

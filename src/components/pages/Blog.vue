@@ -42,11 +42,6 @@
 
                     <p>I'd like to get back to the OSM 3D generation pipeline, focusing on roads and buldings and formalizing
                         data structures (metadata and hierarchy) for those two areas.</p>
-                    <p>I have also been playing with the idea of writing a lightweight ddd server that allows
-                        pipeline generation inspection and see changes to code dynamically. It'd work on the web,
-                        using ddd-viewer-app as frontend, which will admitedly be slow, but I really miss
-                        a tool to inspect the 3D generation pipeline at any point, so I think I'll try to
-                        put something together. Let's see.</p>
 
                     <p>Have a good one!</p>
 

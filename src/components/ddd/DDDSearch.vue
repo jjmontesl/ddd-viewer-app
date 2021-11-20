@@ -1,13 +1,13 @@
 <template>
     <div class="ddd-search unselectable">
       <v-row style="margin: 0px;">
-        <v-col style="padding: 0px; pointer-events: auto;" sm="5" offset-sm="7" md="4" offset-md="8" >
+        <v-col style="padding: 0px;" sm="5" offset-sm="7" md="4" offset-md="8" >
           <v-card>
-            <v-card-text class="pa-0">
+            <v-card-text class="pa-0" style="pointer-events: auto;">
                 <v-form action="" @submit.prevent="goPageSearch">
                   <v-layout>
                     <v-text-field class="my-0" hide-details="true" label="Search" solo placeholder="Address or place" v-model="query"></v-text-field>
-                    <v-btn class="cream" x-large @click="this.goPageSearch">
+                    <v-btn class="cream" x-large @click="this.goPageSearch" style="height: inherit;">
                       <v-icon>mdi-magnify</v-icon>
                     </v-btn>
                   </v-layout>
@@ -25,7 +25,6 @@
     margin: 10px;
     /* opacity: .75; */
     cursor: pointer;
-    pointer-events: auto;
 }
 *.unselectable {
    -moz-user-select: none;

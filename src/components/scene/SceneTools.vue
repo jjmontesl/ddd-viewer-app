@@ -45,7 +45,9 @@
                         -->
                         <v-checkbox v-model="viewerState.sceneShadowsEnabled" @change="sceneShadowsEnabledChange" label="Shadows" style="margin-top: 2px;"></v-checkbox>
 
-                        <v-checkbox v-model="viewerState.sceneTextsEnabled" @change="sceneTextsEnabledChange" label="Texts" style="margin-top: 2px;"></v-checkbox>
+                        <!--
+                            <v-checkbox v-model="viewerState.sceneTextsEnabled" @change="sceneTextsEnabledChange" label="Texts" style="margin-top: 2px;"></v-checkbox>
+                        -->
                         <!--<small>(Slow / High Mem)</small>-->
 
                         <!--

@@ -104,14 +104,24 @@ export default {
 
         new TileLayer({
           source: new OSM({
-          }),
+            }),
           maxZoom: 19
+       }),
+
+          /*
+        new TileLayer({
+          source: new XYZ({
+            url: "http://3dsmaps.com:8090/wmts/osm_standard/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png"
+            }),
+            minZoom: 12,
+            maxZoom: 21,
         }),
+        */
 
         new TileLayer({
-             source: new XYZ({
-                 url: this.viewerState.dddConfig.tileUrlBase + '{z}/{x}/{y}.png',
-             }),
+            source: new XYZ({
+                url: this.viewerState.dddConfig.tileUrlBase + '{z}/{x}/{y}.png',
+            }),
             minZoom: 16.6,
             maxZoom: 17.4,
         }),

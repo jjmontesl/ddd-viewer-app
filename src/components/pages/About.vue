@@ -83,12 +83,15 @@
                         or <a href="https://twitter.com/jjmontes" target="_blank">contact me</a>.
                     </p>
 
-                    <h3>Coverage</h3>
+                    <h3>Source Dataset Coverage</h3>
                     <p>
                             <center><i>Current Coverage (limited by disk space available for elevation data)</i></center>
                             <center><v-img src="/img/about-map.png" contain max-height="300"/></center>
                     </p>
-
+                    <p>
+                        Note that not all this extension is immediately available. You have to wait for tiles to be generated
+                        on-demand if your area of interest has not been generated before.
+                    </p>
 
                     <h3>Authors</h3>
 

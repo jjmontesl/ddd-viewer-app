@@ -70,44 +70,44 @@ import { mapActions, mapState } from 'vuex';
 
 
 export default {
-  mounted() {
+    mounted() {
 
-    //window.addEventListener('resize', this.resize);
-    //this.resize();
-    //window.addEventListener('beforeunload', this.beforeUnload);
+      //window.addEventListener('resize', this.resize);
+      //this.resize();
+      //window.addEventListener('beforeunload', this.beforeUnload);
 
-    this.$emit('dddViewerMode', 'scene');
+      this.$emit('dddViewerMode', 'scene');
 
-    window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('resize'));
 
-  },
-  beforeDestroy() {
-  },
-
-  metaInfo() {
-    return {
-      title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('sceneTools.TITLE')} - %s`
-    }
-  },
-  inject: [
-    'getSceneViewer',
-  ],
-  data() {
-    return {
-        file: null
-    }
-  },
-  computed: {
-    ...mapState(['layers'])
-  },
-  props: [
-      'viewerState',
-  ],
-  watch: {
-    '$route' () {
     },
-  },
+    beforeDestroy() {
+    },
+
+    metaInfo() {
+        return {
+          title: this.$store.getters.appTitle,
+          titleTemplate: `${this.$t('sceneTools.TITLE')} - %s`
+        }
+    },
+    inject: [
+        'getSceneViewer',
+    ],
+    data() {
+        return {
+            file: null
+        }
+    },
+    computed: {
+        ...mapState(['layers'])
+    },
+    props: [
+        'viewerState',
+    ],
+    watch: {
+        '$route' () {
+        },
+    },
 
     components: {
         DDDScene,
@@ -115,11 +115,22 @@ export default {
     },
 
     methods: {
-      ...mapActions(['addLayer']),
+        ...mapActions(['addLayer']),
 
         async addLayerButton() {
             const fileData = await this.file.text();
             const fileName = this.file.name;
+
+            this.addLayer( {
+                sceneViewer: this.getSceneViewer(),
+                layerConfig: {
+                    key: 'custom-' + fileName,
+                    label: fileName,
+                    type: 'GeoJson3DLayer',
+                    save: true,
+                },
+                data: fileData
+            });
 
             this.addLayer( {fileData, fileName, sceneViewer: this.getSceneViewer()} );
 

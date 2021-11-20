@@ -174,14 +174,9 @@ export default {
         'viewerState',
     ],
     watch: {
-        /*
-        'viewerState.sceneSelectedMeshId' () {
-            this.$forceUpdate();
-            //this.setMesh(this.getSceneViewer().selectedMesh);
-            //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
-            //this.metadata['_updated']++;
+        data() {
+            window.dispatchEvent(new Event('resize'));
         }
-        */
     },
 
     components: {

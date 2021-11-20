@@ -250,7 +250,7 @@ export default {
       },
 
       parseHref() {
-          //console.debug("Route: " + window.location.href);
+          console.debug("Route: " + window.location.href);
 
           try {
                 // Parse at location
@@ -301,7 +301,7 @@ export default {
                         } else if (code === 'h') {
                             this.$root.viewerAppState.positionHeading = value;
                         } else if (code === 't') {
-                            this.$root.viewerAppState.positionTilt = value;
+                          this.$root.viewerAppState.positionTilt = value;
                         }
                         //console.debug(value, code);
                     }

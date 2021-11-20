@@ -15,8 +15,6 @@
 
                     <v-card-title style="text-align: left; word-break: break-word; width: 95%;">Layers</v-card-title>
 
-                    <div style="height: 20px;"> </div>
-
                     <v-card-text class="text-left">
 
                         <v-simple-table dense>
@@ -28,25 +26,23 @@
                             </thead>
                             <tbody>
                             <tr v-for="layer in this.layers.layers " :key="layer.key">
-                                <td style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0;">
-                                    <v-btn depressed class="btn" :input-value="layer.visible" x-small @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
+                                <td style="white-space: nowrap; text-overflow: ellipsis; padding: 0;">
+                                    <v-btn depressed class="btn" :input-value="layer.visible" x-small :class="{'success': layer.visible}" @click="showHideLayer(layer)"><v-icon>mdi-eye</v-icon></v-btn>
                                 </td>
-                                <td style="white-space: nowrap; width: 100%; cursor: pointer;" @click="selectLayer(layer)" :title="layer.key">
+                                <td style="white-space: nowrap; width: 100%; cursor: pointer;" :class="{'font-weight-bold': layer == selectedLayer}" @click="selectLayer(layer)" :title="layer.key">
                                     {{ layer.label }}
                                 </td>
                             </tr>
                             </tbody>
                         </v-simple-table>
-
                     </v-card-text>
 
-
-                    <v-card-text class="text-left">
+                    <v-card-text class="text-right">
                         <v-btn to="/3d/layers/create" class="mx-2" dark color="primary"><v-icon dark>mdi-plus</v-icon> Add Layer</v-btn>
                     </v-card-text>
 
                     <div v-if="selectedLayer">
-                        <SceneLayerDetails :viewerState="viewerState" :layer="selectedLayer" />
+                        <SceneLayerDetails :viewerState="viewerState" :layer="selectedLayer" @layerDeleted="layerDeleted" />
                     </div>
                 </v-card>
 
@@ -60,14 +56,6 @@
 </template>
 
 <style>
-/*tbody tr:nth-of-type(odd) {
-   background-color: rgba(0, 0, 0, .05);
-}*/
-/*
-.v-card__subtitle, .v-card__text, .v-card__title {
-    padding: 2px;
-}
-*/
 </style>
 
 
@@ -79,48 +67,49 @@ import { mapState } from 'vuex';
 import { mapActions } from 'vuex';
 
 export default {
-  mounted() {
+    mounted() {
 
-      //window.addEventListener('resize', this.resize);
-    //this.resize();
-    //window.addEventListener('beforeunload', this.beforeUnload);
+        //window.addEventListener('resize', this.resize);
+        //this.resize();
+        //window.addEventListener('beforeunload', this.beforeUnload);
 
-    this.$emit('dddViewerMode', 'scene');
+        this.$emit('dddViewerMode', 'scene');
 
-    window.dispatchEvent(new Event('resize'));
+        window.dispatchEvent(new Event('resize'));
 
-    setTimeout(() => {
-        this.loadLayers(this.getSceneViewer())
-    }, 0);
+        setTimeout(() => {
+            this.loadLayers(this.getSceneViewer())
+        }, 0);
 
+    },
 
+    metaInfo() {
+        return {
+        title: this.$store.getters.appTitle,
+        titleTemplate: `${this.$t('sceneTools.TITLE')} - %s`
+        }
+    },
 
-   },
-  beforeDestroy() {
-      },
+    inject: [
+        'getSceneViewer',
+    ],
 
-  metaInfo() {
-    return {
-      title: this.$store.getters.appTitle,
-      titleTemplate: `${this.$t('sceneTools.TITLE')} - %s`
-    }
-  },
-  inject: [
-    'getSceneViewer',
-  ],
-  data() {
-    return {
-        selectedLayer: null
-    }
-  },
-  computed: {
-    ...mapState(['layers'])
-  },
-  props: [
-      'viewerState',
-  ],
-  watch: {
-  },
+    data() {
+        return {
+            selectedLayer: null
+        }
+    },
+
+    computed: {
+        ...mapState(['layers'])
+    },
+
+    props: [
+        'viewerState',
+    ],
+
+    watch: {
+    },
 
     components: {
         DDDScene,
@@ -132,13 +121,21 @@ export default {
         ...mapActions(['loadLayers', 'saveLayers', 'getViewerLayer']),
 
         selectLayer(layer) {
-            this.selectedLayer = layer;
+            if (this.selectedLayer !== layer) {
+                this.selectedLayer = layer;
+            } else {
+                this.selectedLayer = null;
+            }
         },
 
-        showHideLayer(layer) {
+        layerDeleted(layer) {
+            this.selectedLayer = null;
+        },
+
+        async showHideLayer(layer) {
             layer.visible = ! layer.visible;
             // let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(layer.key);
-            let sceneViewerLayer = this.getViewerLayer({sceneViewer: this.getSceneViewer(), layer: layer})
+            let sceneViewerLayer = await this.getViewerLayer({sceneViewer: this.getSceneViewer(), layer: layer})
             sceneViewerLayer.setVisible(layer.visible)
 
             this.saveLayers()

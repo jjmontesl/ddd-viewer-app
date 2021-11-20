@@ -4,7 +4,11 @@
 
         <div>
               <v-btn :to="{name: 'sceneTools'}" class="primary"><small><v-icon class="mr-1" dark>mdi-cog</v-icon> Settings</small></v-btn>
+        </div>
+        <div>
               <v-btn :to="{name: 'sceneLayers'}" class="primary mt-2"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
+        </div>
+        <div>
               <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState" />
         </div>
 
