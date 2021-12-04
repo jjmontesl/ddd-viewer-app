@@ -13,8 +13,8 @@
                         </div>
 
                         <p>This is the doc of the ddd-viewer library, which can be embedded in other sites.
-                        Here there are examples including how to use the library, show a location in 3D,
-                        animate camera between target coordinates...</p>
+                        Here there are examples including how to use the library, show a 3D map,
+                        animate the camera between target coordinates...</p>
 
                         <a href="https://github.com/jjmontesl/ddd-viewer#readme">DDD-Viewer README</a>
                         <div>

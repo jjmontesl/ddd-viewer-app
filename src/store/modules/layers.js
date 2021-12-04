@@ -1,14 +1,24 @@
-import { DDD3DLayer, GeoJson3DLayer } from "ddd-viewer";
+import { DDD3DLayer, GeoJson3DLayer, OverlayLayer } from "ddd-viewer";
 
 function loadLayerViewer(sceneViewer, layerObject) {
     let dddLayer = null;
     if (layerObject.type === 'GeoJson3DLayer') {
         dddLayer = new GeoJson3DLayer(layerObject.key, JSON.parse(layerObject.data));
         sceneViewer.layerManager.addLayer(dddLayer);
+
+        dddLayer.setColor(layerObject.color);
+        dddLayer.setAltitudeOffset(layerObject.altitude);
+        dddLayer.setVisible(layerObject.visible);
+
     } else if (layerObject.type === 'DDD3DLayer') {
         dddLayer = new DDD3DLayer(layerObject.key);
         sceneViewer.layerManager.addLayer(dddLayer);
         dddLayer.loadData(layerObject.data);  // must be done after adding due to dependency :/
+
+    } else if (layerObject.type === 'OverlayLayer') {
+        dddLayer = new OverlayLayer(layerObject.key, layerObject.data.sourceLayer);
+        sceneViewer.layerManager.addLayer(dddLayer);
+
     } else {
         console.warn("Tried to create unknown layer type: " + layerObject.type);
     }
@@ -34,35 +44,24 @@ const actions = {
         const layers = localStorage.getItem('dddLayers');
 
         this.state.layers.layers = layers ? JSON.parse(layers) : this.state.layers.layers;
-
-        console.log(this.state.layers.layers);
+        console.debug("Loaded layers state: ", this.state.layers.layers);
 
         for (let i = 0; i < this.state.layers.layers.length; i++) {
             const layer = this.state.layers.layers[i];
             if (layer.visible) {
-                context.dispatch('loadLayer', {sceneViewer: sceneViewer, layer: layer})
+                context.dispatch('loadLayer', {sceneViewer: sceneViewer, layerObject: layer})
             }
         }
     },
 
-    loadLayer(context, {sceneViewer, layer}) {
-        const geoJsonLayerPoints = new GeoJson3DLayer(JSON.parse(layer.data));
-        sceneViewer.layerManager.addLayer(layer.key, geoJsonLayerPoints);
-
-        //Attributes
-        const layerViewer = sceneViewer.layerManager.getLayer(layer.key);
-
-        layerViewer.setColor(layer.color);
-        layerViewer.setAltitudeOffset(layer.altitude);
-        layerViewer.setVisible(layer.visible);
-
-        return layerViewer
+    loadLayer(context, {sceneViewer, layerObject}) {
+        loadLayerViewer(sceneViewer, layerObject);
     },
 
     getViewerLayer(context, {sceneViewer, layer}) {
         let layerViewer = sceneViewer.layerManager.getLayer(layer.key)
         if (layerViewer === null) {
-            layerViewer = context.dispatch('loadLayer', {sceneViewer: sceneViewer, layer: layer})
+            layerViewer = context.dispatch('loadLayer', {sceneViewer: sceneViewer, layerObject: layer})
         }
         return layerViewer
     },
@@ -103,11 +102,10 @@ const actions = {
         context.dispatch('saveLayers')
     },
 
-    updateName(context, layer) {
-        const existingLayer = this.state.layers.layers.find(e => layer.key === e.key)
-        existingLayer.label = layer.label
-
-        context.commit(this.state.layers.layers)
+    updateLayer(context, layer) {
+        const existingLayer = this.state.layers.layers.find((e) => layer.key === e.key )
+        this.editedItem = Object.assign(existingLayer, layer)
+        context.commit('setLayers', this.state.layers.layers)
     }
 }
 

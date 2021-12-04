@@ -121,7 +121,6 @@ export default {
     this.sceneViewer.viewerState.positionHeading = this.$root.viewerAppState.positionHeading;
     this.sceneViewer.viewerState.positionTilt = this.$root.viewerAppState.positionTilt;
     this.sceneViewer.viewerState.positionGroundHeight = this.$root.viewerAppState.positionGroundHeight;
-    console.debug(this.sceneViewer.viewerState.positionTilt);
     this.sceneViewer.setPosition(this.sceneViewer.viewerState.positionHeading, this.sceneViewer.viewerState.positionTilt, this.sceneViewer.viewerState.positionGroundHeight);
 
     // Forces camera repositioning according to sceneViewer.viewerState

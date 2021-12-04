@@ -23,13 +23,14 @@
                                 label="Source GeoJSON file"
                             ></v-file-input>
 
+                            <!--
                             <div style="text-align: center;"><span>or</span></div>
-
 
                             <v-text-field
                                 type="url"
                                 label="Source URL"
                             ></v-text-field>
+                            -->
                         </v-form>
 
                     </v-card-text>
@@ -131,8 +132,6 @@ export default {
                 },
                 data: fileData
             });
-
-            this.addLayer( {fileData, fileName, sceneViewer: this.getSceneViewer()} );
 
             this.$router.replace('/3d/layers/').catch(()=>{});
         },

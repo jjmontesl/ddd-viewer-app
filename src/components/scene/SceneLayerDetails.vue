@@ -56,7 +56,8 @@
                 </div>
 
                 <div class="text-right">
-                    <v-btn color="error" @click="deleteLayerButton()"><v-icon>mdi-delete</v-icon>Remove layer</v-btn>
+                    <v-btn color="" class="mx-2" @click="addMarkersLayerButton()"><v-icon>mdi-map-marker</v-icon>Create Markers Layer</v-btn>
+                    <v-btn color="error" @click="deleteLayerButton()"><v-icon>mdi-delete</v-icon>Remove Layer</v-btn>
                 </div>
 
             </v-form>
@@ -115,11 +116,14 @@ export default {
 
     methods: {
 
-        ...mapActions(['deleteLayer', 'saveLayers']),
+        ...mapActions(['deleteLayer', 'saveLayers', 'updateLayer', 'addLayer']),
 
         changeColor(color) {
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setColor(color);
+
+            this.layer.color = color
+            this.updateLayer(this.layer)
 
             this.saveLayers();
         },
@@ -128,16 +132,44 @@ export default {
             let sceneViewerLayer = this.getSceneViewer().layerManager.getLayer(this.layer.key);
             sceneViewerLayer.setAltitudeOffset(altitude);
 
+            this.layer.altitude = altitude
+            this.updateLayer(this.layer)
+
             this.saveLayers();
         },
+
+        updateNameClick() {
+            this.layer.label = this.nameEdit
+            this.updateLayer(this.layer)
+            this.saveLayers()
+            this.pressEdit = false
+        },
+
         deleteLayerButton() {
             this.deleteLayer(this.layer);
             this.$emit('dddLayerDeleted', this.layer);
         },
-        updateNameClick() {
-            this.layer.label = this.nameEdit;
-            this.updateName({layer: this.layer})
-            this.pressEdit = false;
+
+        addMarkersLayerButton()  {
+
+            let layerConfig = {
+                sceneViewer: this.getSceneViewer(),
+                layerConfig: {
+                    key: 'overlay-' + this.layer.key,
+                    label: this.layer.key + " Overlay",
+                    type: 'OverlayLayer',
+                    save: true,
+                },
+                data: {
+                    'sourceLayer': this.layer.key,
+                    'html': f => `<div class="ddd-marker-overlay">${f}</div>`,
+                }
+            };
+
+            this.addLayer(layerConfig);
+
+            //this.$router.replace('/3d/layers/').catch(()=>{});
+
         }
     },
 

@@ -55,6 +55,8 @@ export default {
           sceneViewer.layerManager.removeLayer(geoTile3DLayer);
         }
 
+        sceneViewer.viewerState.timeScale = 0;
+
         this.$root.dddServer.initialize();
 
       }

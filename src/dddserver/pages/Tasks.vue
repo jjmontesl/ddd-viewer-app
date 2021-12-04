@@ -174,8 +174,10 @@ export default {
         'viewerState',
     ],
     watch: {
-        data() {
-            window.dispatchEvent(new Event('resize'));
+        tasks() {
+            this.$nextTick(() => {
+                window.dispatchEvent(new Event('resize'));
+            });
         }
     },
 

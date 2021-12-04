@@ -10,7 +10,7 @@
         </span>
         <span v-if="result.address.country">
             {{result.address.country}}
-        </span> 
+        </span>
         <span class="details--text" v-if="result.address.postcode && result.address.postcode != 0">
             {{result.address.postcode}}
         </span>
