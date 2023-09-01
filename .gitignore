@@ -1,6 +1,6 @@
 *~
 .DS_Store
-node_modules
+/node_modules
 /dist
 
 .nyc_output
@@ -73,9 +73,11 @@ yarn-error.log*
 /public/assets
 /public/cache
 
+/tools/downloader/data
 
 # Maintenance files
 /upload.sh
 
 # Exclude workspace code
 *.code-workspace
+node_modules

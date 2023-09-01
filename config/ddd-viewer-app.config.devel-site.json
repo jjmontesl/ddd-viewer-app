@@ -6,7 +6,7 @@
 
     "showDevelLinks": true,
 
-    "showDDDServerLinks": true,
+    "showDDDServerLinks": false,
 
     "tileUrlBase": "http://{{hostname}}:8080/cache/ddd_http/",
 
@@ -34,6 +34,8 @@
 
     "geolocation": false,
 
-    "moveSpeeds": [2.0, 5.0, 10.0, 15.0]
+    "moveSpeeds": [1.0, 2.0, 5.0, 10.0, 15.0],
+    "sceneTileDrawDistanceMax": 6,
+    "sceneTileDrawDistanceDefault": 1
 
 }

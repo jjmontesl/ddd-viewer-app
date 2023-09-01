@@ -80,6 +80,8 @@ class DDDViewerAppState {
         const textureSet = localStorage.getItem('dddSceneTextureSet');
         this.sceneTextureSet = textureSet ? JSON.parse(textureSet) : this.sceneTextureSet;
 
+        //this.sceneTileDrawDistance = localStorage.getItem('dddSceneTileDrawDistance') || this.sceneTileDrawDistance;
+
         // Mobiles
         this.isMobile = false;
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

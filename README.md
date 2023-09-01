@@ -29,6 +29,15 @@ The build toolchain accepts some environment variables that configure the applic
 
     DDD_VIEWER_APP_TILE_URL_BASE="http://localhost:8000/cache/ddd_http/" npm run serve
 
+To run using a different configuration:
+
+    DDD_VIEWER_APP_BUILD_ENV=prod npm run serve
+
+To build:
+
+    npm build       # For default configuration
+    npm build-prod  # For production website: links to blog and about, oriented to OSM maps, no DDDServer links
+
 ### Assets
 
 Note that this application connects to map tile servers to retrieve and show data. It also requires

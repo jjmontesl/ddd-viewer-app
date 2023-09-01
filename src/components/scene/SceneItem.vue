@@ -196,7 +196,7 @@ export default {
       this.$route;  // force dependency on property
 
       //relation-12685963
-      let result = JSON.stringify(this.metadata, null, 2);
+      let result = JSON.stringify(this.metadata, Object.keys(this.metadata).sort(), 2);
       result = result.replaceAll("<", "&lt;");
       result = result.replaceAll(">", "&gt;");
       result = this.parseLinkOSMObjects(result);

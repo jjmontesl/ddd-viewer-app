@@ -278,7 +278,7 @@ export default {
         }
       ];
 
-      if (true) {
+      if (this.viewerState.dddConfig.showDDDServerLinks) {
         links.push({
           title: 'dddserver',
           link: 'dddServerTasks',

@@ -31,7 +31,7 @@
                             :items="tasks"
                             :search="search"
                             :loading="loading"
-                            item-key="key"
+                            item-key="item.key"
                             :items-per-page="itemsPerPage"
                             show-select
                             hide-default-footer >

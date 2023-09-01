@@ -18,8 +18,10 @@
                     <div style="height: 20px;"> </div>
 
                     <v-card-text class="text-left">
-                           <div style="text-align: right; margin-bottom: 0px;"><i>You can also use N and M keys to shift time</i></div>
+                           <div style="text-align: right; margin-bottom: 0px;"><i>You can use N and M keys to shift time</i></div>
                            <v-slider v-model="sceneTime" @change="sceneTimeChange" style="margin-top: 0px;" step="0.1" min="0" max="24" thumb-label ticks label="Hour (Day/Night)"></v-slider>
+
+                           <v-select v-model="viewerState.sceneSkybox" @change="skyboxChange" :items="skyBoxItems" label="Environment" ></v-select>
                     </v-card-text>
 
                     <!--
@@ -32,13 +34,24 @@
 
                     <v-card-text class="text-left">
 
-                        <v-slider v-model="viewerState.sceneTileDrawDistance" @change="sceneTileDrawDistanceChange" step="1" min="0" max="4" thumb-label ticks label="Draw Distance"></v-slider>
+                        <v-slider v-model="viewerState.sceneTileDrawDistance" @change="sceneTileDrawDistanceChange" show-ticks="always" step="1" min="0" :max="sceneTileDrawDistanceMax" thumb-label ticks label="Draw Distance"></v-slider>
 
                         <v-select v-model="viewerState.sceneTextureSet" @change="sceneTextureSetChange" :items="textureModeItems" label="Textures" ></v-select>
 
                         <v-select v-model="viewerState.sceneGroundTextureOverrideKey" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
 
-                        <v-select v-model="viewerState.sceneSkybox" @change="skyboxChange" :items="skyBoxItems" label="Environment" ></v-select>
+                        <!-- TODO: Use (sub)layers or "virtual layers" instead (?) : -->
+                        <!--
+                        <v-checkbox
+                            'Show Instanced Items',
+                            'Show Texts (Static)'
+
+                            'Show Extra Ground Items',
+                            'Show Extra Building Items',
+
+                            'Dynamic Components',   // rotating things, analog clocks, animated things, other controllers (ddd:component...)...
+                            'Dynamic Components Texts'  // e.g. clocks / banners - dynamic text is managed by components, so they are needed
+                        -->
 
                         <!--
                         <v-checkbox label="Items" disabled style="margin-top: 2px;"></v-checkbox>
@@ -151,6 +164,8 @@ export default {
 
       sceneTime: this.viewerState.positionDate.getHours(),
 
+      sceneTileDrawDistanceMax: this.dddConfig.sceneTileDrawDistanceMax || 3,
+
       skyBoxItems: [
           {value: '/textures/TropicalSunnyDay', text: 'Sunny'},
           {value: '/textures/skybox/clouds1/clouds1', text: 'Cloudy'},
@@ -177,8 +192,10 @@ export default {
 
     groundTextureLayerItems: function() {
         let result = [];
+
         result.push({value: null, text: 'None'});
         result.push({value: 'divider1', divider: true});
+
         for (let key in this.dddConfig.sceneGroundLayers) {
             result.push({value: key, text: this.dddConfig.sceneGroundLayers[key].text},)
         }

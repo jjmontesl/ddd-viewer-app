@@ -28,7 +28,9 @@
 
     "geolocation": false,
 
-    "moveSpeeds": [1.5, 2.5, 5.0]
+    "moveSpeeds": [1.5, 2.5, 5.0, 10.0],
+    "sceneTileDrawDistanceMax": 4,
+    "sceneTileDrawDistanceDefault": 1
 
 
 }
