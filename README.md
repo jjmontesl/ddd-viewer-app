@@ -27,11 +27,7 @@ or
 
 The build toolchain accepts some environment variables that configure the application:
 
-    DDD_VIEWER_APP_TILE_URL_BASE="http://localhost:8000/cache/ddd_http/" npm run serve
-
-To run using a different configuration:
-
-    DDD_VIEWER_APP_BUILD_ENV=prod npm run serve
+    DDD_VIEWER_APP_BUILD_ENV=devel-studio DDD_VIEWER_APP_TILE_URL_BASE="http://localhost:8000/cache/ddd_http/" npm run serve
 
 To build:
 

@@ -13,9 +13,13 @@
 
                     <v-btn style="position: absolute; z-index: 5; right: 5px; margin-top: 15px;" to="/3d" class="mx-2" fab dark x-small color="primary"><v-icon dark>mdi-close</v-icon></v-btn>
 
-                    <v-card-title class="pb-8" style="text-align: left; word-break: break-word; width: 95%;">Create Layer</v-card-title>
+                    <v-card-title class="pb-8" style="text-align: left; word-break: break-word; width: 95%;">Layers > Add</v-card-title>
 
                     <v-card-text class="text-left">
+
+                        <p>
+                            Select a GeoJSON file to add as a new layer.
+                        </p>
 
                         <v-form class="p-4">
                             <v-file-input
@@ -36,9 +40,11 @@
                     </v-card-text>
 
 
-                    <v-card-text class="text-left">
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn @click="back()" class="mx-2" dark color="secondary"><v-icon dark>mdi-back</v-icon>Cancel</v-btn>
                         <v-btn @click="addLayerButton()" class="mx-2" dark color="primary"><v-icon dark>mdi-plus</v-icon>Add</v-btn>
-                    </v-card-text>
+                    </v-card-actions>
 
 
                 </v-card>
@@ -117,6 +123,10 @@ export default {
 
     methods: {
         ...mapActions(['addLayer']),
+
+        back() {
+            this.$router.replace('/3d/layers/').catch(()=>{});
+        },
 
         async addLayerButton() {
             const fileData = await this.file.text();

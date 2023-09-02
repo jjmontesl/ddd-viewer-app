@@ -36,9 +36,21 @@
 
                         <v-slider v-model="viewerState.sceneTileDrawDistance" @change="sceneTileDrawDistanceChange" show-ticks="always" step="1" min="0" :max="sceneTileDrawDistanceMax" thumb-label ticks label="Draw Distance"></v-slider>
 
+                        <v-select v-model="viewerState.sceneGroundTextureOverrideKey" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
+
+                    </v-card-text>
+
+
+                    <v-card-text class="text-left">
+
                         <v-select v-model="viewerState.sceneTextureSet" @change="sceneTextureSetChange" :items="textureModeItems" label="Textures" ></v-select>
 
-                        <v-select v-model="viewerState.sceneGroundTextureOverrideKey" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
+                        <!--
+                        <v-select v-model="viewerState.sceneTileVariant" label="Dataset" style="margin-top: 2px;" :items="[
+                            {'value': null, 'text': 'Compressed (Default)'},
+                            {'value': 'uncompressed', 'text': 'Uncompressed (Better Quality, but Slower)'}
+                        ]"></v-select>
+                        -->
 
                         <!-- TODO: Use (sub)layers or "virtual layers" instead (?) : -->
                         <!--

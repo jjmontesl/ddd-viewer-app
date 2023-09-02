@@ -3,6 +3,6 @@ export default [
     path: '/maps/place/:osmId',
     name: 'moreInfo',
     component: () =>
-      import(/* webpackChunkName: "moreInfo" */ '@/components/ddd/SearchResultUnic.vue')
+      import(/* webpackChunkName: "moreInfo" */ '@/components/ddd/SearchResultUnique.vue')
   }
 ]

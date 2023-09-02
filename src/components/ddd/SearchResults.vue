@@ -104,7 +104,12 @@ export default {
     methods: {
 
       async updateData () {
-        const response = await this.getDataNominatim();
+        let response = await this.getDataNominatim();
+        if (!response || response.length === 0) {
+          // Attempt a broader search
+          response = await this.getDataNominatim(0.0);
+        }
+
         this.searchResults = response;
 
         this.displayResultsMap(this.searchResults);
@@ -123,20 +128,26 @@ export default {
         el.style.minHeight = '' + (window.innerHeight - 38) + 'px';
       },
 
-      async getDataNominatim() {
+      /**
+       * 
+       * @param {*} boundingBox If 0, no bounding box is sent (global search), if 1.0, the current view bounding box is sent.
+       */
+      async getDataNominatim(boundingBox = 1.0) {
         const { query } = this.$route.params;
 
         // Use map viewbox for query if map is available
         // TODO: we should actually ensure that map view is ready before making this query
         let viewboxParam = "";
-        if (this.$root.viewerAppState.dddMap) {
+        if (boundingBox > 0) {
+          if (this.$root.viewerAppState.dddMap) {
 
-          const olmap = this.$root.viewerAppState.dddMap.map;
-          const boundingBox = olmap.getView().calculateExtent(olmap.getSize())
-          const LatLonBounBox = olProj.transform( [boundingBox[0], boundingBox[1]], 'EPSG:3857', 'EPSG:4326')
-          const LatLonBounBoxMax = olProj.transform( [boundingBox[2], boundingBox[3]], 'EPSG:3857', 'EPSG:4326')
+            const olmap = this.$root.viewerAppState.dddMap.map;
+            const boundingBox = olmap.getView().calculateExtent(olmap.getSize())
+            const LatLonBounBox = olProj.transform( [boundingBox[0], boundingBox[1]], 'EPSG:3857', 'EPSG:4326')
+            const LatLonBounBoxMax = olProj.transform( [boundingBox[2], boundingBox[3]], 'EPSG:3857', 'EPSG:4326')
 
-          viewboxParam = `&viewbox=${LatLonBounBox[0]},${LatLonBounBox[1]},${LatLonBounBoxMax[0]},${LatLonBounBoxMax[1]}&bounded=1`;
+            viewboxParam = `&viewbox=${LatLonBounBox[0]},${LatLonBounBox[1]},${LatLonBounBoxMax[0]},${LatLonBounBoxMax[1]}&bounded=1`;
+          }
         }
 
         const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=11&addressdetails=1&extratags=1&namedetails=1` + viewboxParam;
