@@ -65,6 +65,16 @@
                         </div>
                     </v-card-text>
 
+                    <v-card-text v-if="sceneSelectedPosition" class="text-left">
+                        <div>
+                            <h3>Selected Object</h3>
+                            <div>
+                                Distance (3D):
+                                <span>{{ sceneSelectedPositionDistance }} m</span>
+                            </div>
+                        </div>
+                    </v-card-text>
+
                     <v-card-text v-if="!loading" class="text-left">
                         <div>
                             <h3>Links</h3>
@@ -132,6 +142,7 @@ import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import OSMImage from '@/components/ddd/OSMImage.vue';
 import NodeHierarchy from '@/components/scene/NodeHierarchy.vue';
+import { Vector3 } from '@babylonjs/core';
 import { DDDObjectRef } from 'ddd-viewer';
 
 export default {
@@ -186,6 +197,9 @@ export default {
       //nodeGetter: () => { return (this.viewerState.sceneSelectedMeshId ? this.getSceneViewer().selectedMesh : null); },
       nodeName: null,
       metadata: {},
+
+      sceneSelectedPosition: null,
+      sceneSelectedPositionDistance: 0,
 
       showJSON: false,
     }
@@ -307,7 +321,16 @@ export default {
         //this.setMesh(this.getSceneViewer().selectedMesh);
         //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
         //this.metadata['_updated']++;
-    }
+    },
+    '$root.viewerAppState.sceneSelectedPosition' () {
+        console.debug("SceneItem: sceneSelectedPosition changed.");
+        this.sceneSelectedPosition = this.$root.viewerAppState.sceneSelectedPosition;
+        this.sceneSelectedPositionDistance = Vector3.Distance(this.$root.viewerAppState.sceneSelectedPosition, new Vector3(...this.viewerState.positionScene));
+    },
+    '$root.viewerState.positionScene.x' () {
+        this.sceneSelectedPosition = this.$root.viewerAppState.sceneSelectedPosition;
+        this.sceneSelectedPositionDistance = Vector3.Distance(this.$root.viewerAppState.sceneSelectedPosition, new Vector3(...this.viewerState.positionScene));
+    },
   },
 
   components: {

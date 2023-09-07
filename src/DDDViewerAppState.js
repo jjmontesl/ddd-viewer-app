@@ -41,6 +41,7 @@ class DDDViewerAppState {
     sceneTriangles = 0;
 
     sceneSelectedMeshId = null;
+    sceneSelectedPosition = null;
 
     sceneShadowsEnabled = false;
 

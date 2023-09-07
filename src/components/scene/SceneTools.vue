@@ -18,10 +18,23 @@
                     <div style="height: 20px;"> </div>
 
                     <v-card-text class="text-left">
-                           <div style="text-align: right; margin-bottom: 0px;"><i>You can use N and M keys to shift time</i></div>
-                           <v-slider v-model="sceneTime" @change="sceneTimeChange" style="margin-top: 0px;" step="0.1" min="0" max="24" thumb-label ticks label="Hour (Day/Night)"></v-slider>
+                        
+                        <v-slider v-model="sceneTime" @start="sceneTimeChangeStart" @end="sceneTimeChangeEnd" @change="sceneTimeChange" style="margin-top: 0px;" step="0.5" min="0" max="24" thumb-label="always" ticks label="Hour (Day/Night)">
+                            <template v-slot:thumb-label="">
+                                {{ Math.floor(sceneTime).toString() + ":" + (Math.abs((sceneTime % 1) * 60)).toString().padStart(2, "0") }} 
+                            </template>
+                        </v-slider>
+                        
+                        <!--
+                            (Math.abs(Math.frac(sceneTime) * 60))
+                            .padStart(2, "0")
+                        -->
+                        
+                        <div style="text-align: right; margin-top: 0px;"><i>You can <b>shift time with <kbd>N</kbd> and <kbd>M</kbd></b> keys</i></div>
 
-                           <v-select v-model="viewerState.sceneSkybox" @change="skyboxChange" :items="skyBoxItems" label="Environment" ></v-select>
+                        
+                        <v-select v-model="viewerState.sceneSkybox" @change="skyboxChange" :items="skyBoxItems" label="Environment" ></v-select>
+
                     </v-card-text>
 
                     <!--
@@ -34,7 +47,7 @@
 
                     <v-card-text class="text-left">
 
-                        <v-slider v-model="viewerState.sceneTileDrawDistance" @change="sceneTileDrawDistanceChange" show-ticks="always" step="1" min="0" :max="sceneTileDrawDistanceMax" thumb-label ticks label="Draw Distance"></v-slider>
+                        <v-slider v-model="viewerState.sceneTileDrawDistance" :lazy="true" @change="sceneTileDrawDistanceChange" thumb-label="always" show-ticks="always" step="1" min="0" :max="sceneTileDrawDistanceMax" ticks label="Draw Distance"></v-slider>
 
                         <v-select v-model="viewerState.sceneGroundTextureOverrideKey" @change="groundTextureLayerChange" :items="groundTextureLayerItems" label="Ground texture override" ></v-select>
 
@@ -175,6 +188,7 @@ export default {
       //x: new SceneViewer(),
 
       sceneTime: this.viewerState.positionDate.getHours(),
+      isChangingTime: false,
 
       sceneTileDrawDistanceMax: this.dddConfig.sceneTileDrawDistanceMax || 3,
 
@@ -268,10 +282,12 @@ export default {
         //this.metadata['_updated']++;
     },
     'viewerState.positionDateSeconds' () {
-        this.sceneTime = this.viewerState.positionDate.getHours() + this.viewerState.positionDate.getMinutes() / 60;
-        this.$forceUpdate();
-        //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
-        //this.metadata['_updated']++;
+        if (!this.isChangingTime) {
+            this.sceneTime = this.viewerState.positionDate.getHours() + this.viewerState.positionDate.getMinutes() / 60;
+            this.$forceUpdate();
+            //if (! this.metadata['_updated']) {this.metadata['_updated'] = 0;}
+            //this.metadata['_updated']++;
+        }
     }
   },
 
@@ -385,6 +401,14 @@ export default {
             currentDate.setMinutes(parseInt((value - parseInt(value)) * 60));
             this.viewerState.positionDate = currentDate;
             this.viewerState.positionDateSeconds = this.viewerState.positionDate / 1000;
+      },
+
+      sceneTimeChangeStart(value) {
+            this.isChangingTime = true;
+      },
+
+      sceneTimeChangeEnd(value) {
+            this.isChangingTime = false;
       },
 
       sceneTileDrawDistanceChange(value) {

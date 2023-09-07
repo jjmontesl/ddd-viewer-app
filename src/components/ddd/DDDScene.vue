@@ -106,7 +106,7 @@ export default {
         // TODO: move to viewer-app?
         //"dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
     }
-    console.debug("Merging DDDViewer options: ", dddViewerConfig, this.viewerState);
+    //console.debug("Merging DDDViewer options: ", dddViewerConfig, this.viewerState);
     Object.assign(dddViewerConfig, this.viewerState.dddConfig.dddViewer);
 
     // Initialize DDDViewer
@@ -122,11 +122,6 @@ export default {
     this.sceneViewer.viewerState.positionTilt = this.$root.viewerAppState.positionTilt;
     this.sceneViewer.viewerState.positionGroundHeight = this.$root.viewerAppState.positionGroundHeight;
     this.sceneViewer.setPosition(this.sceneViewer.viewerState.positionHeading, this.sceneViewer.viewerState.positionTilt, this.sceneViewer.viewerState.positionGroundHeight);
-
-    // Forces camera repositioning according to sceneViewer.viewerState
-    // TODO: Provide a setCameraPosition/target, once Cameras are refactored
-    // NOTE: this causes an initial camera change, which can make other bugs surface (eg. wrong shadows if shadowGenerator.autoCalcDepthBounds is true)
-    //this.sceneViewer.selectCameraFree();
 
     // Hook a callback (a ViewerProcess) to DDDViewer to update state.
     const that = this;
@@ -185,6 +180,12 @@ export default {
         new WalkCollideCameraController(this.sceneViewer),
         new FreeCameraController(this.sceneViewer),
     ];
+
+    // Forces camera repositioning according to sceneViewer.viewerState
+    // TODO: Provide a setCameraPosition/target, once Cameras are refactored
+    // NOTE: this causes an initial camera change, which can make other bugs surface (eg. wrong shadows if shadowGenerator.autoCalcDepthBounds is true)
+    
+    this.selectCameraFree();
 
   },
 
@@ -330,6 +331,9 @@ export default {
         //const point = olProj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');
         //const pointString = point[1].toFixed(7) + "," + point[0].toFixed(7);
         //const posString = this.positionString();
+
+        const clickPosition = pickResult.pickedPoint;
+        this.$root.viewerAppState.sceneSelectedPosition = clickPosition;
 
         if (!pickResult.pickedMesh || pickResult.pickedMesh.id === "skyBox") {
             this.$router.push('/3d/pos/').catch(()=>{});
