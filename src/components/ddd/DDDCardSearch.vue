@@ -7,18 +7,19 @@
                     <IconTitle :result="this.result"/>
                 </div>
                 <v-flex class="text-left">
-                    <Title :result="this.result"/>
+                    
+                    <Title :result="this.result" class="mb-3" />
 
-                    <Direction :result="this.result"/>
-
-                    <Population :result="this.result"/>
-
-                    <OpeningHours :result="this.result"/>
-
-                    <Wheelchair :result="this.result"/>
+                    <Direction :result="this.result" class="mb-2" />
 
                     <div>
-                        <v-flex class="">
+                        <Population :result="this.result"/>
+                        <OpeningHours :result="this.result"/>
+                        <Wheelchair :result="this.result"/>
+                    </div>
+
+                    <div class="mt-6">
+                        <v-flex>
                                 <v-row>
                                     <SocialMedia :result="this.result"/>
                                     <Contact :result="this.result"/>

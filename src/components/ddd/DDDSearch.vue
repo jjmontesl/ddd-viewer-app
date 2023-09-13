@@ -1,5 +1,5 @@
 <template>
-    <div class="ddd-search unselectable">
+    <div class="ddd-search unselectable" style="margin-bottom: 4px; ">
       <v-row style="margin: 0px;">
         <v-col style="padding: 0px;" sm="5" offset-sm="7" md="4" offset-md="8" >
           <v-card>

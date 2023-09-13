@@ -1,36 +1,34 @@
 <template>
 
-    <div class="ddd-scene-tool-buttons unselectable" style="text-align: right;">
+  <div class="ddd-scene-tool-buttons unselectable" style="text-align: right;">
+      
+      <div v-if="viewerState.sceneVisible">
+            <v-btn :to="{name: 'sceneTools'}" class="primary mb-2" style="pointer-events: auto;"><small><v-icon class="mr-1" dark>mdi-cog</v-icon> Settings</small></v-btn>
+      </div>
+      <div>
+            <v-btn :to="{name: 'sceneLayers'}" class="primary" style="pointer-events: auto;"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
+      </div>
+      <div>
+            <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState" />
+      </div>
 
-        <div>
-              <v-btn :to="{name: 'sceneTools'}" class="primary"><small><v-icon class="mr-1" dark>mdi-cog</v-icon> Settings</small></v-btn>
-        </div>
-        <div>
-              <v-btn :to="{name: 'sceneLayers'}" class="primary mt-2"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
-        </div>
-        <div>
-              <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState" />
-        </div>
+      <div v-if="dddConfig.geolocation">
+          <v-btn @click="switchGeolocationPosition" class="" style="pointer-events: auto;" :color="viewerState.geolocationEnabled ? 'success': 'primary'"><small><v-icon dark>mdi-crosshairs-gps</v-icon> GPS</small></v-btn>
+      </div>
 
-        <div v-if="dddConfig.geolocation" style="margin-top: 4px;">
-            <v-btn @click="switchGeolocationPosition" class="" :color="viewerState.geolocationEnabled ? 'success': 'primary'"><small><v-icon dark>mdi-crosshairs-gps</v-icon> GPS</small></v-btn>
-        </div>
-
-    </div>
+  </div>
 
 </template>
 
 <style>
 .ddd-scene-tool-buttons {
-    position: absolute;
     /*z-index: 2;*/
-    top: 10px;
-    right: 10px;
+    margin: 10px;
     /*//opacity: .75;*/
     cursor: pointer;
 }
-.ddd-scene-tool-buttons div {
-    pointer-events: auto;
+.ddd-scene-tool-buttons {
+    /*pointer-events: auto;*/
 }
 .ddd-scene-tool-buttons button {
     pointer-events: auto;
@@ -73,7 +71,7 @@ export default {
   ],
   components: {
     ServerInfo
-  },
+},
 
   computed: {
 

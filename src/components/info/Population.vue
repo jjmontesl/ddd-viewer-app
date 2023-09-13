@@ -1,8 +1,8 @@
 <template>
-    <p v-if="result.extratags.population">
+    <span v-if="result.extratags.population">
         <v-icon class="info--text">mdi-account</v-icon>
-        <span class="info--text">{{ result.extratags.population }}</span>
-    </p>
+        <span class="info--text">{{ result.extratags.population }}</span> inhabitants
+    </span>
 </template>
 
 <script>

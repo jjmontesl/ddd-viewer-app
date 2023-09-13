@@ -9,7 +9,7 @@
 
                 <v-card class="" style="overflow-x: hidden;">
 
-                    <DDDSceneInsert />
+                    <DDDDualMapSceneInsert />
 
                     <v-btn style="position: absolute; z-index: 5; right: 5px; margin-top: 15px;" to="/3d" class="mx-2" fab dark x-small color="primary"><v-icon dark>mdi-close</v-icon></v-btn>
 
@@ -62,6 +62,7 @@
 <script>
 import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
+import DDDDualMapSceneInsert from '@/components/ddd/DDDDualMapSceneInsert.vue';
 import SceneLayerDetails from '@/components/scene/SceneLayerDetails.vue';
 import { mapState } from 'vuex';
 import { mapActions } from 'vuex';
@@ -73,7 +74,8 @@ export default {
         //this.resize();
         //window.addEventListener('beforeunload', this.beforeUnload);
 
-        this.$emit('dddViewerMode', 'scene');
+        // Keep mode (layers can be shown in any mode)
+        //this.$emit('dddViewerMode', 'scene');
 
         window.dispatchEvent(new Event('resize'));
 
@@ -113,7 +115,7 @@ export default {
 
     components: {
         DDDScene,
-        DDDSceneInsert,
+        DDDDualMapSceneInsert,
         SceneLayerDetails
     },
 

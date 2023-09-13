@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ddd-map-3d-switch unselectable">
+    <div class="ddd-map-3d-switch unselectable" style="text-align: right;">
         <!--
         <v-card class="pa-1 primary" outlined style="width: 60px; height: 60px;">
             <canvas id="ddd-map-3d-switch" width="50" height="50" style="width: 50px; height: 50px;" v-on:click="switch3D"></canvas>
@@ -9,7 +9,7 @@
             </span>
         </v-card>
         -->
-        <div style="margin-top: 4px; text-align: right;">
+        <div>
           <v-btn @click="switch3D" class="primary" style="pointer-events: auto;"><small><v-icon dark>mdi-earth</v-icon> 3D</small></v-btn>
         </div>
     </div>

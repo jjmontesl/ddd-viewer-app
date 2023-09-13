@@ -47,7 +47,7 @@ import DDDScene from '@/components/ddd/DDDScene.vue';
 import DDDSceneInsert from '@/components/ddd/DDDSceneInsert.vue';
 import DDDMapInsert from '@/components/ddd/DDDMapInsert.vue';
 import DDDCardSearchResults from '@/components/ddd/DDDCardSearch.vue';
-import DDDMoreInfo from '@/components/ddd/DDDmoreInfo.vue'
+import DDDMoreInfo from '@/components/ddd/DDDMoreInfo.vue'
 
 export default {
   async mounted() {

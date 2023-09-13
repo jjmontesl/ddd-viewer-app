@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/3d/layers/',
+    path: '/layers/',
     name: 'sceneLayers',
     meta: {
       requiresAuth: false

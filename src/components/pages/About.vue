@@ -114,7 +114,7 @@
                     <h3>Thanks to</h3>
 
                     <p>
-                        Thanks to the following persons who have greatly helped us with development or design.
+                        Thanks to the masters who have greatly supported us with during development:
                     </p>
                     <p>
                         <ul>
@@ -126,6 +126,15 @@
                     </p>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col>
+                    <div class="text-center"><small>
+                        DDD Version: -<br />
+                        DDD Viewer Version: -<br />
+                        DDD Viewer App (3DSMaps) Version: {{ dddViewerAppVersion }}
+                    </small></div>
+                </v-col>
+            </v-row>
         </div>
     </div>
     <Footer />
@@ -133,6 +142,7 @@
 </template>
 
 <style scoped lang="scss">
+
 .about {
     color: #473D54;
 }
@@ -155,6 +165,7 @@
 
 <script>
 import Footer from "../core/Footer";
+import process from "process";
 
 export default {
   metaInfo() {
@@ -163,11 +174,17 @@ export default {
       titleTemplate: `${this.$t('about.TITLE')} - %s`
     }
   },
+  data() {
+    return {
+        dddViewerAppVersion: process.env.VUE_APP_DDD_VIEWER_APP_VERSION
+    }
+  },
   mounted() {
     this.$emit('dddViewerMode', "site");
   },
   components: {
       Footer
-  }
+  },
 }
+
 </script>

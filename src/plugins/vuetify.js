@@ -20,7 +20,7 @@ const opts = {
                 secondary: "#285e24",
                 accent: "#FF6947",
                 info: "#a55eea",
-                details: "#2980b9",
+                details: "#29b99a",
                 white: "#FFFFFF",
                 cream: "#F7F2C8",
                 error: "#BE3749"

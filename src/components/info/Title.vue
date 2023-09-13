@@ -1,5 +1,7 @@
 <template>
-    <b><h3 class="mb-1">{{result.namedetails.name}}</h3></b>
+    <p>
+        <b><h3 class="mb-1">{{result.namedetails.name}}</h3></b>
+    </p>
 </template>
 
 <script>

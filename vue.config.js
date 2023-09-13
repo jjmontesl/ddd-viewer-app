@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+process.env.VUE_APP_VERSION = require('./package.json').version
+process.env.VUE_APP_DDD_VIEWER_APP_VERSION = require('./package.json').version
+process.env.VUE_APP_DDD_VIEWER_VERSION = require('./package.json').version
+process.env.VUE_APP_DDD_VERSION = require('./package.json').version
+
 module.exports = {
   productionSourceMap: false,
   pluginOptions: {

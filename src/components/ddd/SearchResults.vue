@@ -182,7 +182,7 @@ export default {
 
           const iconFeature = new Feature({
             geometry: new Point(xy),
-            name: result.namedetails.name,
+            name: ('namedatails' in result) ? result.namedetails.name : result.name,
             osmId: result.osm_id
           });
 
