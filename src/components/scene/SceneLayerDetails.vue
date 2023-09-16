@@ -41,6 +41,7 @@
                         v-if="showColorPicker"
                         dot-size="25"
                         swatches-max-height="200"
+                        class="ml-2"
                     ></v-color-picker>
                 </div>
 
@@ -56,7 +57,7 @@
                 </div>
 
                 <div class="text-right">
-                    <v-btn color="" class="mx-2" @click="addMarkersLayerButton()"><v-icon>mdi-map-marker</v-icon>Create Markers Layer</v-btn>
+                    <!--<v-btn color="" class="mx-2" @click="addMarkersLayerButton()"><v-icon>mdi-map-marker</v-icon>Create Markers Layer</v-btn> -->
                     <v-btn color="error" @click="deleteLayerButton()"><v-icon>mdi-delete</v-icon>Remove Layer</v-btn>
                 </div>
 

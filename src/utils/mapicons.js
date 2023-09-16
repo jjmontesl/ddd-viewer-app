@@ -1,183 +1,176 @@
 export default class MapIcons {
 
-    icons = [
-
+    static ICONS = [
+        "amenity-arts_centre",
+        "amenity-atm",
+        "amenity-bank",
+        "amenity-bar",
+        "amenity-bbq",
+        "amenity-bench",
+        "amenity-bicycle_parking",
+        "amenity-bicycle_repair_station",
+        "amenity-biergarten",
+        "amenity-boat_rental",
+        "amenity-bureau_de_change",
+        "amenity-bus_station",
+        "amenity-cafe",
+        "amenity-car_wash",
+        "amenity-casino",
+        "amenity-charging_station",
+        "amenity-cinema",
+        "amenity-community_centre",
+        "amenity-courthouse",
+        "amenity-dentist",
+        "amenity-doctors",
+        "amenity-drinking_water",
+        "amenity-embassy",
+        "amenity-emergency_phone",
+        "amenity-excrement_bags",
+        "amenity-fast_food",
+        "amenity-ferry",
+        "amenity-firestation",
+        "amenity-fountain",
+        "amenity-fuel",
+        "amenity-hospital",
+        "amenity-hunting_stand",
+        "amenity-ice_cream",
+        "amenity-internet_cafe",
+        "amenity-library",
+        "amenity-motorcycle_parking",
+        "amenity-nightclub",
+        "amenity-parking_entrance_multistorey",
+        "amenity-parking_entrance_underground",
+        "amenity-parking_tickets",
+        "amenity-pharmacy",
+        "amenity-place_of_worship",
+        "amenity-police",
+        "amenity-post_box",
+        "amenity-post_office",
+        "amenity-prison",
+        "amenity-public_bath",
+        "amenity-public_bookcase",
+        "amenity-public_transport_tickets",
+        "amenity-pub",
+        "amenity-recycling",
+        "amenity-rental_bicycle",
+        "amenity-rental_car",
+        "amenity-restaurant",
+        "amenity-shelter",
+        "amenity-shower",
+        "amenity-social_facility",
+        "amenity-taxi",
+        "amenity-telephone",
+        "amenity-theatre",
+        "amenity-toilets",
+        "amenity-town_hall",
+        "amenity-vehicle_inspection",
+        "amenity-veterinary",
+        "amenity-waste_basket",
+        "amenity-waste_disposal",
+        "beach_coarse.png",
+        "beach.png",
+        "danger_red_hatch.png",
+        "dog_park.png",
+        "grey_vertical_hatch.png",
+        "intermittent_river.png",
+        "intermittent_water.png",
+        "military_red_hatch.png",
+        "mud.png",
+        "orchard.png",
+        "plant_nursery.png",
+        "reef.png",
+        "religion-buddhist",
+        "religion-christian",
+        "religion-hinduist",
+        "religion-jewish",
+        "religion-muslim",
+        "religion-shintoist",
+        "religion-sikhist",
+        "religion-taoist",
+        "rock_overlay.png",
+        "salt-dots-2.png",
+        "salt_pond.png",
+        "scree_overlay.png",
+        "scrub.png",
+        "shop-alcohol",
+        "shop-art",
+        "shop-bag",
+        "shop-bakery",
+        "shop-beauty",
+        "shop-bed",
+        "shop-beverages",
+        "shop-bicycle",
+        "shop-bookmaker",
+        "shop-butcher",
+        "shop-car_parts",
+        "shop-carpet",
+        "shop-car_repair",
+        "shop-car",
+        "shop-charity",
+        "shop-chemist",
+        "shop-clothes",
+        "shop-coffee",
+        "shop-computer",
+        "shop-confectionery",
+        "shop-convenience",
+        "shop-copyshop",
+        "shop-dairy",
+        "shop-deli",
+        "shop-department_store",
+        "shop-diy",
+        "shop-electronics",
+        "shop-fabric",
+        "shop-florist",
+        "shop-furniture",
+        "shop-garden_centre",
+        "shop-gift",
+        "shop-greengrocer",
+        "shop-hairdresser",
+        "shop-hifi",
+        "shop-houseware",
+        "shop-interior_decoration",
+        "shop-jewelry",
+        "shop-laundry",
+        "shop-marketplace",
+        "shop-massage",
+        "shop-medical_supply",
+        "shop-mobile_phone",
+        "shop-musical_instrument",
+        "shop-music",
+        "shop-newsagent",
+        "shop-optician",
+        "shop-outdoor",
+        "shop-paint",
+        "shop-perfumery",
+        "shop-pet",
+        "shop-photo",
+        "shop-seafood",
+        "shop-second_hand",
+        "shop-shoes",
+        "shop-sports",
+        "shop-stationery",
+        "shop-supermarket",
+        "shop-tea",
+        "shop-ticket",
+        "shop-tobacco",
+        "shop-toys",
+        "shop-trade",
+        "shop-travel_agency",
+        "shop-tyres",
+        "shop-variety_store",
+        "shop-video_games",
+        "shop-video",
+        "vineyard.png",
+        "wetland_bog.png",
+        "wetland_mangrove.png",
+        "wetland_marsh.png",
+        "wetland.png",
+        "wetland_reed.png",
+        "wetland_swamp.png"
     ];
 
-    constructor( viewerState ) {
-        this.viewerState = viewerState;
-
-        // Load layers on localstorage
-        this.loadLayers();
+    static iconExists(iconName) {
+        return MapIcons.ICONS.includes(iconName);
     }
-
-    icons_text = `
-amenity-arts_centre.svg.png
-amenity-atm.svg.png
-amenity-bank.svg.png
-amenity-bar.svg.png
-amenity-bbq.svg.png
-amenity-bench.svg.png
-amenity-bicycle_parking.svg.png
-amenity-bicycle_repair_station.svg.png
-amenity-biergarten.svg.png
-amenity-boat_rental.svg.png
-amenity-bureau_de_change.svg.png
-amenity-bus_station.svg.png
-amenity-cafe.svg.png
-amenity-car_wash.svg.png
-amenity-casino.svg.png
-amenity-charging_station.svg.png
-amenity-cinema.svg.png
-amenity-community_centre.svg.png
-amenity-courthouse.svg.png
-amenity-dentist.svg.png
-amenity-doctors.svg.png
-amenity-drinking_water.svg.png
-amenity-embassy.svg.png
-amenity-emergency_phone.svg.png
-amenity-excrement_bags.svg.png
-amenity-fast_food.svg.png
-amenity-ferry.svg.png
-amenity-firestation.svg.png
-amenity-fountain.svg.png
-amenity-fuel.svg.png
-amenity-hospital.svg.png
-amenity-hunting_stand.svg.png
-amenity-ice_cream.svg.png
-amenity-internet_cafe.svg.png
-amenity-library.svg.png
-amenity-motorcycle_parking.svg.png
-amenity-nightclub.svg.png
-amenity-parking_entrance_multistorey.svg.png
-amenity-parking_entrance_underground.svg.png
-amenity-parking_tickets.svg.png
-amenity-pharmacy.svg.png
-amenity-place_of_worship.svg.png
-amenity-police.svg.png
-amenity-post_box.svg.png
-amenity-post_office.svg.png
-amenity-prison.svg.png
-amenity-public_bath.svg.png
-amenity-public_bookcase.svg.png
-amenity-public_transport_tickets.svg.png
-amenity-pub.svg.png
-amenity-recycling.svg.png
-amenity-rental_bicycle.svg.png
-amenity-rental_car.svg.png
-amenity-restaurant.svg.png
-amenity-shelter.svg.png
-amenity-shower.svg.png
-amenity-social_facility.svg.png
-amenity-taxi.svg.png
-amenity-telephone.svg.png
-amenity-theatre.svg.png
-amenity-toilets.svg.png
-amenity-town_hall.svg.png
-amenity-vehicle_inspection.svg.png
-amenity-veterinary.svg.png
-amenity-waste_basket.svg.png
-amenity-waste_disposal.svg.png
-beach_coarse.png
-beach.png
-danger_red_hatch.png
-dog_park.png
-grey_vertical_hatch.png
-intermittent_river.png
-intermittent_water.png
-military_red_hatch.png
-mud.png
-orchard.png
-plant_nursery.png
-reef.png
-religion-buddhist.svg.png
-religion-christian.svg.png
-religion-hinduist.svg.png
-religion-jewish.svg.png
-religion-muslim.svg.png
-religion-shintoist.svg.png
-religion-sikhist.svg.png
-religion-taoist.svg.png
-rock_overlay.png
-salt-dots-2.png
-salt_pond.png
-scree_overlay.png
-scrub.png
-shop-alcohol.svg.png
-shop-art.svg.png
-shop-bag.svg.png
-shop-bakery.svg.png
-shop-beauty.svg.png
-shop-bed.svg.png
-shop-beverages.svg.png
-shop-bicycle.svg.png
-shop-bookmaker.svg.png
-shop-butcher.svg.png
-shop-car_parts.svg.png
-shop-carpet.svg.png
-shop-car_repair.svg.png
-shop-car.svg.png
-shop-charity.svg.png
-shop-chemist.svg.png
-shop-clothes.svg.png
-shop-coffee.svg.png
-shop-computer.svg.png
-shop-confectionery.svg.png
-shop-convenience.svg.png
-shop-copyshop.svg.png
-shop-dairy.svg.png
-shop-deli.svg.png
-shop-department_store.svg.png
-shop-diy.svg.png
-shop-electronics.svg.png
-shop-fabric.svg.png
-shop-florist.svg.png
-shop-furniture.svg.png
-shop-garden_centre.svg.png
-shop-gift.svg.png
-shop-greengrocer.svg.png
-shop-hairdresser.svg.png
-shop-hifi.svg.png
-shop-houseware.svg.png
-shop-interior_decoration.svg.png
-shop-jewelry.svg.png
-shop-laundry.svg.png
-shop-marketplace.svg.png
-shop-massage.svg.png
-shop-medical_supply.svg.png
-shop-mobile_phone.svg.png
-shop-musical_instrument.svg.png
-shop-music.svg.png
-shop-newsagent.svg.png
-shop-optician.svg.png
-shop-outdoor.svg.png
-shop-paint.svg.png
-shop-perfumery.svg.png
-shop-pet.svg.png
-shop-photo.svg.png
-shop-seafood.svg.png
-shop-second_hand.svg.png
-shop-shoes.svg.png
-shop-sports.svg.png
-shop-stationery.svg.png
-shop-supermarket.svg.png
-shop-tea.svg.png
-shop-ticket.svg.png
-shop-tobacco.svg.png
-shop-toys.svg.png
-shop-trade.svg.png
-shop-travel_agency.svg.png
-shop-tyres.svg.png
-shop-variety_store.svg.png
-shop-video_games.svg.png
-shop-video.svg.png
-vineyard.png
-wetland_bog.png
-wetland_mangrove.png
-wetland_marsh.png
-wetland.png
-wetland_reed.png
-wetland_swamp.png
-    `;
 
 }

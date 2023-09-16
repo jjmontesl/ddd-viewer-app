@@ -5,8 +5,8 @@
       <div v-if="viewerState.sceneVisible">
             <v-btn :to="{name: 'sceneTools'}" class="primary mb-2" style="pointer-events: auto;"><small><v-icon class="mr-1" dark>mdi-cog</v-icon> Settings</small></v-btn>
       </div>
-      <div>
-            <v-btn :to="{name: 'sceneLayers'}" class="primary" style="pointer-events: auto;"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
+      <div v-if="viewerState.sceneVisible">
+            <v-btn :to="{name: 'sceneLayers'}" class="primary mb-2" style="pointer-events: auto;"><small><v-icon class="mr-1" dark>mdi-folder-multiple</v-icon> Layers</small></v-btn>
       </div>
       <div>
             <ServerInfo v-if="viewerState.serverInfoShow" :viewerState="viewerState" />
@@ -26,9 +26,6 @@
     margin: 10px;
     /*//opacity: .75;*/
     cursor: pointer;
-}
-.ddd-scene-tool-buttons {
-    /*pointer-events: auto;*/
 }
 .ddd-scene-tool-buttons button {
     pointer-events: auto;

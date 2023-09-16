@@ -1,23 +1,27 @@
 <template>
 
-    <div v-if="queuedCount > 0"><!--v-if="!serverInfo.queue_size"-->
-
-        <div style="color: white; margin: 5px;">
-
-            <v-card class="">
-              <!--<v-card-title>Queued tiles</v-card-title>-->
-              <v-card-text class="text-left">
+    <v-row v-if="queuedCount > 0" class="align-end unselectable">
+    
+        <v-col align="right">
+          <div>
+            <small>Generating: <b>{{ queuedCount }}</b> tiles</small><br/>
+            <small>Time: <b>{{ queuedEta }}</b> min</small>
+          </div>
+          <!--
+          <v-card class="align-end" max-width="140">
+              <!-<v-card-title>Queued tiles</v-card-title>->
+              <v-card-text class="pa-2">
                   <div>
-                    <!-- <small><b>Server Generation Queue: ~{{ serverInfo.queue_size }} jobs</b></small><br /> -->
+                    <!- <small><b>Server Generation Queue: ~{{ serverInfo.queue_size }} jobs</b></small><br /> ->
                     <small><b>Pending tiles: {{ queuedCount }}</b></small><br/>
                     <small><b>Time: {{ queuedEta }}</b></small>
                   </div>
               </v-card-text>
             </v-card>
+          -->  
+        </v-col>
 
-        </div>
-
-    </div>
+    </v-row>
 
 </template>
 
@@ -81,7 +85,7 @@ export default {
           // TODO: currently just returning first
           const queue = this.$root.dddViewer.sceneViewer.viewerState.remoteQueueJobsStatus;
           if (queue.length > 0) {
-            this.queuedEta = "~" + Math.ceil(queue[0]['task_eta'] / 60) + " min";
+            this.queuedEta = "~" + Math.ceil(queue[0]['task_eta'] / 60);  // In minutes here
           } else {
             this.queuedEta = "-";
           }

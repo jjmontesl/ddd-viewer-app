@@ -6,17 +6,18 @@
                     <IconTitle :result="this.result"/>
                 </div>
                 <v-flex class="text-left">
-                        <Title :result="this.result"/>
 
-                        <Direction :result="this.result"/>
+                    <Title :result="this.result"/>
 
-                        <PlusInfo :result="this.result"/>
+                    <Direction :result="this.result"/>
 
-                        <Population :result="this.result"/>
+                    <PlusInfo :result="this.result"/>
 
-                        <OpeningHours :result="this.result"/>
+                    <Population :result="this.result"/>
 
-                        <Wheelchair :result="this.result"/>
+                    <OpeningHours :result="this.result"/>
+
+                    <Wheelchair :result="this.result"/>
 
                     <div>
                         <v-flex class="">
@@ -26,6 +27,7 @@
                                 </v-row>
                         </v-flex>
                     </div>
+                    
                 </v-flex>
             </v-layout>
         </v-card-text>

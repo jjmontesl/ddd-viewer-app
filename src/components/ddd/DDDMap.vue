@@ -202,7 +202,7 @@ export default {
       this.map.updateSize();
       */
       
-      console.debug("Resizing DDDMap.");
+      //console.debug("Resizing DDDMap.");
       if (!this.mapParent) { return; }
       
       let panel = document.querySelector('.ddd-front .row div');

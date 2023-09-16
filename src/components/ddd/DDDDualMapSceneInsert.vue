@@ -34,6 +34,9 @@ export default {
         
         checkMountScene: function() {
             // Check if insert is visible as per https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
+            
+            if (! this.$el) { return; }
+
             let el = this.$el.querySelector('.ddd-scene-insert').parentNode;
             let visible = window.getComputedStyle(el).display !== 'none'; // ; (el.parentNode.parentOffset !== null);
             

@@ -1,14 +1,8 @@
 <template>
-    <p v-if="result.extratags.opening_hours">
-        <v-row>
-                <v-col class="col-1">
-                    <v-icon class="info--text">mdi-clock</v-icon>
-                </v-col>
-                <v-col class="col-11">
-                    <span class="info--text">{{result.extratags.opening_hours}}</span>
-                </v-col>
-        </v-row>
-    </p>
+    <span v-if="result.extratags && result.extratags.opening_hours">
+        <v-icon class="info--text mr-2">mdi-clock</v-icon>
+        <span class="info--text">{{ result.extratags.opening_hours }}</span>
+    </span>
 </template>
 
 <script>

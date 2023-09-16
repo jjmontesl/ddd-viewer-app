@@ -1,5 +1,4 @@
 <template>
-    <!-- TODO: put code postal -->
     <v-card class="my-3 hoverme" @click="goMapAndMovement(result)" @mouseenter="changeColour(result, true)" @mouseleave="changeColour(result, false)">
         <v-card-text>
             <v-layout>
@@ -13,18 +12,16 @@
                     <Direction :result="this.result" class="mb-2" />
 
                     <div>
-                        <Population :result="this.result"/>
-                        <OpeningHours :result="this.result"/>
-                        <Wheelchair :result="this.result"/>
+                        <Population :result="this.result" />
+                    </div>
+                    <div>
+                        <Wheelchair :result="this.result" class="mr-4" />
+                        <OpeningHours :result="this.result" />
                     </div>
 
-                    <div class="mt-6">
-                        <v-flex>
-                                <v-row>
+                    <div class="mt-2">
                                     <SocialMedia :result="this.result"/>
-                                    <Contact :result="this.result"/>
-                                </v-row>
-                        </v-flex>
+                                    <!--<Contact :result="this.result"/>-->
                     </div>
 
                     <div class="text-right mt-2 a-decoration">

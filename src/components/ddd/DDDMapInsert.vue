@@ -25,7 +25,7 @@ export default {
             // Check if insert is visible as per https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
             let el = this.$el.querySelector('.ddd-map-insert').parentNode;
             let visible = window.getComputedStyle(el).display !== 'none'; // ; (el.parentNode.parentOffset !== null);
-            console.debug("CheckMountMap");
+            //console.debug("CheckMountMap");
 
             if (visible) {
                 if (this.mountedMap === null) {

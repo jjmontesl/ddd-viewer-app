@@ -3,7 +3,7 @@
     <div class="ddd-view-mode-selector unselectable" style="text-align: right;">
 
         <div style="margin-top: 4px;">
-            <small style="color: white;"><v-icon small dark>mdi-white-balance-sunny</v-icon> {{ positionDateFormatted }}</small>
+            <small style="color: white;"><b><v-icon small dark>mdi-white-balance-sunny</v-icon> {{ positionDateFormatted }}</b></small>
         </div>
 
         <div v-if="dddConfig.geolocation" style="margin-top: 4px;">
