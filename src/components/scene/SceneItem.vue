@@ -81,7 +81,7 @@
                             <div><a v-if="osmLink" :href="osmLink" target="_blank">OpenStreetMap Object</a></div>
                             <div><a v-if="osmchaLink" :href="osmchaLink" target="_blank">OSMCha (Change Analyzer)</a></div>
                             <div><a v-if="mapillaryLink" :href="mapillaryLink" target="_blank">Mapillary Picture</a></div>
-                            <div v-if="viewerState.dddConfig.showDevelLinks"><a :href="sceneLinkGoogleMaps" target="_blank">Google Maps View</a></div>
+                            <div v-if="viewerState.dddConfig.showDevelLinks"><a :href="sceneLinkGoogleMaps" target="_blank" rel="noopener noreferrer">Google Maps View</a></div>
                         </div>
                     </v-card-text>
 
@@ -399,6 +399,8 @@ export default {
             this.metadata = targetObjectRef.getMetadata() || {};
             if (this.metadata && 'osm:name' in this.metadata) {
                 this.nodeName = this.metadata['osm:name'];
+            } else if (this.metadata && 'ddd:title' in this.metadata) {
+                this.nodeName = this.metadata['ddd:title'];
             } else if (this.metadata && 'ddd:rpath' in this.metadata) {
                 this.nodeName = this.metadata['ddd:rpath'].split("/").slice(-1)[0];
             }

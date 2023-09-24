@@ -8,7 +8,59 @@
 
     "showDDDServerLinks": false,
 
+    "appLabel": "experimental (0.7.0) - DEV/SITE",
+
     "tileUrlBase": "http://{{hostname}}:8080/cache/ddd_http/",
+    "tileUrlSuffix": ".uncompressed",
+
+    "layers": [
+        {
+            "value": "3dsmaps-ddd_http", 
+            "type": "3d-geo", 
+            "format": "ddd-geo", 
+            "title": "OSM 3D - 3DSMaps", 
+            "url": "http://{{host}}/cache/ddd_http/{z}/{x}/{y}"
+        },
+        {
+            "value": "3dsmaps-ddd_http-uncompressed", 
+            "type": "3d-geo", 
+            "format": "ddd-geo", 
+            "title": "OSM 3D - 3DSMaps Uncompressed"
+        },
+        {
+            "value": "osm",
+            "type": "2d",
+            "format": "wmts", 
+            "title": "OSM - Standard"
+        },
+        {
+            "value": "debug-tilegrid",
+            "type": "2d",
+            "format": "tilegrid", 
+            "title": "OSM 3D - 3DSMaps Uncompressed"
+        },
+        {
+            "value": "info-3dsmaps-dem-coverage",
+            "type": "2d",
+            "format": "geojson", 
+            "title": "3DSMaps - DEM (Elevation) Coverage",
+            "description": "..."
+        },
+        {
+            "value": "info-3dsmaps-tile-coverage",
+            "type": "2d-heatmap",
+            "format": "geojson", 
+            "title": "3DSMaps - Existing Tiles",
+            "description": "..."
+        },
+        {
+            "value": "es-pnoa",
+            "type": "2d",
+            "format": "wmts", 
+            "text": "ES - PNOA (Orthophotos)"
+        }
+
+    ],
 
     "sceneGroundLayers": {
         "osm": {"text": "OpenStreetMap", "url": "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"},

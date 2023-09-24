@@ -97,14 +97,14 @@ export default {
         "defaultCoords": this.viewerState.positionWGS84,
 
         "tileUrlBase": this.viewerState.dddConfig.tileUrlBase,
+        "tileUrlSuffix": this.viewerState.dddConfig.tileUrlSuffix,
+
         "assetsUrlbase": "/assets/",
 
         "materialsTextureSet": textures,
         "materialsSplatmap": splatmap,
 
         "geolocation": false
-        // TODO: move to viewer-app?
-        //"dddHttpApiUrlBase": "https://{{hostname}}:8000/api/",
     }
     //console.debug("Merging DDDViewer options: ", dddViewerConfig, this.viewerState);
     Object.assign(dddViewerConfig, this.viewerState.dddConfig.dddViewer);

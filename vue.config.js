@@ -26,11 +26,12 @@ module.exports = {
             args[0].title = "3dsmaps - DDD";
 
             // Process app config
-            const dddViewerAppBuildEnv = process.env.DDD_VIEWER_APP_BUILD_ENV || "devel";
+            const dddViewerAppBuildEnv = process.env.DDD_VIEWER_APP_BUILD_ENV || "devel-studio";
             const dddViewerAppConfig = JSON.parse(fs.readFileSync(`config/ddd-viewer-app.config.${dddViewerAppBuildEnv}.json`, 'utf8'));
 
             // Override some config parameters from environment variables for development convenience
             dddViewerAppConfig.tileUrlBase = process.env.DDD_VIEWER_APP_TILE_URL_BASE || dddViewerAppConfig.tileUrlBase;
+            dddViewerAppConfig.tileUrlSuffix = process.env.DDD_VIEWER_APP_TILE_URL_SUFFIX || dddViewerAppConfig.tileUrlSuffix;
 
             args[0].dddViewerAppConfig = JSON.stringify(dddViewerAppConfig, null, 4);
 

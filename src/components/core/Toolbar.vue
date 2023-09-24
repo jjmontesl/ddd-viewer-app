@@ -20,7 +20,7 @@
             v-else
             >{{ appTitle }}</router-link>
 
-          <small class="ml-5" style="font-size: 50%; vertical-align: bottom;">experimental</small>
+          <small v-if="viewerState.dddConfig.appLabel" class="ml-5" style="font-size: 50%; vertical-align: bottom;">LABEL! {{ viewerState.dddConfig.appLabel }}</small>
 
         </div>
       </div>

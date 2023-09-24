@@ -1,13 +1,20 @@
 <template>
     <v-card class="my-3 hoverme" @click="goMapAndMovement(result)" @mouseenter="changeColour(result, true)" @mouseleave="changeColour(result, false)">
-        <v-card-text>
+        <v-card-text class="pb-0">
             <v-layout>
                 <div>
                     <IconTitle :result="this.result"/>
                 </div>
                 <v-flex class="text-left">
                     
-                    <Title :result="this.result" class="mb-3" />
+                    <Title :result="this.result" class="mb-0" />
+
+                    <div class="mb-3">
+                        <v-badge color="primary" :content="result.class" inline>
+                        </v-badge>
+                        <v-badge color="secondary" :content="result.type" inline>
+                        </v-badge>
+                    </div>
 
                     <Direction :result="this.result" class="mb-2" />
 
@@ -24,12 +31,26 @@
                                     <!--<Contact :result="this.result"/>-->
                     </div>
 
-                    <div class="text-right mt-2 a-decoration">
-                        <a @click="changeRouteToMoreInfo(result)">More info</a>
-                    </div>
                 </v-flex>
             </v-layout>
+
+            <v-card-actions class="pt-0">
+                <!--
+                <div>
+                    <v-badge color="primary" :content="result.class" inline>
+                    </v-badge>
+                    <v-badge color="secondary" :content="result.type" inline>
+                    </v-badge>
+                </div>
+                -->
+                <v-spacer></v-spacer>
+                <div class="text-right mt-2 a-decoration">
+                    <a @click="changeRouteToMoreInfo(result)">More info</a>
+                </div>
+            </v-card-actions>
+            
         </v-card-text>
+
     </v-card>
 </template>
 

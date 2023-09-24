@@ -17,6 +17,10 @@ Clone the repository:
 
     git clone https://github.com/jjmontesl/ddd-viewer-app.git
 
+You also need to make an _npm link_ to reference the base `ddd-viewer` library:
+
+    npm link ../ddd-viewer  # Replace with local path to ddd-viewer lib
+
 ### Compiles and hot-reloads for development
 
     npm run serve

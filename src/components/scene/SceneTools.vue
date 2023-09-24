@@ -113,7 +113,7 @@
                                         <div><a :href="osmLink" target="_blank">OpenStreetMap Object</a></div>
                                         <div><a :href="osmchaLink" target="_blank">OSMCha (Change Analyzer)</a></div>
                                     -->
-                                    <div v-if="viewerState.dddConfig.showDevelLinks"><a :href="sceneLinkGoogleMaps" target="_blank">Google Maps View</a></div>
+                                    <div v-if="viewerState.dddConfig.showDevelLinks"><a :href="sceneLinkGoogleMaps" target="_blank" rel="noopener noreferrer">Google Maps View</a></div>
                                 </div>
                             </v-card-text>
                             

@@ -7,7 +7,14 @@
                 </div>
                 <v-flex class="text-left">
 
-                    <Title :result="this.result"/>
+                    <Title :result="this.result" class="mb-0" />
+            
+                    <p>
+                        <v-badge color="primary" :content="result.class" inline>
+                        </v-badge>
+                        <v-badge color="secondary" :content="result.type" inline>
+                        </v-badge>
+                    </p>
 
                     <Direction :result="this.result"/>
 

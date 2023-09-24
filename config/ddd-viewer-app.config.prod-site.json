@@ -8,7 +8,10 @@
 
     "showDDDServerLinks": false,
 
+    "appLabel": "experimental (0.7.0)",
+
     "tileUrlBase": "https://{{hostname}}/cache/ddd_http/",
+    "tileUrlSuffix": "",
 
     "sceneGroundLayers": {
         "osm": {"text": "OpenStreetMap", "url": "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"}
