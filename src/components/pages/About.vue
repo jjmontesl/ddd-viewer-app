@@ -8,7 +8,8 @@
                 <v-col cols="12" md="6">
                     <h2>About 3DSMAPS</h2>
                     <p>
-                        3dsmaps, ddd and ddd-viewer are a set of projects designed to generate 3D scenes from
+                        3dsmaps, ddd and ddd-viewer are a set of projects created 
+                        to generate and visualize 3D scenes from
                         <a href="https://www.openstreetmap.org/about">OpenStreetMap</a> data.
                     </p>
 
@@ -114,7 +115,8 @@
                     <h3>Thanks to</h3>
 
                     <p>
-                        Thanks to the masters who have greatly supported us with during development:
+                        Thanks to the masters who have greatly supported us with asset creation,
+                        bug fixing, and general help during development:
                     </p>
                     <p>
                         <ul>
@@ -122,6 +124,8 @@
                             <li>Leobar37</li>
                             <li>Maria Torres</li>
                             <li>Yopaseopor</li>
+                            <li>Randym</li>
+                            <li>blckl</li>
                         </ul>
                     </p>
                 </v-col>

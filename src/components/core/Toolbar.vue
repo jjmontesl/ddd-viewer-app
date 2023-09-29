@@ -19,9 +19,7 @@
             class="primary--text ddd-logo-letter"
             v-else
             >{{ appTitle }}</router-link>
-
-          <small v-if="viewerState.dddConfig.appLabel" class="ml-5" style="font-size: 50%; vertical-align: bottom;">LABEL! {{ viewerState.dddConfig.appLabel }}</small>
-
+            <small v-if="viewerState.dddConfig.appLabel" class="ml-5" style="font-size: 50%; vertical-align: bottom;">{{ viewerState.dddConfig.appLabel }}</small>
         </div>
       </div>
       <v-spacer></v-spacer>
